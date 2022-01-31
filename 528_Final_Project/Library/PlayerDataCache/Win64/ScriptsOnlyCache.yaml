@@ -1,0 +1,25 @@
+ScriptsOnlyBuild:
+  usedScripts: {}
+  sceneClasses:
+    Assets/Scenes/SampleScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+  scriptHashData: []
+  platform: 19
+  scenePathNames:
+  - Assets/Scenes/SampleScene.unity
+  playerPath: C:/Users/pmigl/OneDrive/Documents/GitHub/CSE528Final/528_Final_Project/528_Final_Project.exe
