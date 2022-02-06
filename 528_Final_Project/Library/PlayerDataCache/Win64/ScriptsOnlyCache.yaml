@@ -1,7 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts: {}
   sceneClasses:
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/OverworldScene.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -18,8 +18,20 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
-  scriptHashData: []
+  scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: dbb0a7b7461c44101df31c40555e8a8d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: PlayerCharacter
+    className: Health
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Zones
+    className: VictoryZone
   platform: 19
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/OverworldScene.unity
   playerPath: C:/Users/pmigl/OneDrive/Documents/GitHub/CSE528Final/528_Final_Project/528_Final_Project.exe
