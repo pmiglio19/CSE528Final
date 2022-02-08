@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\EnemyCharacters",
-    "\\Items",
-    "\\PlayerCharacter",
-    "\\Zones"
+    "\\PlayerCharacter"
   ],
-  "SelectedNode": "\\Items\\ExampleItem.cs",
+  "SelectedNode": "\\PlayerCharacter\\PlayerController.cs",
   "PreviewInSolutionExplorer": false
 }
