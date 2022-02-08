@@ -1,7 +1,7 @@
 using System;
 //using Platformer.Gameplay;
 using UnityEngine;
-//using static Platformer.Core.Simulation;
+using static Core.Simulation;
 
 namespace PlayerCharacter
 {
@@ -23,8 +23,8 @@ namespace PlayerCharacter
             currentHP = Mathf.Clamp(currentHP - 1, 0, maxHP);
             if (currentHP == 0)
             {
-                //var ev = Schedule<HealthIsZero>();
-                //ev.health = this;
+                var ev = Schedule<HealthIsZero>();
+                ev.health = this;
             }
         }
 
