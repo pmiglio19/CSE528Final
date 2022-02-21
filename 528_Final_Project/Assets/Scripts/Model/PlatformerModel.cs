@@ -1,4 +1,5 @@
 ﻿using PlayerCharacter;
+using Cinemachine;
 using UnityEngine;
 
 namespace Model

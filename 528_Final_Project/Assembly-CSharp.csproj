@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{BB86E719-34B1-0DC0-5D56-D2E1A315CE6F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -56,27 +55,29 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
-    <Compile Include="Assets\Scripts\Model\PlatformerModel.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\HealthIsZero.cs" />
-    <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
+    <Compile Include="Assets\Scripts\Model\PlatformerModel.cs" />
+    <Compile Include="Assets\Scripts\Items\ExampleItem.cs" />
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
-    <Compile Include="Assets\Scripts\Items\ExampleItem.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\PlayerDeath.cs" />
+    <Compile Include="Assets\Scripts\Physics\AnimationController.cs" />
+    <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerSpawn.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\ExampleEnemy.cs" />
+    <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Items\IItem.cs" />
+    <Compile Include="Assets\Scripts\PlayerCharacter\PlayerDeath.cs" />
+    <Compile Include="Assets\Scripts\Physics\KinematicObject.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\IEnemy.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\Health.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainUIController.cs" />
     <Compile Include="Assets\Scripts\Controllers\MetaGameController.cs" />
+    <Compile Include="Assets\Scripts\PlayerCharacter\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
+    <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
     <None Include="Assets\Documentation\deleteMeLater.txt" />
     <None Include="Assets\Audio\deleteMeLater.txt" />
     <None Include="Assets\Prefabs\deleteMeLater.txt" />
-    <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.25f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -644,8 +645,14 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.25f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup></ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
