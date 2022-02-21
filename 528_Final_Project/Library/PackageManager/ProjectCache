@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637810587770055455
+      ticks: 637810803498372981
     m_Hash: 942790266
   m_LockFileStatus:
     m_FilePath: C:/Users/pmigl/OneDrive/Documents/GitHub/CSE528Final/528_Final_Project/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637810587770278730
+      ticks: 637810803498592490
     m_Hash: 32233723
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
