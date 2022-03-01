@@ -77,7 +77,6 @@
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />
     <None Include="Assets\Audio\deleteMeLater.txt" />
-    <None Include="Assets\Prefabs\deleteMeLater.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
