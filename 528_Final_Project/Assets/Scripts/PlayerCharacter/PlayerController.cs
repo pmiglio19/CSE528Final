@@ -44,33 +44,33 @@ namespace PlayerCharacter
 
         void Awake()
         {
-            //health = GetComponent<Health>();
+            health = GetComponent<Health>();
             //audioSource = GetComponent<AudioSource>();
             //collider2d = GetComponent<Collider2D>();
             //spriteRenderer = GetComponent<SpriteRenderer>();
             //animator = GetComponent<Animator>();
         }
 
-        //protected override void Update()
-        //{
-        //    //if (controlEnabled)
-        //    //{
-        //    //    move.x = Input.GetAxis("Horizontal");
-        //    //    if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
-        //    //        jumpState = JumpState.PrepareToJump;
-        //    //    else if (Input.GetButtonUp("Jump"))
-        //    //    {
-        //    //        stopJump = true;
-        //    //        Schedule<PlayerStopJump>().player = this;
-        //    //    }
-        //    //}
-        //    //else
-        //    //{
-        //    //    move.x = 0;
-        //    //}
-        //    //UpdateJumpState();
-        //    //base.Update();
-        //}
+        protected override void Update()
+        {
+            //if (controlEnabled)
+            //{
+            //    move.x = Input.GetAxis("Horizontal");
+            //    if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+            //        jumpState = JumpState.PrepareToJump;
+            //    else if (Input.GetButtonUp("Jump"))
+            //    {
+            //        stopJump = true;
+            //        Schedule<PlayerStopJump>().player = this;
+            //    }
+            //}
+            //else
+            //{
+            //    move.x = 0;
+            //}
+            //UpdateJumpState();
+            //base.Update();
+        }
 
         //void UpdateJumpState()
         //{
