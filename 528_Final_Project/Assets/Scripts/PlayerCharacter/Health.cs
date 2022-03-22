@@ -23,8 +23,8 @@ namespace PlayerCharacter
             currentHP = Mathf.Clamp(currentHP - 1, 0, maxHP);
             if (currentHP == 0)
             {
-                var ev = Schedule<HealthIsZero>();
-                ev.health = this;
+                //Can probably trigger death animation from here
+
             }
         }
 

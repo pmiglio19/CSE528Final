@@ -19,14 +19,14 @@ namespace PlayerCharacter
         //public Bounds Bounds => collider2d.bounds;
 
 
-        //Character attributes
-        public Health health;
+        //Character states
         bool controlEnabled = true;
         bool isJumping = false;
+        bool isGrounded = true;
 
         //Movement constants & variables
         const float movementSpeedMultiplier = 5;
-        const float jumpHeightMultiplier = 10;
+        const float jumpHeightMultiplier = 40;
 
         float horizontalMovement = 0;
         float verticalMovement = 0;
@@ -41,22 +41,42 @@ namespace PlayerCharacter
         public Rigidbody2D rigidBody;
         //public AudioSource audioSource;
 
+        //Character attributes
+        public Health health;
+
+
         void Awake()
         {
-            health = GetComponent<Health>();
-            //audioSource = GetComponent<AudioSource>();
-            collider2d = GetComponent<Collider2D>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+            collider2d = GetComponent<Collider2D>();
             rigidBody = GetComponent<Rigidbody2D>();
+            //audioSource = GetComponent<AudioSource>();
+
+            health = GetComponent<Health>();
         }
 
         protected override void Update()
         {
+            //Check character health
+            if(health.currentHP <= 0)
+            {
+                //Play death animation
+                //Ask to play again?
+            }
+
+            //Move character
+            Move();
+        }
+
+
+        private void Move()
+        {
             //If character drops too far below viewable map, reset health and respawn
             if (transform.position.y < -10)
             {
-                health.currentHP = health.maxHP; 
+                health.currentHP = health.maxHP;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
 
@@ -69,17 +89,34 @@ namespace PlayerCharacter
                 }
 
                 //If character is beginning to jump, move him upward and start jumping animation
-                if(isJumping)
+                if (isJumping)
                 {
-                    animator.SetBool("isJumping", true);
+                    //animator.SetBool("isGrounded", isGrounded);
+                    animator.SetBool("isJumping", isJumping);
                     verticalMovement = Time.deltaTime * jumpHeightMultiplier;
+
+                    //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + 20, transform.position.z), verticalMovement * 0.5f);
                     transform.Translate(0, verticalMovement, 0);
+
+                    isGrounded = false;
                 }
 
-                horizontalMovement = Input.GetAxis("Horizontal");
-                horizontalMovement *= Time.deltaTime * movementSpeedMultiplier;
-                transform.Translate(horizontalMovement, 0, 0);
+                //If character is on ground, move horizontal                
+                if (isGrounded)
+                {
+                    horizontalMovement = Input.GetAxis("Horizontal");
+                    horizontalMovement *= Time.deltaTime * movementSpeedMultiplier;
+                    transform.Translate(horizontalMovement, 0, 0);
+                }
+                //If character is in air, move horizontal AND descend
+                else if (!isGrounded)
+                {
+                    horizontalMovement = Input.GetAxis("Horizontal");
+                    horizontalMovement *= Time.deltaTime * movementSpeedMultiplier;
+                    transform.Translate(horizontalMovement, -1f * Time.deltaTime, 0);
+                }
 
+                // Flipping character to left or right
                 if (horizontalMovement > 0 && !facingRight)
                 {
                     Flip();
@@ -94,8 +131,11 @@ namespace PlayerCharacter
             }
 
             isJumping = false;
+            animator.SetBool("isJumping", isJumping);
+            //animator.SetBool("isGrounded", isGrounded);
         }
 
+        //Used to flip character left or right
         private void Flip()
         {
             // Switch the way the player is labelled as facing.
@@ -105,6 +145,15 @@ namespace PlayerCharacter
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+        }
+
+        //Activates upon gameobject entering character's collider
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = true;
+            }
         }
     }
 }
