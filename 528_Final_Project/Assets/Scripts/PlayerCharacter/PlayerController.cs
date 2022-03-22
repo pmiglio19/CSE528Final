@@ -24,52 +24,91 @@ namespace PlayerCharacter
         ///// Initial jump velocity at the start of a jump.
         ///// </summary>
         //public float jumpTakeOffSpeed = 7;
+        //bool jump;
 
         //public JumpState jumpState = JumpState.Grounded;
         //private bool stopJump;
-        ///*internal new*/
-        //public Collider2D collider2d;
-        ///*internal new*/
-        //public AudioSource audioSource;
-        public Health health;
-        //public bool controlEnabled = true;
+        
 
-        //bool jump;
-        //Vector2 move;
-        //SpriteRenderer spriteRenderer;
-        //internal Animator animator;
         //readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-
         //public Bounds Bounds => collider2d.bounds;
+
+
+
+
+        //Character attributes
+        public Health health;
+        public bool controlEnabled = true;
+
+        //Movement constants & variables
+        const float movementSpeedMultiplier = 5;
+
+        float horizontalMovement = 0;
+        float verticalMovement = 0;
+        bool facingRight = true;
+
+        //Animations
+        SpriteRenderer spriteRenderer;
+        internal Animator animator;
+
+        //Other components
+        public Collider2D collider2d;
+        //public AudioSource audioSource;
 
         void Awake()
         {
             health = GetComponent<Health>();
             //audioSource = GetComponent<AudioSource>();
-            //collider2d = GetComponent<Collider2D>();
-            //spriteRenderer = GetComponent<SpriteRenderer>();
-            //animator = GetComponent<Animator>();
+            collider2d = GetComponent<Collider2D>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            animator = GetComponent<Animator>();
         }
 
         protected override void Update()
         {
-            //if (controlEnabled)
-            //{
-            //    move.x = Input.GetAxis("Horizontal");
-            //    if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
-            //        jumpState = JumpState.PrepareToJump;
-            //    else if (Input.GetButtonUp("Jump"))
-            //    {
-            //        stopJump = true;
-            //        Schedule<PlayerStopJump>().player = this;
-            //    }
-            //}
+            if (controlEnabled)
+            {
+                horizontalMovement = Input.GetAxis("Horizontal");
+                horizontalMovement *= Time.deltaTime * movementSpeedMultiplier;
+                transform.Translate(horizontalMovement, 0, 0);
+
+                if (horizontalMovement > 0 && !facingRight)
+                {
+                    Flip();
+                }
+                else if (horizontalMovement < 0 && facingRight)
+                {
+                    Flip();
+                }
+
+                //Change animation to "walk" when moving and "idle" when not
+                animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
+
+                //if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                //    jumpState = JumpState.PrepareToJump;
+                //else if (Input.GetButtonUp("Jump"))
+                //{
+                //    stopJump = true;
+                //    Schedule<PlayerStopJump>().player = this;
+                //}
+            }
             //else
             //{
             //    move.x = 0;
             //}
             //UpdateJumpState();
             //base.Update();
+        }
+
+        private void Flip()
+        {
+            // Switch the way the player is labelled as facing.
+            facingRight = !facingRight;
+
+            // Multiply the player's x local scale by -1.
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
         }
 
         //void UpdateJumpState()

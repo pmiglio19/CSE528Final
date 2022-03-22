@@ -20,6 +20,14 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -43,11 +51,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 50
       Script: {instanceID: 0}
-    - Class: 61
+    - Class: 70
+      Script: {instanceID: 0}
+    - Class: 74
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 82
+      Script: {instanceID: 0}
+    - Class: 91
       Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
@@ -56,13 +68,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 628}
     - Class: 114
-      Script: {instanceID: 2444}
+      Script: {instanceID: 2452}
     - Class: 114
-      Script: {instanceID: 2566}
+      Script: {instanceID: 2574}
     - Class: 114
-      Script: {instanceID: 2778}
+      Script: {instanceID: 2786}
     - Class: 114
-      Script: {instanceID: 3226}
+      Script: {instanceID: 3234}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -246,7 +258,7 @@ ScriptsOnlyBuild:
     className: CinemachineOrbitalTransposer
   - hash:
       serializedVersion: 2
-      Hash: cad2d2b405caf2d0c48700b6548b13d6
+      Hash: 6db6f3a20f2b9ea80e9138646db1b9db
     assemblyName: Assembly-CSharp.dll
     namespaceName: PlayerCharacter
     className: PlayerController
