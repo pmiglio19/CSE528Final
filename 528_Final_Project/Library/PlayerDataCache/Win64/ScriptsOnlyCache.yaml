@@ -835,4 +835,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/OverworldScene.unity
-  playerPath: C:/Users/pmigl/OneDrive/Documents/GitHub/CSE528Final/528_Final_Project/528_Final_Project.exe
+  playerPath: C:/Users/pmigl/Desktop/Test/528_Final_Project.exe

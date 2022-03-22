@@ -7,11 +7,11 @@ namespace PlayerCharacter
 {
     public class Health : MonoBehaviour
     {
-        public int maxHP = 1;
+        public int maxHP = 10;
 
         public bool IsAlive => currentHP > 0 ? true : false;
 
-        int currentHP;
+        public int currentHP;
 
         public void Increment()
         {

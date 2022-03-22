@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using Physics;             
 using static Core.Simulation;
@@ -16,32 +15,18 @@ namespace PlayerCharacter
         //public AudioClip respawnAudio;
         //public AudioClip ouchAudio;
 
-        ///// <summary>
-        ///// Max horizontal speed of the player.
-        ///// </summary>
-        //public float maxSpeed = 7;
-        ///// <summary>
-        ///// Initial jump velocity at the start of a jump.
-        ///// </summary>
-        //public float jumpTakeOffSpeed = 7;
-        //bool jump;
-
-        //public JumpState jumpState = JumpState.Grounded;
-        //private bool stopJump;
-        
-
         //readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
         //public Bounds Bounds => collider2d.bounds;
 
 
-
-
         //Character attributes
         public Health health;
-        public bool controlEnabled = true;
+        bool controlEnabled = true;
+        bool isJumping = false;
 
         //Movement constants & variables
         const float movementSpeedMultiplier = 5;
+        const float jumpHeightMultiplier = 10;
 
         float horizontalMovement = 0;
         float verticalMovement = 0;
@@ -53,6 +38,7 @@ namespace PlayerCharacter
 
         //Other components
         public Collider2D collider2d;
+        public Rigidbody2D rigidBody;
         //public AudioSource audioSource;
 
         void Awake()
@@ -62,12 +48,34 @@ namespace PlayerCharacter
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            rigidBody = GetComponent<Rigidbody2D>();
         }
 
         protected override void Update()
         {
+            //If character drops too far below viewable map, reset health and respawn
+            if (transform.position.y < -10)
+            {
+                health.currentHP = health.maxHP; 
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+
             if (controlEnabled)
             {
+                //Check if character is jumping
+                if (!isJumping)
+                {
+                    isJumping = Input.GetKeyDown(KeyCode.Space);
+                }
+
+                //If character is beginning to jump, move him upward and start jumping animation
+                if(isJumping)
+                {
+                    animator.SetBool("isJumping", true);
+                    verticalMovement = Time.deltaTime * jumpHeightMultiplier;
+                    transform.Translate(0, verticalMovement, 0);
+                }
+
                 horizontalMovement = Input.GetAxis("Horizontal");
                 horizontalMovement *= Time.deltaTime * movementSpeedMultiplier;
                 transform.Translate(horizontalMovement, 0, 0);
@@ -83,21 +91,9 @@ namespace PlayerCharacter
 
                 //Change animation to "walk" when moving and "idle" when not
                 animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
-
-                //if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
-                //    jumpState = JumpState.PrepareToJump;
-                //else if (Input.GetButtonUp("Jump"))
-                //{
-                //    stopJump = true;
-                //    Schedule<PlayerStopJump>().player = this;
-                //}
             }
-            //else
-            //{
-            //    move.x = 0;
-            //}
-            //UpdateJumpState();
-            //base.Update();
+
+            isJumping = false;
         }
 
         private void Flip()
@@ -110,71 +106,5 @@ namespace PlayerCharacter
             theScale.x *= -1;
             transform.localScale = theScale;
         }
-
-        //void UpdateJumpState()
-        //{
-        //    jump = false;
-        //    switch (jumpState)
-        //    {
-        //        case JumpState.PrepareToJump:
-        //            jumpState = JumpState.Jumping;
-        //            jump = true;
-        //            stopJump = false;
-        //            break;
-        //        case JumpState.Jumping:
-        //            if (!IsGrounded)
-        //            {
-        //                Schedule<PlayerJumped>().player = this;
-        //                jumpState = JumpState.InFlight;
-        //            }
-        //            break;
-        //        case JumpState.InFlight:
-        //            if (IsGrounded)
-        //            {
-        //                Schedule<PlayerLanded>().player = this;
-        //                jumpState = JumpState.Landed;
-        //            }
-        //            break;
-        //        case JumpState.Landed:
-        //            jumpState = JumpState.Grounded;
-        //            break;
-        //    }
-        //}
-
-        //protected override void ComputeVelocity()
-        //{
-        //    if (jump && IsGrounded)
-        //    {
-        //        velocity.y = jumpTakeOffSpeed * model.jumpModifier;
-        //        jump = false;
-        //    }
-        //    else if (stopJump)
-        //    {
-        //        stopJump = false;
-        //        if (velocity.y > 0)
-        //        {
-        //            velocity.y = velocity.y * model.jumpDeceleration;
-        //        }
-        //    }
-
-        //    if (move.x > 0.01f)
-        //        spriteRenderer.flipX = false;
-        //    else if (move.x < -0.01f)
-        //        spriteRenderer.flipX = true;
-
-        //    animator.SetBool("grounded", IsGrounded);
-        //    animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
-
-        //    targetVelocity = move * maxSpeed;
-        //}
-
-        //public enum JumpState
-        //{
-        //    Grounded,
-        //    PrepareToJump,
-        //    Jumping,
-        //    InFlight,
-        //    Landed
-        //}
     }
 }
