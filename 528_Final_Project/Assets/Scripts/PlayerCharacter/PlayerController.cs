@@ -7,10 +7,6 @@ namespace PlayerCharacter
     public class PlayerController : MonoBehaviour
     {
         #region Class Variables
-        //public AudioClip jumpAudio;
-        //public AudioClip respawnAudio;
-        //public AudioClip ouchAudio;
-
 
         //Character states
         bool controlEnabled = true;
@@ -33,7 +29,6 @@ namespace PlayerCharacter
         //Other components
         public Collider2D collider2d;
         public Rigidbody2D rigidBody;
-        //public AudioSource audioSource;
 
         //Character attributes
         public Health health;
@@ -46,7 +41,9 @@ namespace PlayerCharacter
 
             collider2d = GetComponent<Collider2D>();
             rigidBody = GetComponent<Rigidbody2D>();
-            //audioSource = GetComponent<AudioSource>();
+
+            //Makes it so character's sprite doesn't roll around
+            rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
             health = GetComponent<Health>();
         }
