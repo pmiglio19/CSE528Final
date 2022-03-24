@@ -11,9 +11,6 @@ namespace PlayerCharacter
         //public AudioClip respawnAudio;
         //public AudioClip ouchAudio;
 
-        //readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        //public Bounds Bounds => collider2d.bounds;
-
 
         //Character states
         bool controlEnabled = true;
@@ -82,14 +79,9 @@ namespace PlayerCharacter
                 //If character is grounded, get space key stroke
                 if (isGrounded)
                 {
-                    horizontalMovement = Input.GetAxis("Horizontal");
-
                     isAscending = Input.GetKeyDown(KeyCode.Space);
                 }
-                else if (!isGrounded)
-                {
-                    horizontalMovement = Input.GetAxis("Horizontal");
-                }
+                horizontalMovement = Input.GetAxis("Horizontal");
                 #endregion
 
                 #region Move Character
@@ -103,34 +95,39 @@ namespace PlayerCharacter
                     {
                         direction = new Vector3(horizontalMovement, jumpHeightMultiplier, 0);
                     }
+                    //Otherwise don't
                     else
                     {
                         direction = new Vector3(horizontalMovement, 0, 0);
                     }
 
+                    //If he's about to ascend, play jump animation
                     if(isAscending)
                     {
                         animator.Play("MhumJump");
                     }
 
+                    //This is the statement that actually moves the character
                     rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
 
-                    isAscending = false;
-                    isDescending = true;
+                    //Establish that the character is now descending (which will stop jump animation)
+                    if(isAscending)
+                    {
+                        isAscending = false;
+                        isDescending = true;
+                        animator.SetBool("isDescending", isDescending);
+                    }
                 }
                 //If character is not on ground and descending
                 if (!isGrounded && isDescending)
                 {
-                    animator.Play("MhumIdle");
-
                     Vector3 direction = new Vector3(horizontalMovement, -1f, 0);
 
                     rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
-
-                    //animator.SetBool("isAscending", isAscending);
                 }
                 #endregion
 
+                #region Check Orientation
                 // Flipping character to left or right
                 if (horizontalMovement > 0 && !facingRight)
                 {
@@ -140,6 +137,7 @@ namespace PlayerCharacter
                 {
                     Flip();
                 }
+                #endregion
 
                 //Change animation to "walk" when moving and "idle" when not
                 animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
@@ -165,10 +163,9 @@ namespace PlayerCharacter
             if (collision.gameObject.CompareTag("Ground"))
             {
                 isGrounded = true;
-                //isDescending = false;
-                //isAscending = false;
-                Debug.Log("In OnCollisionEnter2D");
-                Debug.Log("isGrounded is now " + isGrounded.ToString());
+
+                //Debug.Log("In OnCollisionEnter2D");
+                //Debug.Log("isGrounded is now " + isGrounded.ToString());
             }
         }
 
@@ -177,9 +174,9 @@ namespace PlayerCharacter
             if (collision.gameObject.CompareTag("Ground"))
             {
                 isGrounded = false;
-                isAscending = false;
-                Debug.Log("In OnCollisionExit2D");
-                Debug.Log("isGrounded is now " + isGrounded.ToString());
+
+                //Debug.Log("In OnCollisionExit2D");
+                //Debug.Log("isGrounded is now " + isGrounded.ToString());
             }
         }
         #endregion
