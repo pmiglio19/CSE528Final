@@ -1,16 +1,12 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using Physics;             
 using static Core.Simulation;
 
 namespace PlayerCharacter
 {
-    /// <summary>
-    /// This is the main class used to implement control of the player.
-    /// It is a superset of the AnimationController class, but is inlined to allow for any kind of customisation.
-    /// </summary>
-    public class PlayerController : KinematicObject
+    public class PlayerController : MonoBehaviour
     {
+        #region Class Variables
         //public AudioClip jumpAudio;
         //public AudioClip respawnAudio;
         //public AudioClip ouchAudio;
@@ -21,12 +17,13 @@ namespace PlayerCharacter
 
         //Character states
         bool controlEnabled = true;
-        bool isJumping = false;
-        bool isGrounded = true;
+        bool isGrounded = false;
+        bool isAscending = false;
+        bool isDescending = true;
 
         //Movement constants & variables
-        const float movementSpeedMultiplier = 5;
-        const float jumpHeightMultiplier = 40;
+        const float movementSpeedMultiplier = 5f;
+        const float jumpHeightMultiplier = 20f;
 
         float horizontalMovement = 0;
         float verticalMovement = 0;
@@ -43,9 +40,9 @@ namespace PlayerCharacter
 
         //Character attributes
         public Health health;
+        #endregion
 
-
-        void Awake()
+        private void Awake()
         {
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
@@ -57,7 +54,7 @@ namespace PlayerCharacter
             health = GetComponent<Health>();
         }
 
-        protected override void Update()
+        private void Update()
         {
             //Check character health
             if(health.currentHP <= 0)
@@ -70,7 +67,6 @@ namespace PlayerCharacter
             Move();
         }
 
-
         private void Move()
         {
             //If character drops too far below viewable map, reset health and respawn
@@ -82,39 +78,58 @@ namespace PlayerCharacter
 
             if (controlEnabled)
             {
-                //Check if character is jumping
-                if (!isJumping)
-                {
-                    isJumping = Input.GetKeyDown(KeyCode.Space);
-                }
-
-                //If character is beginning to jump, move him upward and start jumping animation
-                if (isJumping)
-                {
-                    //animator.SetBool("isGrounded", isGrounded);
-                    animator.SetBool("isJumping", isJumping);
-                    verticalMovement = Time.deltaTime * jumpHeightMultiplier;
-
-                    //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + 20, transform.position.z), verticalMovement * 0.5f);
-                    transform.Translate(0, verticalMovement, 0);
-
-                    isGrounded = false;
-                }
-
-                //If character is on ground, move horizontal                
+                #region Gather Movement Data
+                //If character is grounded, get space key stroke
                 if (isGrounded)
                 {
                     horizontalMovement = Input.GetAxis("Horizontal");
-                    horizontalMovement *= Time.deltaTime * movementSpeedMultiplier;
-                    transform.Translate(horizontalMovement, 0, 0);
+
+                    isAscending = Input.GetKeyDown(KeyCode.Space);
                 }
-                //If character is in air, move horizontal AND descend
                 else if (!isGrounded)
                 {
                     horizontalMovement = Input.GetAxis("Horizontal");
-                    horizontalMovement *= Time.deltaTime * movementSpeedMultiplier;
-                    transform.Translate(horizontalMovement, -1f * Time.deltaTime, 0);
                 }
+                #endregion
+
+                #region Move Character
+                //Checks if character is on ground and about to ascend             
+                if (isGrounded)
+                {
+                    Vector3 direction = new Vector3();
+
+                    //If in air, include vertical movement
+                    if(isAscending)
+                    {
+                        direction = new Vector3(horizontalMovement, jumpHeightMultiplier, 0);
+                    }
+                    else
+                    {
+                        direction = new Vector3(horizontalMovement, 0, 0);
+                    }
+
+                    if(isAscending)
+                    {
+                        animator.Play("MhumJump");
+                    }
+
+                    rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
+
+                    isAscending = false;
+                    isDescending = true;
+                }
+                //If character is not on ground and descending
+                if (!isGrounded && isDescending)
+                {
+                    animator.Play("MhumIdle");
+
+                    Vector3 direction = new Vector3(horizontalMovement, -1f, 0);
+
+                    rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
+
+                    //animator.SetBool("isAscending", isAscending);
+                }
+                #endregion
 
                 // Flipping character to left or right
                 if (horizontalMovement > 0 && !facingRight)
@@ -129,10 +144,6 @@ namespace PlayerCharacter
                 //Change animation to "walk" when moving and "idle" when not
                 animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
             }
-
-            isJumping = false;
-            animator.SetBool("isJumping", isJumping);
-            //animator.SetBool("isGrounded", isGrounded);
         }
 
         //Used to flip character left or right
@@ -147,13 +158,30 @@ namespace PlayerCharacter
             transform.localScale = theScale;
         }
 
+        #region Collisions
         //Activates upon gameobject entering character's collider
-        private void OnTriggerEnter2D(Collider2D collider)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collider.gameObject.CompareTag("Ground"))
+            if (collision.gameObject.CompareTag("Ground"))
             {
                 isGrounded = true;
+                //isDescending = false;
+                //isAscending = false;
+                Debug.Log("In OnCollisionEnter2D");
+                Debug.Log("isGrounded is now " + isGrounded.ToString());
             }
         }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = false;
+                isAscending = false;
+                Debug.Log("In OnCollisionExit2D");
+                Debug.Log("isGrounded is now " + isGrounded.ToString());
+            }
+        }
+        #endregion
     }
 }

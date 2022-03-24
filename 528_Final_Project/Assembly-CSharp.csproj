@@ -58,14 +58,12 @@
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Physics\AnimationController.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerSpawn.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\ExampleEnemy.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Items\IItem.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerDeath.cs" />
-    <Compile Include="Assets\Scripts\Physics\KinematicObject.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\IEnemy.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainUIController.cs" />
     <Compile Include="Assets\Scripts\Controllers\MetaGameController.cs" />
