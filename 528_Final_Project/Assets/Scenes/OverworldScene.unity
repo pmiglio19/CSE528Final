@@ -1121,8 +1121,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1476147200
-BoxCollider2D:
+--- !u!70 &1476147200
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1135,18 +1135,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4375, y: 0.875}
-    newSize: {x: 0.40625, y: 0.875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.4375, y: 0.875}
-  m_EdgeRadius: 0
+  m_Direction: 0
 --- !u!82 &1476147201
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1346,7 +1336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adafc63372b89134ab3e4a5a8e300cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider2d: {fileID: 1476147200}
+  collider2d: {fileID: 0}
   rigidBody: {fileID: 1476147202}
   health: {fileID: 1476147206}
 --- !u!114 &1476147206

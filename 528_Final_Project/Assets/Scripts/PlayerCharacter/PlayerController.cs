@@ -8,8 +8,11 @@ namespace PlayerCharacter
     {
         #region Class Variables
 
-        //Character states
+        //Other states
         bool controlEnabled = true;
+        bool spaceIsPressed = false;
+
+        //Character states
         bool isGrounded = false;
         bool isAscending = false;
         bool isDescending = true;
@@ -36,6 +39,9 @@ namespace PlayerCharacter
 
         private void Awake()
         {
+            //To enable movement again after respawn
+            controlEnabled = true;
+
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -48,16 +54,26 @@ namespace PlayerCharacter
             health = GetComponent<Health>();
         }
 
+        //Apparently Update is used more specifically for key inputs
         private void Update()
         {
             //Check character health
             if(health.currentHP <= 0)
             {
+                controlEnabled = false;
+                animator.Play("MhumDeath");
+
                 //Play death animation
                 //Ask to play again?
             }
 
-            //Move character
+            spaceIsPressed = Input.GetKeyDown(KeyCode.Space);
+            
+        }
+
+        //And FixedUpdateis used more for things involving physics
+        private void FixedUpdate()
+        {
             Move();
         }
 
@@ -76,9 +92,10 @@ namespace PlayerCharacter
                 //If character is grounded, get space key stroke
                 if (isGrounded)
                 {
-                    isAscending = Input.GetKeyDown(KeyCode.Space);
+                    isAscending = spaceIsPressed;
                 }
                 horizontalMovement = Input.GetAxis("Horizontal");
+
                 #endregion
 
                 #region Move Character
@@ -139,6 +156,9 @@ namespace PlayerCharacter
                 //Change animation to "walk" when moving and "idle" when not
                 animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
             }
+
+            //UNCOMMENT THIS TO SEE HIM DIE
+            //health.currentHP--;
         }
 
         //Used to flip character left or right
