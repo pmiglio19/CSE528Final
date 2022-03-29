@@ -21,11 +21,6 @@ namespace PlayerCharacter
         public void Decrement()
         {
             currentHP = Mathf.Clamp(currentHP - 1, 0, maxHP);
-            if (currentHP == 0)
-            {
-                //Can probably trigger death animation from here
-
-            }
         }
 
         public void Die()
