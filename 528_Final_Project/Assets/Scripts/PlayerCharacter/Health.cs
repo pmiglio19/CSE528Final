@@ -7,11 +7,11 @@ namespace PlayerCharacter
 {
     public class Health : MonoBehaviour
     {
-        public int maxHP = 1;
+        public int maxHP = 10;
 
         public bool IsAlive => currentHP > 0 ? true : false;
 
-        int currentHP;
+        public int currentHP;
 
         public void Increment()
         {
@@ -21,11 +21,6 @@ namespace PlayerCharacter
         public void Decrement()
         {
             currentHP = Mathf.Clamp(currentHP - 1, 0, maxHP);
-            if (currentHP == 0)
-            {
-                var ev = Schedule<HealthIsZero>();
-                ev.health = this;
-            }
         }
 
         public void Die()
