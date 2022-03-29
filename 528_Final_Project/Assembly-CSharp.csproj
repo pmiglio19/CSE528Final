@@ -53,19 +53,19 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Items\ExampleItem.cs" />
+    <Compile Include="Assets\Scripts\Items\BaseItem.cs" />
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
-    <Compile Include="Assets\Scripts\EnemyCharacters\ExampleEnemy.cs" />
-    <Compile Include="Assets\Scripts\Items\IItem.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Mana.cs" />
-    <Compile Include="Assets\Scripts\EnemyCharacters\IEnemy.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainUIController.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
+    <Compile Include="Assets\Scripts\EnemyCharacters\BaseEnemy.cs" />
+    <Compile Include="Assets\Scripts\EnemyCharacters\Slime.cs" />
+    <Compile Include="Assets\Scripts\EnemyCharacters\Bat.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />
