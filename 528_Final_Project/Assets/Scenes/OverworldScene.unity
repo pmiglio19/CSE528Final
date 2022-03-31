@@ -1149,7 +1149,7 @@ PrefabInstance:
       objectReference: {fileID: 1090240443}
     - target: {fileID: 8794442693752699680, guid: e3c9d86200da0884d9b4ebfff503c73c, type: 3}
       propertyPath: m_Name
-      value: Potion
+      value: Potion_0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3c9d86200da0884d9b4ebfff503c73c, type: 3}
@@ -1446,11 +1446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6363633950390018968, guid: 8e38626aa05bd7e48a6d492fa90acc08, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.11
+      value: 5.35
       objectReference: {fileID: 0}
     - target: {fileID: 6363633950390018968, guid: 8e38626aa05bd7e48a6d492fa90acc08, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: -0.63
       objectReference: {fileID: 0}
     - target: {fileID: 6363633950390018968, guid: 8e38626aa05bd7e48a6d492fa90acc08, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1543,7 +1543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6616565821573248975, guid: 7b352f1805bcf484db976e2fbdfdaa47, type: 3}
       propertyPath: m_Name
-      value: Sword
+      value: Sword_0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b352f1805bcf484db976e2fbdfdaa47, type: 3}
@@ -1568,11 +1568,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4448002808106733506, guid: 33cb7e2f4d24c2245b804e5ef9142b2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.1881769
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 4448002808106733506, guid: 33cb7e2f4d24c2245b804e5ef9142b2f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4512236
+      value: -1.66
       objectReference: {fileID: 0}
     - target: {fileID: 4448002808106733506, guid: 33cb7e2f4d24c2245b804e5ef9142b2f, type: 3}
       propertyPath: m_LocalPosition.z

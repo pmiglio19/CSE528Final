@@ -172,6 +172,52 @@ namespace PlayerCharacter
             theScale.x *= -1;
             transform.localScale = theScale;
         }
+
+        private void FaceRight(GameObject gameObject)
+        {
+            if(gameObject.CompareTag("Player"))
+            {
+                if (!facingRight)
+                {
+                    facingRight = !facingRight;
+
+                    Vector3 theScale = transform.localScale;
+                    theScale.x *= -1;
+                    gameObject.transform.localScale = theScale;
+                }
+            }
+
+            //else
+            //{
+            //    Vector3 theScale = transform.localScale;
+            //    theScale.x *= -1;
+            //    gameObject.transform.localScale = theScale;
+            //}
+        }
+
+        private void FaceLeft(GameObject gameObject)
+        {
+            if (gameObject.CompareTag("Player"))
+            {
+                if (facingRight)
+                {
+                    facingRight = !facingRight;
+
+                    Vector3 theScale = transform.localScale;
+                    theScale.x *= -1;
+                    gameObject.transform.localScale = theScale;
+                }
+            }
+
+            //else
+            //{
+            //    Vector3 theScale = transform.localScale;
+            //    theScale.x *= -1;
+            //    gameObject.transform.localScale = theScale;
+            //}
+        }
+
+
         #endregion
 
         #region Death and Game Restart
@@ -204,6 +250,19 @@ namespace PlayerCharacter
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 SceneManager.LoadScene("BattleScene");
+                
+                DontDestroyOnLoad(collider2d);
+                DontDestroyOnLoad(collision.collider);
+
+                //rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
+                //rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
+                transform.position = new Vector3(-2f, 0f, 0f);
+                collision.transform.position = new Vector3(2f, 0f, 0f);
+                //FaceRight(transform.root.gameObject);
+                //FaceLeft(collision.collider.gameObject);
             }
 
             if (collision.gameObject.CompareTag("Item"))
