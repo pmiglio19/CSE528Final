@@ -68,6 +68,8 @@
     <Compile Include="Assets\Scripts\PlayerCharacter\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
+    <Compile Include="Assets\Scripts\PlayerCharacter\Experience.cs" />
+    <Compile Include="Assets\Scripts\PlayerCharacter\ManaPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />

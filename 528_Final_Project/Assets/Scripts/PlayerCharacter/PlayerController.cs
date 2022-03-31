@@ -28,16 +28,19 @@ namespace PlayerCharacter
         bool facingRight = true;
 
         //Animations
-        SpriteRenderer spriteRenderer;
+        private SpriteRenderer spriteRenderer;
         internal Animator animator;
 
         //Other components
-        public Collider2D collider2d;
-        public Rigidbody2D rigidBody;
+        private Collider2D collider2d;
+        private Rigidbody2D rigidBody;
 
         //Character attributes
         private Health health;
-        private Inventory inventory; 
+        private Inventory inventory;
+        private ManaPool manaPool;
+        private Experience experience;
+
         #endregion
 
         private void Awake()
@@ -56,6 +59,8 @@ namespace PlayerCharacter
 
             health = GetComponent<Health>();
             inventory = GetComponent<Inventory>();
+            manaPool = GetComponent<ManaPool>();
+            experience = GetComponent<Experience>();
         }
 
         //Apparently Update is used more specifically for key inputs
