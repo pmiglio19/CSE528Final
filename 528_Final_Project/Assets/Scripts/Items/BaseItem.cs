@@ -5,6 +5,9 @@ namespace Items
 {
     public class BaseItem : MonoBehaviour
     {
+        private int itemId;
+        public string itemName;
+
         //Animations
         SpriteRenderer spriteRenderer;
         internal Animator animator;
@@ -13,6 +16,10 @@ namespace Items
         public Collider2D collider2d;
         public Rigidbody2D rigidBody;
 
+        public BaseItem(string _itemName)
+        {
+            itemName = _itemName;
+        }
 
         private void Awake()
         {

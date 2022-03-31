@@ -144,5 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94779c88e873b0478afbdfa12757e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider2d: {fileID: 0}
-  rigidBody: {fileID: 0}
+  itemName: Sword
+  collider2d: {fileID: 632532717877153450}
+  rigidBody: {fileID: 2349208170605449092}

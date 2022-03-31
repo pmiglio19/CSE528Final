@@ -1,6 +1,8 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using static Core.Simulation;
+using Assets.Scripts.PlayerCharacter;
+using Items;
 
 namespace PlayerCharacter
 {
@@ -34,7 +36,8 @@ namespace PlayerCharacter
         public Rigidbody2D rigidBody;
 
         //Character attributes
-        public Health health;
+        private Health health;
+        private Inventory inventory; 
         #endregion
 
         private void Awake()
@@ -52,23 +55,22 @@ namespace PlayerCharacter
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
             health = GetComponent<Health>();
+            inventory = GetComponent<Inventory>();
         }
 
         //Apparently Update is used more specifically for key inputs
         private void Update()
         {
             //Check character health
-            if(health.currentHP <= 0)
+            if(health.CheckForDeath())
             {
-                controlEnabled = false;
-                animator.Play("MhumDeath");
+                RunDeathProtocols();
+                RestartGame();
 
-                //Play death animation
                 //Ask to play again?
             }
 
             spaceIsPressed = Input.GetKeyDown(KeyCode.Space);
-            
         }
 
         //And FixedUpdateis used more for things involving physics
@@ -82,8 +84,8 @@ namespace PlayerCharacter
             //If character drops too far below viewable map, reset health and respawn
             if (transform.position.y < -10)
             {
-                health.currentHP = health.maxHP;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                RunDeathProtocols();
+                RestartGame();
             }
 
             if (controlEnabled)
@@ -156,11 +158,9 @@ namespace PlayerCharacter
                 //Change animation to "walk" when moving and "idle" when not
                 animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
             }
-
-            //UNCOMMENT THIS TO SEE HIM DIE
-            //health.currentHP--;
         }
 
+        #region Movement Utility
         //Used to flip character left or right
         private void Flip()
         {
@@ -172,6 +172,22 @@ namespace PlayerCharacter
             theScale.x *= -1;
             transform.localScale = theScale;
         }
+        #endregion
+
+        #region Death and Game Restart
+        private void RunDeathProtocols()
+        {
+            controlEnabled = false;
+            animator.Play("MhumDeath");
+            inventory.ClearInventory();
+        }
+
+        private void RestartGame()
+        {
+            health.ResetHealth();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        #endregion
 
         #region Collisions
         //Activates upon gameobject entering character's collider
@@ -183,6 +199,21 @@ namespace PlayerCharacter
 
                 //Debug.Log("In OnCollisionEnter2D");
                 //Debug.Log("isGrounded is now " + isGrounded.ToString());
+            }
+
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                SceneManager.LoadScene("BattleScene");
+            }
+
+            if (collision.gameObject.CompareTag("Item"))
+            {
+                BaseItem item = new BaseItem(collision.gameObject.name);
+
+                inventory.AddToInventory(item);
+                inventory.PrintInventory();
+
+                Destroy(collision.gameObject);
             }
         }
 

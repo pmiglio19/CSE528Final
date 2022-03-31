@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94779c88e873b0478afbdfa12757e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: Potion
   collider2d: {fileID: 0}
   rigidBody: {fileID: 0}
 --- !u!212 &-1495291896797878672

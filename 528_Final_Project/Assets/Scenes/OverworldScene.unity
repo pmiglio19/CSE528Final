@@ -1062,6 +1062,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1090240442 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7966456028272298071, guid: e3c9d86200da0884d9b4ebfff503c73c, type: 3}
+  m_PrefabInstance: {fileID: 1197251595}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1090240443 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: -1469737916236218332, guid: e3c9d86200da0884d9b4ebfff503c73c, type: 3}
+  m_PrefabInstance: {fileID: 1197251595}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1197251595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1129,6 +1139,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8154418576335505144, guid: e3c9d86200da0884d9b4ebfff503c73c, type: 3}
+      propertyPath: rigidBody
+      value: 
+      objectReference: {fileID: 1090240442}
+    - target: {fileID: 8154418576335505144, guid: e3c9d86200da0884d9b4ebfff503c73c, type: 3}
+      propertyPath: collider2d
+      value: 
+      objectReference: {fileID: 1090240443}
     - target: {fileID: 8794442693752699680, guid: e3c9d86200da0884d9b4ebfff503c73c, type: 3}
       propertyPath: m_Name
       value: Potion
@@ -1151,6 +1169,7 @@ GameObject:
   - component: {fileID: 1476147201}
   - component: {fileID: 1476147206}
   - component: {fileID: 1476147200}
+  - component: {fileID: 1476147207}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -1390,7 +1409,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider2d: {fileID: 0}
   rigidBody: {fileID: 1476147202}
-  health: {fileID: 1476147206}
 --- !u!114 &1476147206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1403,8 +1421,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113ed5912f73a4c49b83acc8e508ce19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
-  currentHP: 0
+--- !u!114 &1476147207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476147198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d036bf4f6e5fe64db6627ae01e0cda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1537908504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1418,11 +1446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6363633950390018968, guid: 8e38626aa05bd7e48a6d492fa90acc08, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9267498
+      value: -3.11
       objectReference: {fileID: 0}
     - target: {fileID: 6363633950390018968, guid: 8e38626aa05bd7e48a6d492fa90acc08, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.63111115
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 6363633950390018968, guid: 8e38626aa05bd7e48a6d492fa90acc08, type: 3}
       propertyPath: m_LocalPosition.z

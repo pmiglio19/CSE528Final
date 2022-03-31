@@ -6,7 +6,6 @@
 -a="C:\Users\pmigl\OneDrive\Documents\GitHub\CSE528Final\528_Final_Project\Library\PlayerScriptAssemblies\UnityEngine.UI.dll"
 -a="C:\Users\pmigl\OneDrive\Documents\GitHub\CSE528Final\528_Final_Project\Library\PlayerScriptAssemblies\Unity.Mathematics.dll"
 -a="C:\Users\pmigl\OneDrive\Documents\GitHub\CSE528Final\528_Final_Project\Library\PlayerScriptAssemblies\Unity.2D.IK.Runtime.dll"
--a="C:\Users\pmigl\OneDrive\Documents\GitHub\CSE528Final\528_Final_Project\Library\PlayerScriptAssemblies\Cinemachine.dll"
 -a="C:\Users\pmigl\OneDrive\Documents\GitHub\CSE528Final\528_Final_Project\Library\PlayerScriptAssemblies\Unity.2D.Animation.Triangle.Runtime.dll"
 -a="C:\Users\pmigl\OneDrive\Documents\GitHub\CSE528Final\528_Final_Project\Library\PlayerScriptAssemblies\Unity.2D.Animation.Runtime.dll"
 -a="C:\Users\pmigl\OneDrive\Documents\GitHub\CSE528Final\528_Final_Project\Library\PlayerScriptAssemblies\Unity.2D.Common.Runtime.dll"

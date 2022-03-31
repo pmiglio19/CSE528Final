@@ -9,7 +9,6 @@ namespace Assets.Scripts.EnemyCharacters
 {
     class BaseEnemy : MonoBehaviour
     {
-
         //Animations
         SpriteRenderer spriteRenderer;
         internal Animator animator;

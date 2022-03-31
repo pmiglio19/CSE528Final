@@ -7,11 +7,11 @@ namespace PlayerCharacter
 {
     public class Health : MonoBehaviour
     {
-        public int maxHP = 10;
+        private const int maxHP = 10;
 
-        public bool IsAlive => currentHP > 0 ? true : false;
+        //private bool IsAlive => currentHP > 0 ? true : false;
 
-        public int currentHP;
+        private int currentHP;
 
         public void Increment()
         {
@@ -26,6 +26,21 @@ namespace PlayerCharacter
         public void Die()
         {
             while (currentHP > 0) Decrement();
+        }
+
+        public void ResetHealth()
+        {
+            currentHP = maxHP;
+        }
+
+        public bool CheckForDeath()
+        {
+            if(currentHP <= 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         void Awake()
