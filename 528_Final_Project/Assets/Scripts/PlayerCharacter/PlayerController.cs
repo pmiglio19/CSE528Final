@@ -38,7 +38,7 @@ namespace PlayerCharacter
         //Character attributes
         private Health health;
         private Inventory inventory;
-        private ManaPool manaPool;
+        private Mana mana;
         private Experience experience;
 
         #endregion
@@ -59,7 +59,7 @@ namespace PlayerCharacter
 
             health = GetComponent<Health>();
             inventory = GetComponent<Inventory>();
-            manaPool = GetComponent<ManaPool>();
+            mana = GetComponent<Mana>();
             experience = GetComponent<Experience>();
         }
 
