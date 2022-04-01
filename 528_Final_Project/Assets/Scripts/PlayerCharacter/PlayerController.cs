@@ -40,6 +40,7 @@ namespace PlayerCharacter
         private Inventory inventory;
         private Mana mana;
         private Experience experience;
+        private DamageDealt damage;
 
         #endregion
 
@@ -61,6 +62,7 @@ namespace PlayerCharacter
             inventory = GetComponent<Inventory>();
             mana = GetComponent<Mana>();
             experience = GetComponent<Experience>();
+            damage = new DamageDealt(1);     //Initially
         }
 
         //Apparently Update is used more specifically for key inputs
@@ -270,14 +272,17 @@ namespace PlayerCharacter
                 //FaceLeft(collision.collider.gameObject);
             }
 
-            if (collision.gameObject.CompareTag("Item"))
+            if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
             {
-                BaseItem item = new BaseItem(collision.gameObject.name);
+                BaseItem item = new BaseItem(collision.gameObject.GetComponent<BaseItem>().itemName, collision.gameObject.GetComponent<BaseItem>().damageMultiplier, collision.gameObject.GetComponent<BaseItem>().itemType);
 
                 inventory.AddToInventory(item);
                 inventory.PrintInventory();
 
                 Destroy(collision.gameObject);
+
+                //Set damageMultiplier if player has a weapon in inventory
+                damage.ChangeMultiplier(inventory.CheckInventoryForWeapons());
             }
         }
 

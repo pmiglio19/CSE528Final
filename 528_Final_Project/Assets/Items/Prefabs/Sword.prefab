@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6214495454165917941}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Item
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,5 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Sword
+  damageMultiplier: 2
+  itemType: Weapon
   collider2d: {fileID: 632532717877153450}
   rigidBody: {fileID: 2349208170605449092}

@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\EnemyCharacters\Bat.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Experience.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
+    <Compile Include="Assets\Scripts\PlayerCharacter\DamageDealt.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Mana.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainUIController.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Health.cs" />

@@ -43,5 +43,21 @@ namespace Assets.Scripts.PlayerCharacter
                 i++;
             }
         }
+
+        public int CheckInventoryForWeapons()
+        {
+            int damageMultiplier = 1;
+
+            //Need to find a better system for having multiple different weapons, but this is just a demo
+            foreach (BaseItem item in items)
+            {
+                if(item.itemType == "Weapon")
+                {
+                    damageMultiplier = item.damageMultiplier;
+                }
+            }
+
+            return damageMultiplier;
+        }
     }
 }

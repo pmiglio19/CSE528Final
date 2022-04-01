@@ -5,8 +5,9 @@ namespace Items
 {
     public class BaseItem : MonoBehaviour
     {
-        private int itemId;
         public string itemName;
+        public int damageMultiplier;
+        public string itemType;
 
         //Animations
         SpriteRenderer spriteRenderer;
@@ -16,9 +17,11 @@ namespace Items
         public Collider2D collider2d;
         public Rigidbody2D rigidBody;
 
-        public BaseItem(string _itemName)
+        public BaseItem(string _itemName, int _damageMultiplier, string _itemType)
         {
             itemName = _itemName;
+            damageMultiplier = _damageMultiplier;
+            itemType = _itemType;
         }
 
         private void Awake()
@@ -30,16 +33,6 @@ namespace Items
             rigidBody = GetComponent<Rigidbody2D>();
 
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
-
-        private void Update()
-        {
-
-        }
-
-        private void FixedUpdate()
-        {
-
         }
     }
 }
