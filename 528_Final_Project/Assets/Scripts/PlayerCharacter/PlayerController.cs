@@ -1,7 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using static Core.Simulation;
-using Assets.Scripts.PlayerCharacter;
+using Assets.Scripts.EntityMechanics;
 using Items;
 
 namespace PlayerCharacter
@@ -58,10 +58,10 @@ namespace PlayerCharacter
             //Makes it so character's sprite doesn't roll around
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-            health = GetComponent<Health>();
-            inventory = GetComponent<Inventory>();
-            mana = GetComponent<Mana>();
-            experience = GetComponent<Experience>();
+            health = new Health(10);
+            inventory = new Inventory();
+            mana = new Mana(10);
+            experience = new Experience();
             damage = new DamageDealt(1);     //Initially
         }
 
@@ -256,6 +256,7 @@ namespace PlayerCharacter
 
             if (collision.gameObject.CompareTag("Enemy"))
             {
+                //Start battle scene when enemy is touched
                 SceneManager.LoadScene("BattleScene");
                 
                 DontDestroyOnLoad(collider2d);

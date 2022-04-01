@@ -56,18 +56,18 @@
     <Compile Include="Assets\Scripts\Items\BaseItem.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\BaseEnemy.cs" />
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\Inventory.cs" />
+    <Compile Include="Assets\Scripts\EntityMechanics\Inventory.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\Slime.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\Bat.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\Experience.cs" />
+    <Compile Include="Assets\Scripts\EntityMechanics\Experience.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\DamageDealt.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\Mana.cs" />
+    <Compile Include="Assets\Scripts\EntityMechanics\DamageDealt.cs" />
+    <Compile Include="Assets\Scripts\EntityMechanics\Mana.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainUIController.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\Health.cs" />
+    <Compile Include="Assets\Scripts\EntityMechanics\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
   </ItemGroup>

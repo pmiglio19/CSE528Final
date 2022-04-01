@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.EntityMechanics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace Assets.Scripts.EnemyCharacters
 {
     class Slime : BaseEnemy
     {
-        private void Awake()
+        public Slime() : base()
         {
-
+            health = new Health(5);
         }
 
         private void Update()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.EntityMechanics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,10 @@ namespace Assets.Scripts.EnemyCharacters
 {
     class BaseEnemy : MonoBehaviour
     {
+        //Stats
+        protected Health health;
+        protected DamageDealt damage;
+
         //Animations
         SpriteRenderer spriteRenderer;
         internal Animator animator;
@@ -17,6 +22,11 @@ namespace Assets.Scripts.EnemyCharacters
         public Collider2D collider2d;
         public Rigidbody2D rigidBody;
 
+
+        public BaseEnemy()
+        {
+
+        }
 
         private void Awake()
         {
@@ -28,16 +38,5 @@ namespace Assets.Scripts.EnemyCharacters
 
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-
-        private void Update()
-        {
-
-        }
-
-        private void FixedUpdate()
-        {
-
-        }
-
     }
 }
