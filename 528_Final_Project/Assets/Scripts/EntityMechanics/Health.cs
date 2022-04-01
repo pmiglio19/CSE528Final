@@ -16,19 +16,24 @@ namespace Assets.Scripts.EntityMechanics
             currentHP = maxHP;
         }
 
-        public void Increment()
+        public void IncrementByOne()
         {
             currentHP = Mathf.Clamp(currentHP + 1, 0, maxHP);
         }
 
-        public void Decrement()
+        public void IncrementByAmount(int amount)
+        {
+            currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
+        }
+
+        public void DecrementByOne()
         {
             currentHP = Mathf.Clamp(currentHP - 1, 0, maxHP);
         }
 
         public void Die()
         {
-            while (currentHP > 0) Decrement();
+            while (currentHP > 0) DecrementByOne();
         }
 
         public void ResetHealth()

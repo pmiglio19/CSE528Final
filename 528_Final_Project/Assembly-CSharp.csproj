@@ -63,13 +63,17 @@
     <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\Bat.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Experience.cs" />
-    <Compile Include="Assets\Scripts\Items\Potion.cs" />
+    <Compile Include="Assets\Scripts\Items\HealthPotion.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\DamageDealt.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Mana.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainUIController.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
+    <Compile Include="Assets\Scripts\Items\BaseConsumable.cs" />
+    <Compile Include="Assets\Scripts\Items\Sword.cs" />
+    <Compile Include="Assets\Scripts\Items\InvisibilityPotion.cs" />
+    <Compile Include="Assets\Scripts\Items\BaseWeapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />
