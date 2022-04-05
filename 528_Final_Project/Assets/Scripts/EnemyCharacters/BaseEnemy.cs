@@ -22,6 +22,7 @@ namespace Assets.Scripts.EnemyCharacters
         public Collider2D collider2d;
         public Rigidbody2D rigidBody;
 
+        protected bool isInBattle = false;
 
         public BaseEnemy()
         {
@@ -37,6 +38,11 @@ namespace Assets.Scripts.EnemyCharacters
             rigidBody = GetComponent<Rigidbody2D>();
 
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        public void SetIsInBattle(bool newBool)
+        {
+            isInBattle = newBool;
         }
     }
 }

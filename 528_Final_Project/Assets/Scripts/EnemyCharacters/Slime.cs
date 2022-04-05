@@ -22,14 +22,12 @@ namespace Assets.Scripts.EnemyCharacters
 
         private void Update()
         {
-            Vector3 destination = transform.position;
-            destination.y = (transform.position.y > origin.y + maxMoveDistance) ? origin.y : origin.y + maxMoveDistance;
-            transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-        }
-
-        private void FixedUpdate()
-        {
-
+            if(!isInBattle)
+            {
+                Vector3 destination = transform.position;
+                destination.y = (transform.position.y > origin.y + maxMoveDistance) ? origin.y : origin.y + maxMoveDistance;
+                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+            }
         }
     }
 }

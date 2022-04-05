@@ -3,6 +3,7 @@ using UnityEngine;
 using static Core.Simulation;
 using Assets.Scripts.EntityMechanics;
 using Items;
+using Assets.Scripts.EnemyCharacters;
 
 namespace PlayerCharacter
 {
@@ -269,6 +270,8 @@ namespace PlayerCharacter
 
                 transform.position = new Vector3(-2f, 0f, 0f);
                 collision.transform.position = new Vector3(2f, 0f, 0f);
+
+                collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
                 //FaceRight(transform.root.gameObject);
                 //FaceLeft(collision.collider.gameObject);
             }

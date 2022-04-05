@@ -30,16 +30,19 @@ namespace Assets.Scripts.EnemyCharacters
 
         private void Update()
         {
-            transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
-            
-            if(transform.position.x <= max - .07)
+            if (!isInBattle)
             {
-                Flip();
-            }
+                transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
 
-            if (transform.position.x >= min + .07)
-            {
-                Flip();
+                if (transform.position.x <= max - .07)
+                {
+                    Flip();
+                }
+
+                if (transform.position.x >= min + .07)
+                {
+                    Flip();
+                }
             }
         }
 
