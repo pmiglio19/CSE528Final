@@ -5,7 +5,7 @@ using Assets.Scripts.EntityMechanics;
 using Items;
 using Assets.Scripts.EnemyCharacters;
 
-namespace PlayerCharacter
+namespace Assets.Scripts.PlayerCharacter
 {
     public class PlayerController : MonoBehaviour
     {
