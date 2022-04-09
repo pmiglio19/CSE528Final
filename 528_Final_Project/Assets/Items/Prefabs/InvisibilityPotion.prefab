@@ -96,8 +96,9 @@ MonoBehaviour:
   itemName: InvisibilityPotion
   damageMultiplier: 0
   itemType: Item
-  collider2d: {fileID: 0}
-  rigidBody: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 5123c6f2628a3a547b33819dc50e3832, type: 3}
+  collider2d: {fileID: -8880866800128622999}
+  rigidBody: {fileID: 5185782756407801954}
 --- !u!212 &1749212450073977256
 SpriteRenderer:
   m_ObjectHideFlags: 0

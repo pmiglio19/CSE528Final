@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.UI
 {
-    public class MainUIController : MonoBehaviour
+    public class InventoryUIController : MonoBehaviour
     {
-        public GameObject[] buttons;
+        public GameObject[] slots;
 
         public void AddItem(BaseItem item)
         {

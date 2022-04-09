@@ -147,5 +147,6 @@ MonoBehaviour:
   itemName: Sword
   damageMultiplier: 2
   itemType: Weapon
+  sprite: {fileID: 21300000, guid: c69c8bd85497600468470e4b8a5762f0, type: 3}
   collider2d: {fileID: 632532717877153450}
   rigidBody: {fileID: 2349208170605449092}

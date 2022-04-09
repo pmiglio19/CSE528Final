@@ -73,7 +73,7 @@ namespace Assets.Scripts.PlayerCharacter
             if(health.CheckForDeath())
             {
                 RunDeathProtocols();
-                RestartGame();
+                //RestartGame();
 
                 //Ask to play again?
             }
@@ -81,7 +81,7 @@ namespace Assets.Scripts.PlayerCharacter
             spaceIsPressed = Input.GetKeyDown(KeyCode.Space);
         }
 
-        //And FixedUpdateis used more for things involving physics
+        //And FixedUpdate is used more for things involving physics
         private void FixedUpdate()
         {
             Move();

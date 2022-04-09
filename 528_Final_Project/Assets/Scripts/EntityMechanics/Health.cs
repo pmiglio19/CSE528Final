@@ -1,3 +1,4 @@
+using Assets.Scripts.UI;
 using System;
 using UnityEngine;
 using static Core.Simulation;
@@ -6,29 +7,41 @@ namespace Assets.Scripts.EntityMechanics
 {
     public class Health : MonoBehaviour
     {
-        private int maxHP;
-
+        private static int maxHP;
         private int currentHP;
+        private HealthUI healthUI;
 
         public Health(int _maxHP)
         {
             maxHP = _maxHP;
             currentHP = maxHP;
+            healthUI = new HealthUI();
         }
 
         public void IncrementByOne()
         {
             currentHP = Mathf.Clamp(currentHP + 1, 0, maxHP);
+            healthUI.IncrementHealth(1);
         }
 
         public void IncrementByAmount(int amount)
         {
             currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
+            healthUI.IncrementHealth(amount);
         }
 
         public void DecrementByOne()
         {
             currentHP = Mathf.Clamp(currentHP - 1, 0, maxHP);
+
+            healthUI.DecrementHealth(1);
+        }
+
+        public void DecrementByAmount(int amount)
+        {
+            currentHP = Mathf.Clamp(currentHP - amount, 0, maxHP);
+
+            healthUI.DecrementHealth(1);
         }
 
         public void Die()
@@ -51,9 +64,6 @@ namespace Assets.Scripts.EntityMechanics
             return false;
         }
 
-        void Awake()
-        {
-            currentHP = maxHP;
-        }
+        public static int GetMaxHealth() { return maxHP; }
     }
 }

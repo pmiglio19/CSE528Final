@@ -8,6 +8,7 @@ namespace Items
         public string itemName;
         public int damageMultiplier;
         public string itemType;
+        public Sprite sprite;
 
         //Animations
         SpriteRenderer spriteRenderer;
