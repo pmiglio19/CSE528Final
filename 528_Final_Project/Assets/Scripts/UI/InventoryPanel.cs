@@ -11,12 +11,10 @@ namespace Assets.Scripts.UI
     public class InventoryPanel : MonoBehaviour
     {
         static List<Button> buttons;
-        //public static GridLayoutGroup gridLayout;
 
         public InventoryPanel()
         {
             buttons = new List<Button>();
-            //gridLayout = _gridLayout;
         }
 
         private void Start()
@@ -45,7 +43,7 @@ namespace Assets.Scripts.UI
                 //Check if slots are full already
                 for (int i = 0; i < buttons.Count; i++)
                 {
-                    Debug.Log("In for loop");
+                    Debug.Log("In for loop: "+ buttons[i].GetComponent<Image>().sprite.name);
                     if (buttons[i].GetComponent<Image>().sprite.name != "UISprite")
                     {
                         Debug.Log("In if statement");
@@ -60,7 +58,7 @@ namespace Assets.Scripts.UI
                     return;
                 }
 
-                if (slotsTaken >= 3)
+                if (slotsTaken > 3)
                 {
                     throw new Exception();
                 }
@@ -70,6 +68,9 @@ namespace Assets.Scripts.UI
                 {
                     if(buttons[i].GetComponent<Image>().sprite.name == "UISprite")
                     {
+                        Debug.Log("Iteration: " + i.ToString());
+                        Debug.Log("NEW SPRITE IMAGE AT: "+buttons[i].GetComponent<Image>().sprite.name);
+
                         buttons[i].GetComponent<Image>().sprite = newSprite;
                         return;
                     }

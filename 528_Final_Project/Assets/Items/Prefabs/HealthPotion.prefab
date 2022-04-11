@@ -147,5 +147,7 @@ MonoBehaviour:
   itemName: HealthPotion
   damageMultiplier: 0
   itemType: Consumable
+  sprite: {fileID: 21300000, guid: 191f0e80561afbd47b33815d32826288, type: 3}
   collider2d: {fileID: -1469737916236218332}
   rigidBody: {fileID: 7966456028272298071}
+  newSprite: {fileID: 0}
