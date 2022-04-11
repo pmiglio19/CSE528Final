@@ -11,18 +11,20 @@ namespace Items
         public Sprite sprite;
 
         //Animations
-        SpriteRenderer spriteRenderer;
+        protected SpriteRenderer spriteRenderer;
         internal Animator animator;
 
         //Other components
         public Collider2D collider2d;
         public Rigidbody2D rigidBody;
 
-        public BaseItem(string _itemName, int _damageMultiplier, string _itemType)
+        public BaseItem(string _itemName, int _damageMultiplier, string _itemType, Sprite _sprite)
         {
             itemName = _itemName;
             damageMultiplier = _damageMultiplier;
             itemType = _itemType;
+            sprite = _sprite;
+            //sprite = spriteRenderer.sprite;
         }
 
         private void Awake()
@@ -34,6 +36,11 @@ namespace Items
             rigidBody = GetComponent<Rigidbody2D>();
 
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        public Sprite GetSprite()
+        {
+            return sprite;
         }
     }
 }

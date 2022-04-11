@@ -4,22 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.EntityMechanics
 {
     public class Inventory : MonoBehaviour
     {
-        List<BaseItem> items;
+        private List<BaseItem> items;
+        private InventoryPanel inventoryPanel;
 
         public Inventory()
         {
             items = new List<BaseItem>();
+            inventoryPanel = new InventoryPanel();
         }
 
         public void AddToInventory(BaseItem item)
         {
             items.Add(item);
+            inventoryPanel.AddToInventoryPanel(item.GetSprite());
+            //ChangeSprite(item.sprite);
+            Debug.Log("got past AddToInventoryPanel()");
         }
 
         public void RemoveFromInventory(BaseItem item)
@@ -38,8 +45,8 @@ namespace Assets.Scripts.EntityMechanics
             int i = 1;
             foreach (BaseItem item in items)
             {
-                Debug.Log("Got right here");
                 Debug.Log("Item "+ i.ToString()+": "+ item.itemName);
+                Debug.Log("Item sprite" + i.ToString() + ": " + item.GetSprite().name);
                 i++;
             }
         }

@@ -278,9 +278,11 @@ namespace Assets.Scripts.PlayerCharacter
 
             if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
             {
-                BaseItem item = new BaseItem(collision.gameObject.GetComponent<BaseItem>().itemName, collision.gameObject.GetComponent<BaseItem>().damageMultiplier, collision.gameObject.GetComponent<BaseItem>().itemType);
+                BaseItem item = new BaseItem(collision.gameObject.GetComponent<BaseItem>().itemName, collision.gameObject.GetComponent<BaseItem>().damageMultiplier, collision.gameObject.GetComponent<BaseItem>().itemType,
+                  collision.gameObject.GetComponent<BaseItem>().sprite);
 
                 inventory.AddToInventory(item);
+
                 inventory.PrintInventory();
 
                 Destroy(collision.gameObject);

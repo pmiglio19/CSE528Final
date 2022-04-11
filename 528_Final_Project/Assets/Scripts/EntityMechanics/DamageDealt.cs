@@ -19,7 +19,7 @@ namespace Assets.Scripts.EntityMechanics
         public void ChangeMultiplier(int newMultiplier)
         {
             damageMultiplier = newMultiplier;
-            Debug.Log("Damage multiplier is now: " + damageMultiplier.ToString());
+            //Debug.Log("Damage multiplier is now: " + damageMultiplier.ToString());
         }
 
     }

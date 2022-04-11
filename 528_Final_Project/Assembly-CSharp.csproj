@@ -76,6 +76,8 @@
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
     <Compile Include="Assets\Scripts\UI\HealthUI.cs" />
     <Compile Include="Assets\Scripts\UI\ManaUI.cs" />
+    <Compile Include="Assets\Scripts\UI\InventoryButton.cs" />
+    <Compile Include="Assets\Scripts\UI\InventoryPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />
