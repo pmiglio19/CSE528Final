@@ -26,7 +26,7 @@ namespace Assets.Scripts.EntityMechanics
 
         public void IncrementByAmount(int amount)
         {
-            currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
+            currentHP = Mathf.Clamp(currentHP + amount, 0, 20);
             healthUI.IncrementHealth(amount);
         }
 

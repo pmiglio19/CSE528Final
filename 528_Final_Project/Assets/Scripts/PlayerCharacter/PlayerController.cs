@@ -283,8 +283,6 @@ namespace Assets.Scripts.PlayerCharacter
 
                 inventory.AddToInventory(item);
 
-                inventory.PrintInventory();
-
                 Destroy(collision.gameObject);
 
                 //Set damageMultiplier if player has a weapon in inventory

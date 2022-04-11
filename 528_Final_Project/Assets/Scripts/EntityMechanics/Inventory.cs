@@ -25,8 +25,6 @@ namespace Assets.Scripts.EntityMechanics
         {
             items.Add(item);
             inventoryPanel.AddToInventoryPanel(item.GetSprite());
-            //ChangeSprite(item.sprite);
-            Debug.Log("got past AddToInventoryPanel()");
         }
 
         public void RemoveFromInventory(BaseItem item)

@@ -21,37 +21,29 @@ namespace Assets.Scripts.UI
         {
             buttons = GetComponent<GridLayoutGroup>().GetComponentsInChildren<Button>().ToList();
 
-            Debug.Log("Name: " + name);
+            //Debug.Log("Name: " + name);
 
-            for (int i = 0; i < buttons.Count; i++)
-            {
-                Debug.Log("Sprite Names: " + buttons[i].GetComponent<Image>().sprite.name);
-            }
+            //for (int i = 0; i < buttons.Count; i++)
+            //{
+            //    Debug.Log("Sprite Names: " + buttons[i].GetComponent<Image>().sprite.name);
+            //}
 
-            Debug.Log("buttons.Count in print: " + buttons.Count);
         }
 
         public void AddToInventoryPanel(Sprite newSprite)
         {
-            Debug.Log("newSprite name: "+newSprite.name);
             try
             {
                 int slotsTaken = 0;
 
-                Debug.Log("This is slots taken: " + slotsTaken.ToString());
-                Debug.Log("buttons.Count in add: " + buttons.Count);
                 //Check if slots are full already
                 for (int i = 0; i < buttons.Count; i++)
                 {
-                    Debug.Log("In for loop: "+ buttons[i].GetComponent<Image>().sprite.name);
                     if (buttons[i].GetComponent<Image>().sprite.name != "UISprite")
                     {
-                        Debug.Log("In if statement");
                         slotsTaken++;
                     }
                 }
-
-                Debug.Log("This is slots taken: " + slotsTaken.ToString());
 
                 if (slotsTaken == 3)
                 {
@@ -68,9 +60,6 @@ namespace Assets.Scripts.UI
                 {
                     if(buttons[i].GetComponent<Image>().sprite.name == "UISprite")
                     {
-                        Debug.Log("Iteration: " + i.ToString());
-                        Debug.Log("NEW SPRITE IMAGE AT: "+buttons[i].GetComponent<Image>().sprite.name);
-
                         buttons[i].GetComponent<Image>().sprite = newSprite;
                         return;
                     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.EntityMechanics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +12,46 @@ namespace Assets.Scripts.UI
     public class InventoryButton : MonoBehaviour
     {
         Image spriteImage;
+        Button button;
+        Health health;
 
-        private void Awake()
+        private void Start()
         {
             spriteImage = GetComponent<Image>();
-            //Debug.Log("Image name: "+ spriteImage.sprite.name);
+            button = GetComponent<Button>();
+            button.onClick.AddListener(TaskOnClick);
+
+            health = new Health(10);
         }
 
-        public void ChangeSprite(Sprite newSprite)
+        private void TaskOnClick()
         {
-            spriteImage.sprite = newSprite;
+            UseItem();
+        }
+
+        private void UseItem()
+        {
+            if (spriteImage.sprite.name == "UISprite")
+            {
+                return;
+            }
+
+            else if (spriteImage.sprite.name == "HealthPotion")
+            {
+                health.IncrementByAmount(5);
+            }
+
+            else if (spriteImage.sprite.name == "InvisibilityPotion")
+            {
+
+            }
+
+            else if (spriteImage.sprite.name == "Sword")
+            {
+
+            }
+
+            return;
         }
     }
 }
