@@ -78,7 +78,7 @@ namespace Assets.Scripts.PlayerCharacter
                 //Ask to play again?
             }
 
-            spaceIsPressed = Input.GetKeyDown(KeyCode.Space);
+            spaceIsPressed = Input.GetKey(KeyCode.Space);
         }
 
         //And FixedUpdate is used more for things involving physics
