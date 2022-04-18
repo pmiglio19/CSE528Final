@@ -26,7 +26,7 @@ namespace Assets.Scripts.UI
 
         public void IncrementHealth(int amount)
         {
-            currentHealth = Mathf.Clamp(currentHealth + amount, 0, 20);
+            currentHealth = Mathf.Clamp(currentHealth + amount, 0, Health.GetMaxHealth());
         }
 
         public void DecrementHealth(int amount)

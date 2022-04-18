@@ -21,14 +21,6 @@ namespace Assets.Scripts.UI
         private void Start()
         {
             buttons = GetComponent<GridLayoutGroup>().GetComponentsInChildren<Button>().ToList();
-
-            //Debug.Log("Name: " + name);
-
-            //for (int i = 0; i < buttons.Count; i++)
-            //{
-            //    Debug.Log("Sprite Names: " + buttons[i].GetComponent<Image>().sprite.name);
-            //}
-
         }
 
         public void AddToInventoryPanel(Sprite newSprite)

@@ -289,6 +289,10 @@ namespace Assets.Scripts.PlayerCharacter
                     //Start battle scene when enemy is touched
                     SceneManager.LoadScene("BattleScene");
 
+                    //Turn off control while in battle
+                    controlEnabled = false;
+                    animator.Play("MhumIdle");
+
                     DontDestroyOnLoad(collider2d);
                     DontDestroyOnLoad(collision.collider);
 

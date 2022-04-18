@@ -81,6 +81,8 @@
     <Compile Include="Assets\Scripts\EntityMechanics\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleButton.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleOptionsPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />
