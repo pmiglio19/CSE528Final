@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.EntityMechanics;
+using Assets.Scripts.PlayerCharacter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,12 @@ namespace Assets.Scripts.UI
 {
     public class InventoryButton : MonoBehaviour
     {
-        Image spriteImage;
-        Button button;
-        Health health;
+        private Image spriteImage;
+        private Button button;
+        public PlayerController playerController;
+        public InventoryPanel inventoryPanel;
+        private Health health;
+        private Inventory inventory;
 
         private void Start()
         {
@@ -21,7 +25,8 @@ namespace Assets.Scripts.UI
             button = GetComponent<Button>();
             button.onClick.AddListener(TaskOnClick);
 
-            health = new Health(10);
+            health = playerController.GetPlayerHealth();
+            inventory = playerController.GetPlayerInventory();
         }
 
         private void TaskOnClick()
@@ -50,6 +55,9 @@ namespace Assets.Scripts.UI
             {
 
             }
+
+            inventory.RemoveFromInventory(spriteImage.sprite.name);
+            inventoryPanel.RemoveFromInventoryPanel(spriteImage.sprite.name);
 
             return;
         }

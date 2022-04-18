@@ -301,5 +301,9 @@ namespace Assets.Scripts.PlayerCharacter
             }
         }
         #endregion
+
+        public Health GetPlayerHealth() { return health; }
+
+        public Inventory GetPlayerInventory() { return inventory; }
     }
 }

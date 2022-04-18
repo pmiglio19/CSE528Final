@@ -11,6 +11,7 @@ namespace Assets.Scripts.UI
     public class InventoryPanel : MonoBehaviour
     {
         static List<Button> buttons;
+        public Sprite uiSprite;
 
         public InventoryPanel()
         {
@@ -72,7 +73,18 @@ namespace Assets.Scripts.UI
             {
                 Debug.Log(ex.Message);
             }
-            
+        }
+
+        public void RemoveFromInventoryPanel(string itemName)
+        {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                if (buttons[i].GetComponent<Image>().sprite.name == itemName)
+                {
+                    buttons[i].GetComponent<Image>().sprite = uiSprite;
+                    return;
+                }
+            }
         }
     }
 }

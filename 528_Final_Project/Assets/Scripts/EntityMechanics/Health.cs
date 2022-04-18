@@ -8,7 +8,7 @@ namespace Assets.Scripts.EntityMechanics
     public class Health : MonoBehaviour
     {
         private static int maxHP;
-        private int currentHP;
+        private static int currentHP;
         private HealthUI healthUI;
 
         public Health(int _maxHP)
@@ -26,7 +26,7 @@ namespace Assets.Scripts.EntityMechanics
 
         public void IncrementByAmount(int amount)
         {
-            currentHP = Mathf.Clamp(currentHP + amount, 0, 20);
+            currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
             healthUI.IncrementHealth(amount);
         }
 
@@ -65,5 +65,7 @@ namespace Assets.Scripts.EntityMechanics
         }
 
         public static int GetMaxHealth() { return maxHP; }
+
+        public int GetCurrentHealth() { return currentHP; }
     }
 }

@@ -20969,6 +20969,14 @@ PrefabInstance:
       propertyPath: m_Text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4946157992367285581, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
+      propertyPath: inventoryPanel
+      value: 
+      objectReference: {fileID: 591904613}
+    - target: {fileID: 4946157992367285581, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1476147205}
     - target: {fileID: 6560422806512737609, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -20997,6 +21005,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6737289851754229435, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
+      propertyPath: inventoryPanel
+      value: 
+      objectReference: {fileID: 591904613}
+    - target: {fileID: 6737289851754229435, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1476147205}
     - target: {fileID: 7461709153514644017, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -21021,6 +21037,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7840458671468868942, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
+      propertyPath: inventoryPanel
+      value: 
+      objectReference: {fileID: 591904613}
+    - target: {fileID: 7840458671468868942, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1476147205}
     - target: {fileID: 7846894443587204908, guid: 56a692dd298da474ab764942fc7b1882, type: 3}
       propertyPath: m_Text
       value: 

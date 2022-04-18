@@ -27,9 +27,17 @@ namespace Assets.Scripts.EntityMechanics
             inventoryPanel.AddToInventoryPanel(item.GetSprite());
         }
 
-        public void RemoveFromInventory(BaseItem item)
+        public void RemoveFromInventory(string itemName)
         {
-            items.Remove(item);
+            foreach(BaseItem item in items)
+            {
+                Debug.Log("current item name: " + item.itemName);
+                if (item.itemName == itemName)
+                {
+                    items.Remove(item);
+                    return;
+                }
+            }
         }
 
         public void ClearInventory()

@@ -12,11 +12,11 @@ namespace Assets.Scripts.Items
     //Increases health by 5
     public class HealthPotion : BaseConsumable
     {
-        public Sprite newSprite;
+        //public Sprite newSprite;
 
         public HealthPotion(string itemName, int damageMultiplier, string itemType, Sprite sprite) : base(itemName, damageMultiplier, itemType, sprite)
         {
-            sprite = newSprite;
+            //sprite = newSprite;
         }
 
         private void Awake()
