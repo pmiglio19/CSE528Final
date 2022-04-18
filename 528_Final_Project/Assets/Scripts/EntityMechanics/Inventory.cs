@@ -31,7 +31,6 @@ namespace Assets.Scripts.EntityMechanics
         {
             foreach(BaseItem item in items)
             {
-                Debug.Log("current item name: " + item.itemName);
                 if (item.itemName == itemName)
                 {
                     items.Remove(item);

@@ -19,6 +19,8 @@ namespace Assets.Scripts.PlayerCharacter
         bool isGrounded = false;
         bool isAscending = false;
         bool isDescending = true;
+        bool isInvisible = false;
+        bool swordIsEquipped = false;
 
         //Movement constants & variables
         const float movementSpeedMultiplier = 5f;
@@ -27,6 +29,9 @@ namespace Assets.Scripts.PlayerCharacter
         float horizontalMovement = 0;
         float verticalMovement = 0;
         bool facingRight = true;
+
+        int invisoTimer = 0;
+        int invisoTimerMax = 500;
 
         //Animations
         private SpriteRenderer spriteRenderer;
@@ -85,6 +90,24 @@ namespace Assets.Scripts.PlayerCharacter
         private void FixedUpdate()
         {
             Move();
+
+            //Invisible Check
+            if(isInvisible)
+            {
+                if (invisoTimer < invisoTimerMax)
+                {
+                    invisoTimer++;
+                }
+                else
+                {
+                    isInvisible = false;
+                    invisoTimer = 0;
+                    spriteRenderer.color += new Color(0, 0, 0, .5f);
+                }
+            }
+
+            //If swordIsEquipped and sword animator bool value is not set to true, do it
+            //This will change Mhum's animation to carry a sword
         }
 
         private void Move()
@@ -225,7 +248,6 @@ namespace Assets.Scripts.PlayerCharacter
             //}
         }
 
-
         #endregion
 
         #region Death and Game Restart
@@ -257,23 +279,31 @@ namespace Assets.Scripts.PlayerCharacter
 
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                //Start battle scene when enemy is touched
-                SceneManager.LoadScene("BattleScene");
-                
-                DontDestroyOnLoad(collider2d);
-                DontDestroyOnLoad(collision.collider);
+                if (isInvisible)
+                {
+                    Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+                }
 
-                //rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
-                //rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-                //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
-                //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                else
+                {
+                    //Start battle scene when enemy is touched
+                    SceneManager.LoadScene("BattleScene");
 
-                transform.position = new Vector3(-2f, 0f, 0f);
-                collision.transform.position = new Vector3(2f, 0f, 0f);
+                    DontDestroyOnLoad(collider2d);
+                    DontDestroyOnLoad(collision.collider);
 
-                collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
-                //FaceRight(transform.root.gameObject);
-                //FaceLeft(collision.collider.gameObject);
+                    //rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
+                    //rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                    //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
+                    transform.position = new Vector3(-2f, 0f, 0f);
+                    collision.transform.position = new Vector3(2f, 0f, 0f);
+
+                    collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
+                    //FaceRight(transform.root.gameObject);
+                    //FaceLeft(collision.collider.gameObject);
+                }
             }
 
             if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
@@ -286,7 +316,7 @@ namespace Assets.Scripts.PlayerCharacter
                 Destroy(collision.gameObject);
 
                 //Set damageMultiplier if player has a weapon in inventory
-                damage.ChangeMultiplier(inventory.CheckInventoryForWeapons());
+                //damage.ChangeMultiplier(inventory.CheckInventoryForWeapons());
             }
         }
 
@@ -302,8 +332,24 @@ namespace Assets.Scripts.PlayerCharacter
         }
         #endregion
 
+        #region Gets & Sets
         public Health GetPlayerHealth() { return health; }
 
         public Inventory GetPlayerInventory() { return inventory; }
+
+        public DamageDealt GetPlayerDamageDealt() { return damage; }
+
+        public SpriteRenderer GetPlayerSpriteRenderer() { return spriteRenderer; }
+
+        public void SetInvisibility(bool boolValue)
+        {
+            isInvisible = boolValue;
+        }
+
+        public void SetSwordIsEquipped(bool boolValue)
+        {
+            swordIsEquipped = boolValue;
+        }
+        #endregion
     }
 }

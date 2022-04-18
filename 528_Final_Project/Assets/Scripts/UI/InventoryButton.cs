@@ -18,6 +18,7 @@ namespace Assets.Scripts.UI
         public InventoryPanel inventoryPanel;
         private Health health;
         private Inventory inventory;
+        private DamageDealt damage;
 
         private void Start()
         {
@@ -27,6 +28,7 @@ namespace Assets.Scripts.UI
 
             health = playerController.GetPlayerHealth();
             inventory = playerController.GetPlayerInventory();
+            damage = playerController.GetPlayerDamageDealt();
         }
 
         private void TaskOnClick()
@@ -48,12 +50,14 @@ namespace Assets.Scripts.UI
 
             else if (spriteImage.sprite.name == "InvisibilityPotion")
             {
-
+                playerController.SetInvisibility(true);
+                playerController.GetPlayerSpriteRenderer().color += new Color(0, 0, 0, -.5f);
             }
 
             else if (spriteImage.sprite.name == "Sword")
             {
-
+                damage.ChangeMultiplier(2);
+                playerController.SetSwordIsEquipped(true);
             }
 
             inventory.RemoveFromInventory(spriteImage.sprite.name);
