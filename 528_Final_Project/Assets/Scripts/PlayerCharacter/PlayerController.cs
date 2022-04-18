@@ -1,8 +1,11 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using static Core.Simulation;
+using Assets.Scripts.EntityMechanics;
+using Items;
+using Assets.Scripts.EnemyCharacters;
 
-namespace PlayerCharacter
+namespace Assets.Scripts.PlayerCharacter
 {
     public class PlayerController : MonoBehaviour
     {
@@ -16,6 +19,8 @@ namespace PlayerCharacter
         bool isGrounded = false;
         bool isAscending = false;
         bool isDescending = true;
+        bool isInvisible = false;
+        bool swordIsEquipped = false;
 
         //Movement constants & variables
         const float movementSpeedMultiplier = 5f;
@@ -25,16 +30,24 @@ namespace PlayerCharacter
         float verticalMovement = 0;
         bool facingRight = true;
 
+        int invisoTimer = 0;
+        int invisoTimerMax = 500;
+
         //Animations
-        SpriteRenderer spriteRenderer;
+        private SpriteRenderer spriteRenderer;
         internal Animator animator;
 
         //Other components
-        public Collider2D collider2d;
-        public Rigidbody2D rigidBody;
+        private Collider2D collider2d;
+        private Rigidbody2D rigidBody;
 
         //Character attributes
-        public Health health;
+        private Health health;
+        private Inventory inventory;
+        private Mana mana;
+        private Experience experience;
+        private DamageDealt damage;
+
         #endregion
 
         private void Awake()
@@ -51,30 +64,50 @@ namespace PlayerCharacter
             //Makes it so character's sprite doesn't roll around
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-            health = GetComponent<Health>();
+            health = new Health(10);
+            inventory = new Inventory();
+            mana = new Mana(10);
+            experience = new Experience();
+            damage = new DamageDealt(1);     //Initially
         }
 
         //Apparently Update is used more specifically for key inputs
         private void Update()
         {
             //Check character health
-            if(health.currentHP <= 0)
+            if(health.CheckForDeath())
             {
-                controlEnabled = false;
-                animator.Play("MhumDeath");
+                RunDeathProtocols();
+                //RestartGame();
 
-                //Play death animation
                 //Ask to play again?
             }
 
-            spaceIsPressed = Input.GetKeyDown(KeyCode.Space);
-            
+            spaceIsPressed = Input.GetKey(KeyCode.Space);
         }
 
-        //And FixedUpdateis used more for things involving physics
+        //And FixedUpdate is used more for things involving physics
         private void FixedUpdate()
         {
             Move();
+
+            //Invisible Check
+            if(isInvisible)
+            {
+                if (invisoTimer < invisoTimerMax)
+                {
+                    invisoTimer++;
+                }
+                else
+                {
+                    isInvisible = false;
+                    invisoTimer = 0;
+                    spriteRenderer.color += new Color(0, 0, 0, .5f);
+                }
+            }
+
+            //If swordIsEquipped and sword animator bool value is not set to true, do it
+            //This will change Mhum's animation to carry a sword
         }
 
         private void Move()
@@ -82,8 +115,8 @@ namespace PlayerCharacter
             //If character drops too far below viewable map, reset health and respawn
             if (transform.position.y < -10)
             {
-                health.currentHP = health.maxHP;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                RunDeathProtocols();
+                RestartGame();
             }
 
             if (controlEnabled)
@@ -156,11 +189,9 @@ namespace PlayerCharacter
                 //Change animation to "walk" when moving and "idle" when not
                 animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
             }
-
-            //UNCOMMENT THIS TO SEE HIM DIE
-            //health.currentHP--;
         }
 
+        #region Movement Utility
         //Used to flip character left or right
         private void Flip()
         {
@@ -173,6 +204,67 @@ namespace PlayerCharacter
             transform.localScale = theScale;
         }
 
+        private void FaceRight(GameObject gameObject)
+        {
+            if(gameObject.CompareTag("Player"))
+            {
+                if (!facingRight)
+                {
+                    facingRight = !facingRight;
+
+                    Vector3 theScale = transform.localScale;
+                    theScale.x *= -1;
+                    gameObject.transform.localScale = theScale;
+                }
+            }
+
+            //else
+            //{
+            //    Vector3 theScale = transform.localScale;
+            //    theScale.x *= -1;
+            //    gameObject.transform.localScale = theScale;
+            //}
+        }
+
+        private void FaceLeft(GameObject gameObject)
+        {
+            if (gameObject.CompareTag("Player"))
+            {
+                if (facingRight)
+                {
+                    facingRight = !facingRight;
+
+                    Vector3 theScale = transform.localScale;
+                    theScale.x *= -1;
+                    gameObject.transform.localScale = theScale;
+                }
+            }
+
+            //else
+            //{
+            //    Vector3 theScale = transform.localScale;
+            //    theScale.x *= -1;
+            //    gameObject.transform.localScale = theScale;
+            //}
+        }
+
+        #endregion
+
+        #region Death and Game Restart
+        private void RunDeathProtocols()
+        {
+            controlEnabled = false;
+            animator.Play("MhumDeath");
+            inventory.ClearInventory();
+        }
+
+        private void RestartGame()
+        {
+            health.ResetHealth();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        #endregion
+
         #region Collisions
         //Activates upon gameobject entering character's collider
         private void OnCollisionEnter2D(Collision2D collision)
@@ -183,6 +275,48 @@ namespace PlayerCharacter
 
                 //Debug.Log("In OnCollisionEnter2D");
                 //Debug.Log("isGrounded is now " + isGrounded.ToString());
+            }
+
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                if (isInvisible)
+                {
+                    Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+                }
+
+                else
+                {
+                    //Start battle scene when enemy is touched
+                    SceneManager.LoadScene("BattleScene");
+
+                    DontDestroyOnLoad(collider2d);
+                    DontDestroyOnLoad(collision.collider);
+
+                    //rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
+                    //rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                    //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
+                    transform.position = new Vector3(-2f, 0f, 0f);
+                    collision.transform.position = new Vector3(2f, 0f, 0f);
+
+                    collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
+                    //FaceRight(transform.root.gameObject);
+                    //FaceLeft(collision.collider.gameObject);
+                }
+            }
+
+            if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
+            {
+                BaseItem item = new BaseItem(collision.gameObject.GetComponent<BaseItem>().itemName, collision.gameObject.GetComponent<BaseItem>().damageMultiplier, collision.gameObject.GetComponent<BaseItem>().itemType,
+                  collision.gameObject.GetComponent<BaseItem>().sprite);
+
+                inventory.AddToInventory(item);
+
+                Destroy(collision.gameObject);
+
+                //Set damageMultiplier if player has a weapon in inventory
+                //damage.ChangeMultiplier(inventory.CheckInventoryForWeapons());
             }
         }
 
@@ -195,6 +329,26 @@ namespace PlayerCharacter
                 //Debug.Log("In OnCollisionExit2D");
                 //Debug.Log("isGrounded is now " + isGrounded.ToString());
             }
+        }
+        #endregion
+
+        #region Gets & Sets
+        public Health GetPlayerHealth() { return health; }
+
+        public Inventory GetPlayerInventory() { return inventory; }
+
+        public DamageDealt GetPlayerDamageDealt() { return damage; }
+
+        public SpriteRenderer GetPlayerSpriteRenderer() { return spriteRenderer; }
+
+        public void SetInvisibility(bool boolValue)
+        {
+            isInvisible = boolValue;
+        }
+
+        public void SetSwordIsEquipped(bool boolValue)
+        {
+            swordIsEquipped = boolValue;
         }
         #endregion
     }
