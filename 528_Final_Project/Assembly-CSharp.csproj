@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\SceneLoaders\TitleScene.cs" />
     <Compile Include="Assets\Scripts\UI\HealthUI.cs" />
     <Compile Include="Assets\Scripts\Items\InvisibilityPotion.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleOptionsPanel.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Experience.cs" />
     <Compile Include="Assets\Scripts\Items\HealthPotion.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryPanel.cs" />
@@ -77,12 +78,13 @@
     <Compile Include="Assets\Scripts\EntityMechanics\Mana.cs" />
     <Compile Include="Assets\Scripts\SceneLoaders\InstructionScene.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUIController.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleButton.cs" />
     <Compile Include="Assets\Scripts\UI\ManaUI.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
-    <Compile Include="Assets\Scripts\UI\BattleButton.cs" />
-    <Compile Include="Assets\Scripts\UI\BattleOptionsPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\RestartButton.cs" />
+    <Compile Include="Assets\Scripts\UI\QuitButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />
