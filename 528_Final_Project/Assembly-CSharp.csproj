@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\Bat.cs" />
     <Compile Include="Assets\Scripts\Items\BaseConsumable.cs" />
+    <Compile Include="Assets\Scripts\SceneLoaders\TitleScene.cs" />
     <Compile Include="Assets\Scripts\UI\HealthUI.cs" />
     <Compile Include="Assets\Scripts\Items\InvisibilityPotion.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Experience.cs" />
@@ -73,17 +74,16 @@
     <Compile Include="Assets\Scripts\Items\Sword.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\DamageDealt.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Mana.cs" />
+    <Compile Include="Assets\Scripts\SceneLoaders\InstructionScene.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUIController.cs" />
     <Compile Include="Assets\Scripts\UI\ManaUI.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
-    <Compile Include="Assets\Scripts\SceneLoaders\TitleScene.cs" />
-    <Compile Include="Assets\Scripts\SceneLoaders\InstructionScene.cs" />
+    <Compile Include="Assets\Audio\MusicClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />
-    <None Include="Assets\Audio\deleteMeLater.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

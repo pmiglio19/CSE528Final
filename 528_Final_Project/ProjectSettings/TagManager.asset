@@ -9,6 +9,7 @@ TagManager:
   - Item
   - Weapon
   - UI
+  - Music
   layers:
   - Default
   - TransparentFX
