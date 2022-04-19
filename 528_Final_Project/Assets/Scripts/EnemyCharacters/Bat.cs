@@ -14,6 +14,7 @@ namespace Assets.Scripts.EnemyCharacters
         private float max = 3f;
         public float maxDistanceCovered = 0f;
         public bool facingRight = true;
+        private bool justStarted;
 
         public Bat(int _maxDistanceCovered, bool _facingRight) : base()
         {
@@ -23,12 +24,14 @@ namespace Assets.Scripts.EnemyCharacters
 
             maxDistanceCovered = _maxDistanceCovered;
             facingRight = _facingRight;
+            justStarted = true;
         }
 
         private void Awake()
         {
             min = transform.position.x;
             max = transform.position.x + maxDistanceCovered;
+            justStarted = true;
         }
 
         private void Update()
@@ -37,13 +40,16 @@ namespace Assets.Scripts.EnemyCharacters
             {
                 transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
 
-                if (transform.position.x <= max - .07)
+                if (transform.position.x == max)
                 {
+                    Debug.Log("max");
                     Flip();
+                    justStarted = false;
                 }
 
-                if (transform.position.x >= min + .07)
+                if (!justStarted && transform.position.x == min)
                 {
+                    Debug.Log("min");
                     Flip();
                 }
             }

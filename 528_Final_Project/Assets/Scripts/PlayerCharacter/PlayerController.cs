@@ -293,6 +293,8 @@ namespace Assets.Scripts.PlayerCharacter
                     controlEnabled = false;
                     animator.Play("MhumIdle");
 
+                    collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
+
                     DontDestroyOnLoad(collider2d);
                     DontDestroyOnLoad(collision.collider);
 
@@ -303,8 +305,7 @@ namespace Assets.Scripts.PlayerCharacter
 
                     transform.position = new Vector3(-2f, 0f, 0f);
                     collision.transform.position = new Vector3(2f, 0f, 0f);
-
-                    collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
+                    
                     //FaceRight(transform.root.gameObject);
                     //FaceLeft(collision.collider.gameObject);
                 }
