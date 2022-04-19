@@ -14,7 +14,10 @@ namespace Assets.Scripts.UI
     {
         private Image spriteImage;
         private Button button;
-        public PlayerController playerController;
+
+        private GameObject playerGameObject;
+        private PlayerController playerController;
+
         public InventoryPanel inventoryPanel;
         private Health health;
         private Inventory inventory;
@@ -25,6 +28,9 @@ namespace Assets.Scripts.UI
             spriteImage = GetComponent<Image>();
             button = GetComponent<Button>();
             button.onClick.AddListener(TaskOnClick);
+
+            playerGameObject = GameObject.FindWithTag("Player");
+            playerController = playerGameObject.GetComponent<PlayerController>();
 
             health = playerController.GetPlayerHealth();
             inventory = playerController.GetPlayerInventory();

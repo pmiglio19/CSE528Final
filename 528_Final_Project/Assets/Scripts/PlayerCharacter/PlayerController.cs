@@ -55,6 +55,8 @@ namespace Assets.Scripts.PlayerCharacter
             //To enable movement again after respawn
             controlEnabled = true;
 
+            DontDestroyOnLoad(transform.gameObject);
+
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -295,7 +297,7 @@ namespace Assets.Scripts.PlayerCharacter
 
                     collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
 
-                    DontDestroyOnLoad(collider2d);
+                    //DontDestroyOnLoad(collider2d);
                     DontDestroyOnLoad(collision.collider);
 
                     //rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
