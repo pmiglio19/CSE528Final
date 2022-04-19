@@ -339,6 +339,8 @@ namespace Assets.Scripts.PlayerCharacter
         #region Gets & Sets
         public Health GetPlayerHealth() { return health; }
 
+        public Mana GetPlayerMana() { return mana; }
+
         public Inventory GetPlayerInventory() { return inventory; }
 
         public DamageDealt GetPlayerDamageDealt() { return damage; }
