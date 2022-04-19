@@ -13,6 +13,7 @@ namespace Assets.Scripts.EnemyCharacters
         //Stats
         protected Health health;
         protected DamageDealt damage;
+        protected int experienceGained;
 
         //Animations
         SpriteRenderer spriteRenderer;

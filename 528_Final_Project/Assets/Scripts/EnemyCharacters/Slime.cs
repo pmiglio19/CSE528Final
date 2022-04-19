@@ -18,6 +18,8 @@ namespace Assets.Scripts.EnemyCharacters
         public Slime() : base()
         {
             health = new Health(5);
+            experienceGained = 3;
+            damage = new DamageDealt(3);
         }
 
         private void Update()
