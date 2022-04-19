@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3330502375529006762}
   - component: {fileID: 6845654180325210716}
   - component: {fileID: 7328864555378635889}
-  - component: {fileID: 4946157992367285581}
+  - component: {fileID: 8555246243730592715}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4946157992367285581
+--- !u!114 &8555246243730592715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,10 +131,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1943493948671319664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2e3e38a61ea51b47bf92e0494994127, type: 3}
+  m_Script: {fileID: 11500000, guid: 541a1a96fe4f3834e813b5d7774806c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
   inventoryPanel: {fileID: 0}
 --- !u!1 &2589044402255781476
 GameObject:
@@ -148,7 +147,7 @@ GameObject:
   - component: {fileID: 2565906482389929008}
   - component: {fileID: 8402820165808509962}
   - component: {fileID: 5374075996668399627}
-  - component: {fileID: 6737289851754229435}
+  - component: {fileID: 8262591261400728261}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -258,7 +257,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6737289851754229435
+--- !u!114 &8262591261400728261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,10 +266,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2589044402255781476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2e3e38a61ea51b47bf92e0494994127, type: 3}
+  m_Script: {fileID: 11500000, guid: 541a1a96fe4f3834e813b5d7774806c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
   inventoryPanel: {fileID: 0}
 --- !u!1 &2708805504529660796
 GameObject:
@@ -363,7 +361,7 @@ GameObject:
   - component: {fileID: 7220053546926678411}
   - component: {fileID: 3539484515226781801}
   - component: {fileID: 1195069090044450785}
-  - component: {fileID: 3840649376536930626}
+  - component: {fileID: 4136022434195836550}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -473,7 +471,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3840649376536930626
+--- !u!114 &4136022434195836550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -482,10 +480,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3491104099534648730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2e3e38a61ea51b47bf92e0494994127, type: 3}
+  m_Script: {fileID: 11500000, guid: 541a1a96fe4f3834e813b5d7774806c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
   inventoryPanel: {fileID: 0}
 --- !u!1 &5427414536750571687
 GameObject:
@@ -736,7 +733,7 @@ GameObject:
   - component: {fileID: 4870087743011456272}
   - component: {fileID: 6542312646440309493}
   - component: {fileID: 525939737733988507}
-  - component: {fileID: 7840458671468868942}
+  - component: {fileID: 6882820877431664011}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -846,7 +843,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7840458671468868942
+--- !u!114 &6882820877431664011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -855,10 +852,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8503760376511138726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2e3e38a61ea51b47bf92e0494994127, type: 3}
+  m_Script: {fileID: 11500000, guid: 541a1a96fe4f3834e813b5d7774806c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
   inventoryPanel: {fileID: 0}
 --- !u!1 &8615855478797041364
 GameObject:
@@ -872,6 +868,7 @@ GameObject:
   - component: {fileID: 941330028085734952}
   - component: {fileID: 941330028085734959}
   - component: {fileID: 941330028085734953}
+  - component: {fileID: 6521131515556061343}
   m_Layer: 5
   m_Name: BattlePanel
   m_TagString: Untagged
@@ -964,3 +961,16 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &6521131515556061343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615855478797041364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a0409a0c68d5940b0bdaee216beecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiSprite: {fileID: 0}

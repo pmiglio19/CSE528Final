@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.Scripts.EntityMechanics;
+using Assets.Scripts.PlayerCharacter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,21 +14,22 @@ namespace Assets.Scripts.UI
     {
         private Image spriteImage;
         private Button button;
-        //public PlayerController playerController;
+
+        public PlayerController playerController;
         public InventoryPanel inventoryPanel;
-        //private Health health;
-        //private Inventory inventory;
-        //private DamageDealt damage;
+        public SkillsPanel skillsPanel;
+
+        private Text text;
+        private Health health;
 
         private void Start()
         {
             spriteImage = GetComponent<Image>();
             button = GetComponent<Button>();
             button.onClick.AddListener(TaskOnClick);
+            text = button.GetComponentInChildren<Text>();
 
-            //health = playerController.GetPlayerHealth();
-            //inventory = playerController.GetPlayerInventory();
-            //damage = playerController.GetPlayerDamageDealt();
+            health = playerController.GetPlayerHealth();
         }
 
         private void TaskOnClick()
@@ -36,30 +39,32 @@ namespace Assets.Scripts.UI
 
         private void UseOption()
         {
-            //if (spriteImage.sprite.name == "UISprite")
-            //{
-            //    return;
-            //}
+            Debug.Log("Using option");
+            Debug.Log("text: "+text.text);
 
-            //else if (spriteImage.sprite.name == "HealthPotion")
-            //{
-            //    health.IncrementByAmount(5);
-            //}
+            if (text.text == "Attack")
+            {
+                //Does attack animation and ~so much damage
+                Debug.Log("Attack");
+            }
 
-            //else if (spriteImage.sprite.name == "InvisibilityPotion")
-            //{
-            //    playerController.SetInvisibility(true);
-            //    playerController.GetPlayerSpriteRenderer().color += new Color(0, 0, 0, -.5f);
-            //}
+            else if (text.text == "Magic")
+            {
+                Debug.Log("Magic");
+                skillsPanel.gameObject.SetActive(true);
+            }
 
-            //else if (spriteImage.sprite.name == "Sword")
-            //{
-            //    damage.ChangeMultiplier(2);
-            //    playerController.SetSwordIsEquipped(true);
-            //}
+            else if (text.text == "Items")
+            {
+                Debug.Log("Items");
+                inventoryPanel.gameObject.SetActive(true);
+            }
 
-            //inventory.RemoveFromInventory(spriteImage.sprite.name);
-            //inventoryPanel.RemoveFromInventoryPanel(spriteImage.sprite.name);
+            else if (text.text == "Rest")
+            {
+                Debug.Log("Rest");
+                health.IncrementByOne();
+            }
 
             return;
         }

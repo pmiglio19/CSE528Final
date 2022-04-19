@@ -134,6 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e3e38a61ea51b47bf92e0494994127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  inventoryPanel: {fileID: 0}
 --- !u!1 &2046596724920698073
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +148,7 @@ GameObject:
   - component: {fileID: 941330028085734952}
   - component: {fileID: 941330028085734959}
   - component: {fileID: 941330028085734953}
+  - component: {fileID: 2350894823787649205}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -237,6 +240,19 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &2350894823787649205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046596724920698073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abc14ffc26dd224fa28b922db46f211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &2589044402255781476
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e3e38a61ea51b47bf92e0494994127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  inventoryPanel: {fileID: 0}
 --- !u!1 &2708805504529660796
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,3 +760,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e3e38a61ea51b47bf92e0494994127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  inventoryPanel: {fileID: 0}

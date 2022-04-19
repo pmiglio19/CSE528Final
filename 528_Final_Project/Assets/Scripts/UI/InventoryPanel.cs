@@ -12,6 +12,7 @@ namespace Assets.Scripts.UI
     {
         static List<Button> buttons;
         public Sprite uiSprite;
+        public bool isInBattle;
 
         public InventoryPanel()
         {
@@ -74,6 +75,12 @@ namespace Assets.Scripts.UI
                 if (buttons[i].GetComponent<Image>().sprite.name == itemName)
                 {
                     buttons[i].GetComponent<Image>().sprite = uiSprite;
+
+                    if(isInBattle)
+                    {
+                        gameObject.SetActive(false);
+                    }
+
                     return;
                 }
             }
