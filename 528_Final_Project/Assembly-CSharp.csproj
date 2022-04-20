@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\UI\Panels\SkillsPanel.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\Slime.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Battle\BattleSystem.cs" />
     <Compile Include="Assets\Scripts\UI\RestartButton.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\InventoryButton.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\SkillsButton.cs" />
+    <Compile Include="Assets\Scripts\EnemyCharacters\EnemyHealth.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Documentation\deleteMeLater.txt" />

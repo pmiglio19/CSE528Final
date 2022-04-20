@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.EntityMechanics;
+using Assets.Scripts.PlayerCharacter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.EnemyCharacters
 {
-    class BaseEnemy : MonoBehaviour
+    public class BaseEnemy : MonoBehaviour
     {
         //Stats
-        protected Health health;
+        protected EnemyHealth health;
         protected DamageDealt damage;
         protected int experienceGained;
 
@@ -24,14 +25,17 @@ namespace Assets.Scripts.EnemyCharacters
         public Rigidbody2D rigidBody;
 
         protected bool isInBattle = false;
-
-        public BaseEnemy()
-        {
-
-        }
+        
+        private GameObject playerGameObject;
+        private PlayerController playerController;
 
         private void Awake()
         {
+            playerGameObject = GameObject.FindWithTag("Player");
+            playerController = playerGameObject.GetComponent<PlayerController>();
+
+            DontDestroyOnLoad(gameObject);
+
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -41,9 +45,27 @@ namespace Assets.Scripts.EnemyCharacters
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
+        private void FixedUpdate()
+        {
+            if(health.CheckForDeath())
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public EnemyHealth GetEnemyHealth()
+        {
+            return health;
+        }
+
         public void SetIsInBattle(bool newBool)
         {
             isInBattle = newBool;
+        }
+
+        public void Attack()
+        {
+            playerController.GetPlayerHealth().DecrementByAmount(damage.GetMultiplier());
         }
     }
 }

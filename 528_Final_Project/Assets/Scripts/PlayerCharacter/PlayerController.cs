@@ -11,7 +11,7 @@ namespace Assets.Scripts.PlayerCharacter
     {
         #region Class Variables
 
-        //Other states
+        //Control states
         bool controlEnabled = true;
         bool spaceIsPressed = false;
 
@@ -21,6 +21,7 @@ namespace Assets.Scripts.PlayerCharacter
         bool isDescending = true;
         bool isInvisible = false;
         bool swordIsEquipped = false;
+        bool playerTurn = false;
 
         //Movement constants & variables
         const float movementSpeedMultiplier = 5f;
@@ -108,6 +109,8 @@ namespace Assets.Scripts.PlayerCharacter
                 }
             }
 
+            health.Die();
+
             //If swordIsEquipped and sword animator bool value is not set to true, do it
             //This will change Mhum's animation to carry a sword
         }
@@ -191,6 +194,11 @@ namespace Assets.Scripts.PlayerCharacter
                 //Change animation to "walk" when moving and "idle" when not
                 animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
             }
+        }
+
+        public void Attack(BaseEnemy enemy)
+        {
+            enemy.GetEnemyHealth().DecrementByAmount(damage.GetMultiplier());
         }
 
         #region Movement Utility
@@ -288,28 +296,30 @@ namespace Assets.Scripts.PlayerCharacter
 
                 else
                 {
+                    //if attacked first, isBattlingFirst = true;
+
+                    
                     //Start battle scene when enemy is touched
                     SceneManager.LoadScene("BattleScene");
 
                     //Turn off control while in battle
-                    controlEnabled = false;
-                    animator.Play("MhumIdle");
+                    //controlEnabled = false;
+                    //animator.Play("MhumIdle");
+
+                    transform.position = new Vector3(-2f, 0f, 0f);
+                    collision.transform.position = new Vector3(2f, 0f, 0f);
+
+                    new WaitForSeconds(1);
 
                     collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
-
-                    //DontDestroyOnLoad(collider2d);
-                    DontDestroyOnLoad(collision.collider);
 
                     //rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
                     //rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
                     //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
                     //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
-                    transform.position = new Vector3(-2f, 0f, 0f);
-                    collision.transform.position = new Vector3(2f, 0f, 0f);
-                    
                     //FaceRight(transform.root.gameObject);
-                    //FaceLeft(collision.collider.gameObject);
+                    FaceLeft(collision.collider.gameObject);
                 }
             }
 
@@ -350,9 +360,16 @@ namespace Assets.Scripts.PlayerCharacter
 
         public SpriteRenderer GetPlayerSpriteRenderer() { return spriteRenderer; }
 
+        public bool GetPlayerTurn() { return playerTurn; }
+
         public void SetInvisibility(bool boolValue)
         {
             isInvisible = boolValue;
+        }
+
+        public void SetPlayerTurn(bool boolValue)
+        {
+            playerTurn = boolValue;
         }
 
         public void SetSwordIsEquipped(bool boolValue)

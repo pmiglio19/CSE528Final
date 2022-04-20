@@ -18,7 +18,7 @@ namespace Assets.Scripts.EnemyCharacters
 
         public Bat(int _maxDistanceCovered, bool _facingRight) : base()
         {
-            health = new Health(3);
+            health = new EnemyHealth(3);
             experienceGained = 4;
             damage = new DamageDealt(2);
 

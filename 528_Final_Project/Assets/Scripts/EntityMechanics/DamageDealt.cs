@@ -22,5 +22,10 @@ namespace Assets.Scripts.EntityMechanics
             Debug.Log("Damage multiplier is now: " + damageMultiplier.ToString());
         }
 
+        public int GetMultiplier()
+        {
+            return damageMultiplier;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.EntityMechanics;
+﻿using Assets.Scripts.EnemyCharacters;
+using Assets.Scripts.EntityMechanics;
 using Assets.Scripts.PlayerCharacter;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,15 @@ namespace Assets.Scripts.UI
     {
         private Image spriteImage;
         private Button button;
+        private Text text;
 
         private GameObject playerGameObject;
         private PlayerController playerController;
+        private GameObject enemyGameObject;
+        private BaseEnemy enemyController;
+        private GameObject skillObject;
+
+
         public SkillsPanel skillsPanel;
         private Mana mana;
         private DamageDealt damage;
@@ -26,9 +33,15 @@ namespace Assets.Scripts.UI
             spriteImage = GetComponent<Image>();
             button = GetComponent<Button>();
             button.onClick.AddListener(TaskOnClick);
+            text = button.GetComponentInChildren<Text>();
 
             playerGameObject = GameObject.FindWithTag("Player");
             playerController = playerGameObject.GetComponent<PlayerController>();
+
+            enemyGameObject = GameObject.FindWithTag("Enemy");
+            enemyController = enemyGameObject.GetComponent<BaseEnemy>();
+
+            skillObject = GameObject.FindWithTag("Skill");
 
             mana = playerController.GetPlayerMana();
             damage = playerController.GetPlayerDamageDealt();
@@ -41,9 +54,16 @@ namespace Assets.Scripts.UI
 
         private void UseSkill()
         {
-            if (spriteImage.sprite.name == "Zappy")
+            Debug.Log("Player name: "+ playerController.name);
+            Debug.Log("Enemy name: " + enemyController.name);
+
+            if (text.text == "Zappy")
             {
-                //Do zappy thing
+                skillObject.SetActive(true);
+                skillObject.GetComponent<Animator>().Play("Lightning");
+                enemyController.GetEnemyHealth().DecrementByAmount(10);
+                playerController.GetPlayerMana().DecrementMana(5);
+                skillObject.SetActive(false);
             }
 
             skillsPanel.gameObject.SetActive(false);
