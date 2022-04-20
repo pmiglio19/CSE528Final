@@ -45,13 +45,13 @@ namespace Assets.Scripts.EnemyCharacters
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        private void FixedUpdate()
-        {
-            if(health.CheckForDeath())
-            {
-                Destroy(gameObject);
-            }
-        }
+        //private void FixedUpdate()
+        //{
+        //    if(health.CheckForDeath())
+        //    {
+        //        Destroy(gameObject);
+        //    }
+        //}
 
         public EnemyHealth GetEnemyHealth()
         {
