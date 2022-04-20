@@ -34,8 +34,6 @@ namespace Assets.Scripts.EnemyCharacters
             playerGameObject = GameObject.FindWithTag("Player");
             playerController = playerGameObject.GetComponent<PlayerController>();
 
-            DontDestroyOnLoad(gameObject);
-
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 

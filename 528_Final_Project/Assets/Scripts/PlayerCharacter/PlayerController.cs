@@ -56,8 +56,6 @@ namespace Assets.Scripts.PlayerCharacter
             //To enable movement again after respawn
             controlEnabled = true;
 
-            DontDestroyOnLoad(transform.gameObject);
-
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -108,8 +106,6 @@ namespace Assets.Scripts.PlayerCharacter
                     spriteRenderer.color += new Color(0, 0, 0, .5f);
                 }
             }
-
-            health.Die();
 
             //If swordIsEquipped and sword animator bool value is not set to true, do it
             //This will change Mhum's animation to carry a sword
@@ -296,30 +292,9 @@ namespace Assets.Scripts.PlayerCharacter
 
                 else
                 {
-                    //if attacked first, isBattlingFirst = true;
 
-                    
-                    //Start battle scene when enemy is touched
-                    SceneManager.LoadScene("BattleScene");
 
-                    //Turn off control while in battle
-                    //controlEnabled = false;
-                    //animator.Play("MhumIdle");
 
-                    transform.position = new Vector3(-2f, 0f, 0f);
-                    collision.transform.position = new Vector3(2f, 0f, 0f);
-
-                    new WaitForSeconds(1);
-
-                    collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
-
-                    //rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
-                    //rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
-                    //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-
-                    //FaceRight(transform.root.gameObject);
-                    FaceLeft(collision.collider.gameObject);
                 }
             }
 
@@ -331,9 +306,6 @@ namespace Assets.Scripts.PlayerCharacter
                 inventory.AddToInventory(item);
 
                 Destroy(collision.gameObject);
-
-                //Set damageMultiplier if player has a weapon in inventory
-                //damage.ChangeMultiplier(inventory.CheckInventoryForWeapons());
             }
         }
 
