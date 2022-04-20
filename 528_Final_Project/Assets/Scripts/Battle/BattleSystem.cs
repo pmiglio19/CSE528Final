@@ -32,21 +32,21 @@ namespace Assets.Scripts.Battle
 
         private void Update()
         {
-            //Player turn
-            while(playerController.GetPlayerTurn())
-            {
-                continue;
-            }
+            ////Player turn
+            //while(playerController.GetPlayerTurn())
+            //{
+            //    continue;
+            //}
 
-            //Enemy turn
-            if(!playerController.GetPlayerTurn())
-            {
-                //Move enemy around
+            ////Enemy turn
+            //if(!playerController.GetPlayerTurn())
+            //{
+            //    //Move enemy around
 
-                enemyController.Attack();
+            //    enemyController.Attack();
 
-                playerController.SetPlayerTurn(true);
-            }
+            //    playerController.SetPlayerTurn(true);
+            //}
 
             if(enemyController.GetEnemyHealth().CheckForDeath())
             {
