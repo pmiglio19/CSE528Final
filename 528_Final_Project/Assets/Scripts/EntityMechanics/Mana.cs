@@ -34,5 +34,7 @@ namespace Assets.Scripts.EntityMechanics
         }
 
         public static int GetMaxMana() { return maxMana; }
+
+        public int GetManaLevel() { return manaLevel; }
     }
 }

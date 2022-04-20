@@ -57,16 +57,14 @@ namespace Assets.Scripts.UI
             Debug.Log("Player name: "+ playerController.name);
             Debug.Log("Enemy name: " + enemyController.name);
 
-            if (text.text == "Zappy")
+            if (mana.GetManaLevel() >= 5 && text.text == "Zappy")
             {
-                skillObject.SetActive(true);
-                skillObject.GetComponent<Animator>().Play("Lightning");
+                //skillObject.SetActive(true);
+                //skillObject.GetComponent<Animator>().Play("Lightning");
                 enemyController.GetEnemyHealth().DecrementByAmount(10);
                 playerController.GetPlayerMana().DecrementMana(5);
-                skillObject.SetActive(false);
+                //skillObject.SetActive(false);
             }
-
-            skillsPanel.gameObject.SetActive(false);
 
             return;
         }

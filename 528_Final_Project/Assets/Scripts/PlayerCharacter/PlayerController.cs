@@ -75,8 +75,16 @@ namespace Assets.Scripts.PlayerCharacter
         //Apparently Update is used more specifically for key inputs
         private void Update()
         {
+            //if ((rigidbody.controller.collisionFlags & CollisionFlags.Above) != 0)
+            //{
+            //    if (gameObject.velocity.y > 0)
+            //    {
+            //        gameObject.velocity.y = -gameObject.velocity.y
+            //    }
+            //}
+
             //Check character health
-            if(health.CheckForDeath())
+            if (health.CheckForDeath())
             {
                 RunDeathProtocols();
                 //RestartGame();

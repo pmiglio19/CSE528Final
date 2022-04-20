@@ -45,7 +45,7 @@ namespace Assets.Scripts.EnemyCharacters
 
         //private void FixedUpdate()
         //{
-        //    if(health.CheckForDeath())
+        //    if (health.CheckForDeath())
         //    {
         //        Destroy(gameObject);
         //    }

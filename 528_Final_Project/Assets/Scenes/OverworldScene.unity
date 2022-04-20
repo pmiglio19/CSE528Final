@@ -17126,7 +17126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
+  m_sendNavigationEvents: 0
   m_DragThreshold: 10
 --- !u!4 &260658773
 Transform:
@@ -18706,6 +18706,7 @@ GameObject:
   - component: {fileID: 385932445}
   - component: {fileID: 385932451}
   - component: {fileID: 385932450}
+  - component: {fileID: 385932449}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: UI
@@ -18799,6 +18800,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &385932449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385932444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df1b9ca1b1cbf6243a5f39fd7ff5220f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &385932450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23132,7 +23145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c330f827424df1469f9f45af4d200ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  uiSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 3}
 --- !u!4 &1962180378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7375134288712952110, guid: a2963c3c419117c4aab88e802a5fd155, type: 3}
