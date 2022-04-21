@@ -41,7 +41,7 @@ namespace Assets.Scripts.EntityMechanics
         {
             currentHP = Mathf.Clamp(currentHP - amount, 0, maxHP);
 
-            healthUI.DecrementHealth(1);
+            healthUI.DecrementHealth(amount);
         }
 
         public void Die()

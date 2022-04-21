@@ -56,6 +56,11 @@ namespace Assets.Scripts.EnemyCharacters
             return health;
         }
 
+        public DamageDealt GetEnemyDamageDealt()
+        {
+            return damage;
+        }
+
         public void SetIsInBattle(bool newBool)
         {
             isInBattle = newBool;

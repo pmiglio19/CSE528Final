@@ -308,9 +308,16 @@ namespace Assets.Scripts.PlayerCharacter
 
                 else
                 {
+                    //if(isAttacking)
+                    //{
 
+                    //}
 
+                    //if(!isAttacking)
 
+                    DamageDealt enemyDamage = collision.collider.gameObject.GetComponent<BaseEnemy>().GetEnemyDamageDealt();
+
+                    health.DecrementByAmount(enemyDamage.GetMultiplier());
                 }
             }
 
