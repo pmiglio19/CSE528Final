@@ -65,10 +65,5 @@ namespace Assets.Scripts.EnemyCharacters
         {
             isInBattle = newBool;
         }
-
-        public void Attack()
-        {
-            playerController.GetPlayerHealth().DecrementByAmount(damage.GetMultiplier());
-        }
     }
 }

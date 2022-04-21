@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.EnemyCharacters
 {
-    class Slime : BaseEnemy
+    public class Slime : BaseEnemy
     {
         float maxMoveDistance = .5f;
         //Set this to your objects initial position when game starts.
