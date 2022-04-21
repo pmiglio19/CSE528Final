@@ -37,7 +37,6 @@ namespace Assets.Scripts.EnemyCharacters
 
         private void Update()
         {
-            Debug.Log("bat damage: "+damage.GetMultiplier());
             if (!isInBattle)
             {
                 transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);

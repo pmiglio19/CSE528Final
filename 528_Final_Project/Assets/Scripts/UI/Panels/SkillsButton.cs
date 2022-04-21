@@ -54,15 +54,15 @@ namespace Assets.Scripts.UI
 
         private void UseSkill()
         {
-            Debug.Log("Player name: "+ playerController.name);
-            Debug.Log("Enemy name: " + enemyController.name);
-
             if (mana.GetManaLevel() >= 5 && text.text == "Zappy")
             {
+                Debug.Log("Player name: " + playerController.name);
+                Debug.Log("Enemy name: " + enemyController.name);
+
                 //skillObject.SetActive(true);
                 //skillObject.GetComponent<Animator>().Play("Lightning");
-                enemyController.GetEnemyHealth().DecrementByAmount(10);
-                playerController.GetPlayerMana().DecrementMana(5);
+                //enemyController.GetEnemyHealth().DecrementByAmount(10);
+                mana.DecrementMana(5);
                 //skillObject.SetActive(false);
             }
 
