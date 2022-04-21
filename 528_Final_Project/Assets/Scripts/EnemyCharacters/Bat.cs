@@ -40,14 +40,12 @@ namespace Assets.Scripts.EnemyCharacters
 
             if (transform.position.x < max && transform.position.x >= max - .4f && isFlipped)
             {
-                Debug.Log("max");
                 Flip();
                 isFlipped = !isFlipped;
             }
 
             else if (transform.position.x > min && transform.position.x <= min + .4f && !isFlipped)
             {
-                Debug.Log("min");
                 Flip();
                 isFlipped = !isFlipped;
             }

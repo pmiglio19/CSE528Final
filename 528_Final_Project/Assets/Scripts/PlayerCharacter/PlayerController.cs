@@ -193,6 +193,8 @@ namespace Assets.Scripts.PlayerCharacter
         {
             //If swordIsEquipped and sword animator bool value is not set to true, do it
             //This will change Mhum's animation to carry a sword
+            animator.Play("MhumAttack_Sword");
+            animator.Play("MhumIdle");
 
         }
 
