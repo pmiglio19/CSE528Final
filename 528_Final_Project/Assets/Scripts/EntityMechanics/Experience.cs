@@ -17,21 +17,23 @@ namespace Assets.Scripts.EntityMechanics
         {
             experienceAmount = 0;
             experienceLevel = 1;
-            nextExperienceLevelGoal = 100;
+            nextExperienceLevelGoal = 10;
         }
 
-        public void IncrementExperience(int amount)
+        public void IncrementExperience(int amount, DamageDealt damage)
         {
             experienceAmount += amount;
-            CheckIfLevelUp(experienceAmount);
+            CheckIfLevelUp(experienceAmount, damage);
         }
 
-        private void CheckIfLevelUp(int xpAmount)
+        private void CheckIfLevelUp(int xpAmount, DamageDealt damage)
         {
             if(xpAmount >= nextExperienceLevelGoal)
             {
                 experienceLevel += 1;
-                nextExperienceLevelGoal += 1000;
+                nextExperienceLevelGoal += 10;
+
+                damage.ChangeMultiplier(damage.GetMultiplier() + 1);
             }
         }
     }

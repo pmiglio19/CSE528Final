@@ -60,6 +60,8 @@ namespace Assets.Scripts.EnemyCharacters
                 playerGameObject = GameObject.FindWithTag("Player");
                 playerController = playerGameObject.GetComponent<PlayerController>();
 
+                playerController.GetPlayerExperience().IncrementExperience(experienceGained, playerController.GetPlayerDamageDealt());
+
                 Destroy(gameObject);
             }
         }

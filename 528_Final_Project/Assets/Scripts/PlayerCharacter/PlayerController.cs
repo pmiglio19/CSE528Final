@@ -372,9 +372,9 @@ namespace Assets.Scripts.PlayerCharacter
 
         public DamageDealt GetPlayerDamageDealt() { return damage; }
 
-        public SpriteRenderer GetPlayerSpriteRenderer() { return spriteRenderer; }
+        public Experience GetPlayerExperience() { return experience; }
 
-        public bool GetPlayerTurn() { return playerTurn; }
+        public SpriteRenderer GetPlayerSpriteRenderer() { return spriteRenderer; }
 
         public List<GameObject> GetListOfEnemies() { return listOfEnemies; }
 
