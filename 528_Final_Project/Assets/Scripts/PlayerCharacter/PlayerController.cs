@@ -14,6 +14,7 @@ namespace Assets.Scripts.PlayerCharacter
         //Control states
         bool controlEnabled = true;
         bool spaceIsPressed = false;
+        bool tabIsPressed = false;
 
         //Character states
         bool isGrounded = false;
@@ -24,8 +25,8 @@ namespace Assets.Scripts.PlayerCharacter
         bool playerTurn = false;
 
         //Movement constants & variables
-        const float movementSpeedMultiplier = 5f;
-        const float jumpHeightMultiplier = 20f;
+        const float movementSpeedMultiplier = .00001f;
+        const float jumpHeightMultiplier = 7f;
 
         float horizontalMovement = 0;
         float verticalMovement = 0;
@@ -75,14 +76,6 @@ namespace Assets.Scripts.PlayerCharacter
         //Apparently Update is used more specifically for key inputs
         private void Update()
         {
-            //if ((rigidbody.controller.collisionFlags & CollisionFlags.Above) != 0)
-            //{
-            //    if (gameObject.velocity.y > 0)
-            //    {
-            //        gameObject.velocity.y = -gameObject.velocity.y
-            //    }
-            //}
-
             //Check character health
             if (health.CheckForDeath())
             {
@@ -93,30 +86,20 @@ namespace Assets.Scripts.PlayerCharacter
             }
 
             spaceIsPressed = Input.GetKey(KeyCode.Space);
+            tabIsPressed = Input.GetKey(KeyCode.Tab);
         }
 
         //And FixedUpdate is used more for things involving physics
         private void FixedUpdate()
         {
-            Move();
-
-            //Invisible Check
-            if(isInvisible)
+            if(tabIsPressed)
             {
-                if (invisoTimer < invisoTimerMax)
-                {
-                    invisoTimer++;
-                }
-                else
-                {
-                    isInvisible = false;
-                    invisoTimer = 0;
-                    spriteRenderer.color += new Color(0, 0, 0, .5f);
-                }
+                Attack();
             }
 
-            //If swordIsEquipped and sword animator bool value is not set to true, do it
-            //This will change Mhum's animation to carry a sword
+            InvisibleCheck();
+
+            Move();
         }
 
         private void Move()
@@ -164,10 +147,13 @@ namespace Assets.Scripts.PlayerCharacter
                     }
 
                     //This is the statement that actually moves the character
-                    rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
+                    rigidBody.AddForce(direction, ForceMode2D.Impulse);
+
+                    Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
+                    rigidBody.AddForce(still);
 
                     //Establish that the character is now descending (which will stop jump animation)
-                    if(isAscending)
+                    if (isAscending)
                     {
                         isAscending = false;
                         isDescending = true;
@@ -177,9 +163,12 @@ namespace Assets.Scripts.PlayerCharacter
                 //If character is not on ground and descending
                 if (!isGrounded && isDescending)
                 {
-                    Vector3 direction = new Vector3(horizontalMovement, -1f, 0);
+                    Vector3 direction = new Vector3(horizontalMovement, 0, 0);
+                    rigidBody.AddForce(direction, ForceMode2D.Impulse);
 
-                    rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
+                    //rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
+                    Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
+                    rigidBody.AddForce(still);
                 }
                 #endregion
 
@@ -200,9 +189,28 @@ namespace Assets.Scripts.PlayerCharacter
             }
         }
 
-        public void Attack(BaseEnemy enemy)
+        private void Attack()
         {
-            enemy.GetEnemyHealth().DecrementByAmount(damage.GetMultiplier());
+            //If swordIsEquipped and sword animator bool value is not set to true, do it
+            //This will change Mhum's animation to carry a sword
+
+        }
+
+        private void InvisibleCheck()
+        {
+            if (isInvisible)
+            {
+                if (invisoTimer < invisoTimerMax)
+                {
+                    invisoTimer++;
+                }
+                else
+                {
+                    isInvisible = false;
+                    invisoTimer = 0;
+                    spriteRenderer.color += new Color(0, 0, 0, .5f);
+                }
+            }
         }
 
         #region Movement Utility

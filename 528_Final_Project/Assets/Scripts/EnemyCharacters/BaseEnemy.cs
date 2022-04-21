@@ -21,8 +21,8 @@ namespace Assets.Scripts.EnemyCharacters
         internal Animator animator;
 
         //Other components
-        public Collider2D collider2d;
-        public Rigidbody2D rigidBody;
+        protected Collider2D collider2d;
+        protected Rigidbody2D rigidBody;
 
         protected bool isInBattle = false;
         
