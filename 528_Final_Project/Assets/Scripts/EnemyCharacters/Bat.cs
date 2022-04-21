@@ -20,7 +20,7 @@ namespace Assets.Scripts.EnemyCharacters
         {
             health = new EnemyHealth(3);
             experienceGained = 4;
-            damage = new DamageDealt(2);
+            //damage = new DamageDealt(2);
 
             maxDistanceCovered = _maxDistanceCovered;
             facingRight = _facingRight;
@@ -32,10 +32,12 @@ namespace Assets.Scripts.EnemyCharacters
             min = transform.position.x;
             max = transform.position.x + maxDistanceCovered;
             justStarted = true;
+            damage = new DamageDealt(2);
         }
 
         private void Update()
         {
+            Debug.Log("bat damage: "+damage.GetMultiplier());
             if (!isInBattle)
             {
                 transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
