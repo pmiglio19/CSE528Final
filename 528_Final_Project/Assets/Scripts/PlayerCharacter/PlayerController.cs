@@ -303,11 +303,15 @@ namespace Assets.Scripts.PlayerCharacter
             {
                 if (isInvisible)
                 {
-                    Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+                    Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), true);
                 }
 
                 else
                 {
+                    Debug.Log("Detected collision");
+
+                    Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), false);
+                    
                     //if(isAttacking)
                     //{
 

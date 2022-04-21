@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistanceCovered: 7
-  facingRight: 0
 --- !u!50 &8352910079985217166
 Rigidbody2D:
   serializedVersion: 4
@@ -69,7 +68,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &-5332918020024063066
 Animator:
   serializedVersion: 3
