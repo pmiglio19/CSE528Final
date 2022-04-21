@@ -24,6 +24,7 @@ namespace Assets.Scripts.PlayerCharacter
         bool isInvisible = false;
         bool swordIsEquipped = false;
         bool playerTurn = false;
+        bool isLightningImmune = false;
 
         //Movement constants & variables
         const float movementSpeedMultiplier = .00001f;
@@ -92,6 +93,13 @@ namespace Assets.Scripts.PlayerCharacter
         //And FixedUpdate is used more for things involving physics
         private void FixedUpdate()
         {
+            if(!isLightningImmune)
+            {
+                GameObject lightning = GameObject.FindWithTag("Skill");
+                Physics2D.IgnoreCollision(lightning.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+                isLightningImmune = true;
+            }
+
             if(tabIsPressed)
             {
                 animator.SetBool("isAttacking", tabIsPressed);
@@ -377,6 +385,8 @@ namespace Assets.Scripts.PlayerCharacter
         public SpriteRenderer GetPlayerSpriteRenderer() { return spriteRenderer; }
 
         public List<GameObject> GetListOfEnemies() { return listOfEnemies; }
+
+        public bool GetFacingRight() { return facingRight; }
 
         public void SetInvisibility(bool boolValue)
         {

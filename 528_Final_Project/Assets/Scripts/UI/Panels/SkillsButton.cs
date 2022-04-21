@@ -23,10 +23,13 @@ namespace Assets.Scripts.UI
         private BaseEnemy enemyController;
         private GameObject skillObject;
 
-
         public SkillsPanel skillsPanel;
         private Mana mana;
         private DamageDealt damage;
+
+        private int lightningTimer = 0;
+        private int lightningTimerMax = 1000;
+        private bool lightningStruck = false;
 
         private void Start()
         {
@@ -53,9 +56,21 @@ namespace Assets.Scripts.UI
         {
             if (mana.GetManaLevel() >= 5 && text.text == "Zappy")
             {
+                lightningStruck = true;
+
                 Vector3 originalLightningPosition = skillObject.transform.position;
 
-                Vector3 newLightningPosition = new Vector3(playerController.transform.position.x + 2, playerController.transform.position.y, 0);
+                Vector3 newLightningPosition = new Vector3();
+
+                if(playerController.GetFacingRight())
+                {
+                    newLightningPosition = new Vector3(playerController.transform.position.x + 3, playerController.transform.position.y, 0);
+                }
+
+                else
+                {
+                    newLightningPosition = new Vector3(playerController.transform.position.x - 3, playerController.transform.position.y, 0);
+                }
 
                 skillObject.transform.position = newLightningPosition;
 
@@ -63,9 +78,26 @@ namespace Assets.Scripts.UI
                 
                 mana.DecrementMana(5);
 
-                //new WaitForSeconds(3);
+                //yield new WaitForSeconds(clip.length);
 
-                //skillObject.transform.position = originalLightningPosition;
+                //if (lightningStruck)
+                //{
+                //    while (lightningTimer < lightningTimerMax)
+                //    {
+                //        lightningTimer++;
+                //        Debug.Log("Still counting");
+
+                //    }
+
+                //    //if
+                //    //{
+                //        Debug.Log("Entered ELSE");
+                //        lightningStruck = false;
+                //        skillObject.transform.position = originalLightningPosition;
+
+                //    //}
+
+                //}
             }
 
             return;

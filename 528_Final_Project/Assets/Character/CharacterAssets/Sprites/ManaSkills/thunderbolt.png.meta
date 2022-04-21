@@ -10,16 +10,22 @@ TextureImporter:
     second: thunderbolt_1
   - first:
       213: -6867065113892200058
-    second: thunderbolt_3
+    second: thunderbolt_2
   - first:
       213: 6471816964783110732
-    second: thunderbolt_4
+    second: thunderbolt_3
   - first:
       213: 8443385855351724152
-    second: thunderbolt_5
+    second: thunderbolt_4
   - first:
       213: -1643693297651970855
-    second: thunderbolt_6
+    second: thunderbolt_5
+  - first:
+      213: -78895251195575515
+    second: thunderbolt_2
+  - first:
+      213: 8511476298031756207
+    second: thunderbolt_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,7 +169,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: thunderbolt_3
+      name: thunderbolt_2
       rect:
         serializedVersion: 2
         x: 72
@@ -184,7 +190,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: thunderbolt_4
+      name: thunderbolt_3
       rect:
         serializedVersion: 2
         x: 98
@@ -205,7 +211,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: thunderbolt_5
+      name: thunderbolt_4
       rect:
         serializedVersion: 2
         x: 128
@@ -226,7 +232,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: thunderbolt_6
+      name: thunderbolt_5
       rect:
         serializedVersion: 2
         x: 166
@@ -242,6 +248,27 @@ TextureImporter:
       bones: []
       spriteID: 9dc83c987ad6039e0800000000000000
       internalID: -1643693297651970855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thunderbolt_6
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 34
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa3f65ae896de1670800000000000000
+      internalID: 8511476298031756207
       vertices: []
       indices: 
       edges: []
