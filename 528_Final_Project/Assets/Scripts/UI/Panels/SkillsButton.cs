@@ -27,10 +27,6 @@ namespace Assets.Scripts.UI
         private Mana mana;
         private DamageDealt damage;
 
-        private int lightningTimer = 0;
-        private int lightningTimerMax = 1000;
-        private bool lightningStruck = false;
-
         private void Start()
         {
             spriteImage = GetComponent<Image>();
@@ -56,11 +52,7 @@ namespace Assets.Scripts.UI
         {
             if (mana.GetManaLevel() >= 5 && text.text == "Zappy")
             {
-                lightningStruck = true;
-
-                Vector3 originalLightningPosition = skillObject.transform.position;
-
-                Vector3 newLightningPosition = new Vector3();
+                Vector3 newLightningPosition;
 
                 if(playerController.GetFacingRight())
                 {
@@ -77,27 +69,6 @@ namespace Assets.Scripts.UI
                 skillObject.GetComponent<Animator>().Play("Lightning", -1, 0f);
                 
                 mana.DecrementMana(5);
-
-                //yield new WaitForSeconds(clip.length);
-
-                //if (lightningStruck)
-                //{
-                //    while (lightningTimer < lightningTimerMax)
-                //    {
-                //        lightningTimer++;
-                //        Debug.Log("Still counting");
-
-                //    }
-
-                //    //if
-                //    //{
-                //        Debug.Log("Entered ELSE");
-                //        lightningStruck = false;
-                //        skillObject.transform.position = originalLightningPosition;
-
-                //    //}
-
-                //}
             }
 
             return;

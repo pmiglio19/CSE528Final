@@ -57,16 +57,13 @@
     <Compile Include="Assets\Scripts\UI\Panels\InventoryPanel.cs" />
     <Compile Include="Assets\Scripts\Items\BaseItem.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\BaseEnemy.cs" />
-    <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\SkillsPanel.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\Slime.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleSystem.cs" />
     <Compile Include="Assets\Scripts\UI\RestartButton.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\InventoryButton.cs" />
-    <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\Bat.cs" />
     <Compile Include="Assets\Scripts\Items\BaseConsumable.cs" />
     <Compile Include="Assets\Audio\MusicClass.cs" />
@@ -86,7 +83,6 @@
     <Compile Include="Assets\Scripts\EnemyCharacters\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Health.cs" />
     <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
-    <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\SkillsButton.cs" />
   </ItemGroup>
   <ItemGroup>

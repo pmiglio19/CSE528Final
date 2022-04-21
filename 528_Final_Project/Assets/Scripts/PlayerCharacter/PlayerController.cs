@@ -1,6 +1,5 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using static Core.Simulation;
 using Assets.Scripts.EntityMechanics;
 using Items;
 using Assets.Scripts.EnemyCharacters;

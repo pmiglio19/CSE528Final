@@ -1,7 +1,6 @@
 using Assets.Scripts.UI;
 using System;
 using UnityEngine;
-using static Core.Simulation;
 
 namespace Assets.Scripts.EntityMechanics
 {
