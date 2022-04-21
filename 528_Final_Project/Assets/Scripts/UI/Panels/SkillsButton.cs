@@ -38,9 +38,6 @@ namespace Assets.Scripts.UI
             playerGameObject = GameObject.FindWithTag("Player");
             playerController = playerGameObject.GetComponent<PlayerController>();
 
-            enemyGameObject = GameObject.FindWithTag("Enemy");
-            enemyController = enemyGameObject.GetComponent<BaseEnemy>();
-
             skillObject = GameObject.FindWithTag("Skill");
 
             mana = playerController.GetPlayerMana();
@@ -56,14 +53,19 @@ namespace Assets.Scripts.UI
         {
             if (mana.GetManaLevel() >= 5 && text.text == "Zappy")
             {
-                Debug.Log("Player name: " + playerController.name);
-                Debug.Log("Enemy name: " + enemyController.name);
+                Vector3 originalLightningPosition = skillObject.transform.position;
 
-                //skillObject.SetActive(true);
-                //skillObject.GetComponent<Animator>().Play("Lightning");
-                //enemyController.GetEnemyHealth().DecrementByAmount(10);
+                Vector3 newLightningPosition = new Vector3(playerController.transform.position.x + 2, playerController.transform.position.y, 0);
+
+                skillObject.transform.position = newLightningPosition;
+
+                skillObject.GetComponent<Animator>().Play("Lightning", -1, 0f);
+                
                 mana.DecrementMana(5);
-                //skillObject.SetActive(false);
+
+                //new WaitForSeconds(3);
+
+                //skillObject.transform.position = originalLightningPosition;
             }
 
             return;

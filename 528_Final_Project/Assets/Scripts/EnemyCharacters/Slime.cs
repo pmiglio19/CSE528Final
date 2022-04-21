@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.EntityMechanics;
+using Assets.Scripts.PlayerCharacter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,9 @@ namespace Assets.Scripts.EnemyCharacters
         Vector3 origin;
         float speed = 5;
 
+        private GameObject playerGameObject;
+        private PlayerController playerController;
+
         public Slime() : base()
         {
             health = new EnemyHealth(5);
@@ -29,6 +33,17 @@ namespace Assets.Scripts.EnemyCharacters
                 Vector3 destination = transform.position;
                 destination.y = (transform.position.y > origin.y + maxMoveDistance) ? origin.y : origin.y + maxMoveDistance;
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (health.CheckForDeath())
+            {
+                playerGameObject = GameObject.FindWithTag("Player");
+                playerController = playerGameObject.GetComponent<PlayerController>();
+
+                Destroy(gameObject);
             }
         }
     }

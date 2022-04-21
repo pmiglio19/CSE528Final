@@ -26,14 +26,8 @@ namespace Assets.Scripts.EnemyCharacters
 
         protected bool isInBattle = false;
         
-        private GameObject playerGameObject;
-        private PlayerController playerController;
-
         private void Start()
         {
-            playerGameObject = GameObject.FindWithTag("Player");
-            playerController = playerGameObject.GetComponent<PlayerController>();
-
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -41,14 +35,6 @@ namespace Assets.Scripts.EnemyCharacters
             rigidBody = GetComponent<Rigidbody2D>();
 
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
-
-        private void FixedUpdate()
-        {
-            //if (health.CheckForDeath())
-            //{
-            //    Destroy(gameObject);
-            //}
         }
 
         public EnemyHealth GetEnemyHealth()
@@ -64,6 +50,14 @@ namespace Assets.Scripts.EnemyCharacters
         public void SetIsInBattle(bool newBool)
         {
             isInBattle = newBool;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Skill"))
+            {
+                health.DecrementByAmount(10);
+            }
         }
     }
 }

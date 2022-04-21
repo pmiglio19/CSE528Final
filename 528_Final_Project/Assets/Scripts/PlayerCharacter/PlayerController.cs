@@ -94,7 +94,20 @@ namespace Assets.Scripts.PlayerCharacter
         {
             if(tabIsPressed)
             {
+                animator.SetBool("isAttacking", tabIsPressed);
+
                 Attack();
+
+                //int count = 0;
+                //while (count < 10)
+                //{
+                //    count++;
+                //}
+
+            }
+            else
+            {
+                animator.SetBool("isAttacking", tabIsPressed);
             }
 
             InvisibleCheck();

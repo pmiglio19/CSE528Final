@@ -11,6 +11,9 @@ TagManager:
   - UI
   - Music
   - Skill
+  - HealthText
+  - ManaText
+  - Canvas
   layers:
   - Default
   - TransparentFX

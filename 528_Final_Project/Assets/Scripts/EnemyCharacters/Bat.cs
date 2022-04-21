@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.EntityMechanics;
+using Assets.Scripts.PlayerCharacter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,18 @@ namespace Assets.Scripts.EnemyCharacters
         private bool facingRight;
         private bool isFlipped;
 
+        private GameObject playerGameObject;
+        private PlayerController playerController;
+
         public Bat(int _maxDistanceCovered) : base()
         {
-            health = new EnemyHealth(3);
-            experienceGained = 4;
-
             maxDistanceCovered = _maxDistanceCovered;
-            isFlipped = true;
         }
 
         private void Awake()
         {
+            health = new EnemyHealth(3);
+            experienceGained = 4;
             min = transform.position.x;
             max = transform.position.x + maxDistanceCovered;
             damage = new DamageDealt(2);
@@ -48,6 +50,17 @@ namespace Assets.Scripts.EnemyCharacters
             {
                 Flip();
                 isFlipped = !isFlipped;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (health.CheckForDeath())
+            {
+                playerGameObject = GameObject.FindWithTag("Player");
+                playerController = playerGameObject.GetComponent<PlayerController>();
+
+                Destroy(gameObject);
             }
         }
 

@@ -33,5 +33,10 @@ namespace Assets.Scripts.UI
         {
             currentHealth = Mathf.Clamp(currentHealth - amount, 0, Health.GetMaxHealth());
         }
+
+        public void ResetHealth()
+        {
+            currentHealth = 10;
+        }
     }
 }

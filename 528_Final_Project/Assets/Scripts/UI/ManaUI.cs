@@ -34,5 +34,10 @@ namespace Assets.Scripts.UI
         {
             currentMana = Mathf.Clamp(currentMana - amount, 0, Mana.GetMaxMana());
         }
+
+        public void ResetMana()
+        {
+            currentMana = 10;
+        }
     }
 }
