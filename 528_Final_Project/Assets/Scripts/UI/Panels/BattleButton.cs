@@ -15,7 +15,6 @@ namespace Assets.Scripts.UI
         private Image spriteImage;
         private Button button;
 
-        
         public InventoryPanel inventoryPanel;
         public SkillsPanel skillsPanel;
 

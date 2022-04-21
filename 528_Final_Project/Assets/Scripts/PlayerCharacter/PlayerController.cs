@@ -4,6 +4,7 @@ using static Core.Simulation;
 using Assets.Scripts.EntityMechanics;
 using Items;
 using Assets.Scripts.EnemyCharacters;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.PlayerCharacter
 {
@@ -34,6 +35,7 @@ namespace Assets.Scripts.PlayerCharacter
 
         int invisoTimer = 0;
         int invisoTimerMax = 500;
+        private List<GameObject> listOfEnemies = new List<GameObject>();
 
         //Animations
         private SpriteRenderer spriteRenderer;
@@ -81,8 +83,6 @@ namespace Assets.Scripts.PlayerCharacter
             {
                 RunDeathProtocols();
                 //RestartGame();
-
-                //Ask to play again?
             }
 
             spaceIsPressed = Input.GetKey(KeyCode.Space);
@@ -211,6 +211,14 @@ namespace Assets.Scripts.PlayerCharacter
                     isInvisible = false;
                     invisoTimer = 0;
                     spriteRenderer.color += new Color(0, 0, 0, .5f);
+
+                    foreach (GameObject enemy in listOfEnemies)
+                    {
+                        Physics2D.IgnoreCollision(enemy.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+                    }
+
+                    listOfEnemies.Clear();
+
                 }
             }
         }
@@ -303,17 +311,9 @@ namespace Assets.Scripts.PlayerCharacter
 
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                if (isInvisible)
+                if (!isInvisible)
                 {
-                    Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), true);
-                }
 
-                else
-                {
-                    Debug.Log("Detected collision");
-
-                    Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), false);
-                    
                     //if(isAttacking)
                     //{
 
@@ -362,6 +362,8 @@ namespace Assets.Scripts.PlayerCharacter
         public SpriteRenderer GetPlayerSpriteRenderer() { return spriteRenderer; }
 
         public bool GetPlayerTurn() { return playerTurn; }
+
+        public List<GameObject> GetListOfEnemies() { return listOfEnemies; }
 
         public void SetInvisibility(bool boolValue)
         {

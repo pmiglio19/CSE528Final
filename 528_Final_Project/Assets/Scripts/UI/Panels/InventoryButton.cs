@@ -57,6 +57,15 @@ namespace Assets.Scripts.UI
             else if (spriteImage.sprite.name == "InvisibilityPotion")
             {
                 playerController.SetInvisibility(true);
+
+                List<GameObject> listOfEnemies = playerController.GetListOfEnemies();
+                listOfEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+
+                foreach(GameObject enemy in listOfEnemies)
+                {
+                    Physics2D.IgnoreCollision(enemy.GetComponent<Collider2D>(), playerController.GetComponent<Collider2D>(), true);
+                }
+
                 playerController.GetPlayerSpriteRenderer().color += new Color(0, 0, 0, -.5f);
             }
 

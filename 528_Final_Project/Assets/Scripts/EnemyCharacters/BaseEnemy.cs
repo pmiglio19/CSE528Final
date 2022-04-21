@@ -29,7 +29,7 @@ namespace Assets.Scripts.EnemyCharacters
         private GameObject playerGameObject;
         private PlayerController playerController;
 
-        private void Awake()
+        private void Start()
         {
             playerGameObject = GameObject.FindWithTag("Player");
             playerController = playerGameObject.GetComponent<PlayerController>();
