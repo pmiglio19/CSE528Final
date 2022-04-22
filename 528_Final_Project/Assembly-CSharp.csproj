@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{BB86E719-34B1-0DC0-5D56-D2E1A315CE6F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -54,6 +55,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Items\BaseWeapon.cs" />
+    <Compile Include="Assets\Scripts\UI\StrengthUI.cs" />
+    <Compile Include="Assets\Scripts\UI\ExperienceUI.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\InventoryPanel.cs" />
     <Compile Include="Assets\Scripts\Items\BaseItem.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\BaseEnemy.cs" />
