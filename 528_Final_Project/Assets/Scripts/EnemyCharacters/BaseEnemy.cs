@@ -47,11 +47,6 @@ namespace Assets.Scripts.EnemyCharacters
             return damage;
         }
 
-        public void SetIsInBattle(bool newBool)
-        {
-            isInBattle = newBool;
-        }
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Skill"))

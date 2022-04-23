@@ -22,7 +22,7 @@ namespace Assets.Scripts.PlayerCharacter
         bool isDescending = true;
         bool isInvisible = false;
         bool swordIsEquipped = false;
-        bool playerTurn = false;
+        bool isAttacking = false;
         bool isLightningImmune = false;
 
         //Movement constants & variables
@@ -82,11 +82,11 @@ namespace Assets.Scripts.PlayerCharacter
             if (health.CheckForDeath())
             {
                 RunDeathProtocols();
-                //RestartGame();
             }
 
             spaceIsPressed = Input.GetKey(KeyCode.Space);
-            tabIsPressed = Input.GetKey(KeyCode.Tab);
+            tabIsPressed = Input.GetKeyDown(KeyCode.Tab);
+            isAttacking = tabIsPressed;
         }
 
         //And FixedUpdate is used more for things involving physics
@@ -99,29 +99,14 @@ namespace Assets.Scripts.PlayerCharacter
                 isLightningImmune = true;
             }
 
-            if(tabIsPressed)
-            {
-                animator.SetBool("isAttacking", tabIsPressed);
-
-                Attack();
-
-                //int count = 0;
-                //while (count < 10)
-                //{
-                //    count++;
-                //}
-
-            }
-            else
-            {
-                animator.SetBool("isAttacking", tabIsPressed);
-            }
+            Attack();
 
             InvisibleCheck();
 
             Move();
         }
 
+        #region Fixed Update Helpers
         private void Move()
         {
             //If character drops too far below viewable map, reset health and respawn
@@ -211,11 +196,19 @@ namespace Assets.Scripts.PlayerCharacter
 
         private void Attack()
         {
-            //If swordIsEquipped and sword animator bool value is not set to true, do it
-            //This will change Mhum's animation to carry a sword
-            animator.Play("MhumAttack_Sword");
-            animator.Play("MhumIdle");
-
+            tabIsPressed = isAttacking;
+            if(isAttacking)
+            {
+                //if (swordIsEquipped)
+                //{
+                    //animator.SetBool("isAttacking", isAttacking);
+                    animator.Play("MhumAttack_Sword");
+                //}
+                //else
+                //{
+                //    animator.Play("MhumAttack_Punch");
+                //}
+            }
         }
 
         private void InvisibleCheck()
@@ -242,6 +235,7 @@ namespace Assets.Scripts.PlayerCharacter
                 }
             }
         }
+        #endregion 
 
         #region Movement Utility
         //Used to flip character left or right
@@ -255,51 +249,6 @@ namespace Assets.Scripts.PlayerCharacter
             theScale.x *= -1;
             transform.localScale = theScale;
         }
-
-        private void FaceRight(GameObject gameObject)
-        {
-            if(gameObject.CompareTag("Player"))
-            {
-                if (!facingRight)
-                {
-                    facingRight = !facingRight;
-
-                    Vector3 theScale = transform.localScale;
-                    theScale.x *= -1;
-                    gameObject.transform.localScale = theScale;
-                }
-            }
-
-            //else
-            //{
-            //    Vector3 theScale = transform.localScale;
-            //    theScale.x *= -1;
-            //    gameObject.transform.localScale = theScale;
-            //}
-        }
-
-        private void FaceLeft(GameObject gameObject)
-        {
-            if (gameObject.CompareTag("Player"))
-            {
-                if (facingRight)
-                {
-                    facingRight = !facingRight;
-
-                    Vector3 theScale = transform.localScale;
-                    theScale.x *= -1;
-                    gameObject.transform.localScale = theScale;
-                }
-            }
-
-            //else
-            //{
-            //    Vector3 theScale = transform.localScale;
-            //    theScale.x *= -1;
-            //    gameObject.transform.localScale = theScale;
-            //}
-        }
-
         #endregion
 
         #region Death and Game Restart
@@ -331,20 +280,26 @@ namespace Assets.Scripts.PlayerCharacter
 
             if (collision.gameObject.CompareTag("Enemy"))
             {
+                Debug.Log("isAttacking: " + isAttacking.ToString());
+
+                Debug.Log("is sword animation: " + animator.GetCurrentAnimatorStateInfo(0).IsName("MhumAttack_Sword").ToString());
+
+                //Enemy doesn't do damage if attacking
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("MhumAttack_Sword") || animator.GetCurrentAnimatorStateInfo(0).IsName("MhumAttack_Punch"))
+                {
+                    EnemyHealth enemyHealth = collision.collider.gameObject.GetComponent<BaseEnemy>().GetEnemyHealth();
+
+                    enemyHealth.DecrementByAmount(damage.GetMultiplier());
+                }
+
                 if (!isInvisible)
                 {
-
-                    //if(isAttacking)
-                    //{
-
-                    //}
-
-                    //if(!isAttacking)
-
+                    //Enemy does do damage if Mhum does not attack
                     DamageDealt enemyDamage = collision.collider.gameObject.GetComponent<BaseEnemy>().GetEnemyDamageDealt();
 
                     health.DecrementByAmount(enemyDamage.GetMultiplier());
                 }
+
             }
 
             if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
@@ -390,11 +345,6 @@ namespace Assets.Scripts.PlayerCharacter
         public void SetInvisibility(bool boolValue)
         {
             isInvisible = boolValue;
-        }
-
-        public void SetPlayerTurn(bool boolValue)
-        {
-            playerTurn = boolValue;
         }
 
         public void SetSwordIsEquipped(bool boolValue)

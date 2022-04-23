@@ -27,7 +27,7 @@ namespace Assets.Scripts.EnemyCharacters
 
         private void Awake()
         {
-            health = new EnemyHealth(3);
+            health = new EnemyHealth(2);
             experienceGained = 4;
             min = transform.position.x;
             max = transform.position.x + maxDistanceCovered;
