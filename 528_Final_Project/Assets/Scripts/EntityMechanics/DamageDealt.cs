@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +11,19 @@ namespace Assets.Scripts.EntityMechanics
     public class DamageDealt : MonoBehaviour 
     {
         private int damageMultiplier;
+        private StrengthUI strengthUI;
 
         public DamageDealt(int _damageMultiplier)
         {
             damageMultiplier = _damageMultiplier;
+            strengthUI = new StrengthUI();
         }
 
         public void ChangeMultiplier(int newMultiplier)
         {
             damageMultiplier = newMultiplier;
             Debug.Log("Damage multiplier is now: " + damageMultiplier.ToString());
+            strengthUI.IncrementStrength(1);
         }
 
         public int GetMultiplier()

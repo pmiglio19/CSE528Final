@@ -14,13 +14,13 @@ namespace Assets.Scripts.EntityMechanics
         private int experienceLevel;
         private int nextExperienceLevelGoal;
         private ExperienceUI experienceUI;
-        private StrengthUI strengthUI;
+        
 
         public Experience()
         {
             experienceAmount = 0;
             experienceLevel = 1;
-            nextExperienceLevelGoal = 10;
+            nextExperienceLevelGoal = 2;
             experienceUI = new ExperienceUI();
         }
 
@@ -41,7 +41,7 @@ namespace Assets.Scripts.EntityMechanics
                 damage.ChangeMultiplier(damage.GetMultiplier() + 1);
 
                 experienceUI.IncrementExperience(1);
-                strengthUI.IncrementStrength(1);
+                
             }
         }
     }

@@ -21,6 +21,8 @@ namespace Assets.Scripts.UI
         private GameObject canvas;
         private HealthUI healthText;
         private ManaUI manaText;
+        private StrengthUI strengthText;
+        private ExperienceUI experienceText;
 
         private void Start()
         {
@@ -33,6 +35,8 @@ namespace Assets.Scripts.UI
             canvas = GameObject.FindWithTag("Canvas");
             healthText = canvas.GetComponent<HealthUI>();
             manaText = canvas.GetComponent<ManaUI>();
+            strengthText = canvas.GetComponent<StrengthUI>();
+            experienceText = canvas.GetComponent<ExperienceUI>();
         }
 
         private void TaskOnClick()
@@ -41,6 +45,8 @@ namespace Assets.Scripts.UI
             playerController.GetPlayerMana().ResetMana();
             healthText.ResetHealth();
             manaText.ResetMana();
+            strengthText.ResetStrength();
+            experienceText.ResetExperience();
             SceneManager.LoadScene("TitleScene");
         }
     }
