@@ -13,7 +13,7 @@ namespace Assets.Scripts.EnemyCharacters
     {
         float maxMoveDistance = .5f;
         //Set this to your objects initial position when game starts.
-        Vector3 origin;
+        //Vector3 origin;
         float speed = 5;
 
         private GameObject playerGameObject;
@@ -31,7 +31,7 @@ namespace Assets.Scripts.EnemyCharacters
             if(!isInBattle)
             {
                 Vector3 destination = transform.position;
-                destination.y = (transform.position.y > origin.y + maxMoveDistance) ? origin.y : origin.y + maxMoveDistance;
+                destination.y = (transform.position.y > transform.position.y + maxMoveDistance) ? transform.position.y : transform.position.y + maxMoveDistance;
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
             }
         }
