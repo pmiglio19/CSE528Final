@@ -14,7 +14,7 @@ namespace Assets.Scripts.PlayerCharacter
         //Control states
         bool controlEnabled = true;
         bool spaceIsPressed = false;
-        bool tabIsPressed = false;
+        bool rightIsPressed = false;
 
         //Character states
         bool isGrounded = false;
@@ -28,6 +28,7 @@ namespace Assets.Scripts.PlayerCharacter
         //Movement constants & variables
         const float movementSpeedMultiplier = .00001f;
         const float jumpHeightMultiplier = 7f;
+        const float maxVelocity = 20f;
 
         float horizontalMovement = 0;
         float verticalMovement = 0;
@@ -85,8 +86,8 @@ namespace Assets.Scripts.PlayerCharacter
             }
 
             spaceIsPressed = Input.GetKey(KeyCode.Space);
-            tabIsPressed = Input.GetKeyDown(KeyCode.Tab);
-            isAttacking = tabIsPressed;
+            rightIsPressed = Input.GetMouseButton(1);
+            isAttacking = rightIsPressed;
         }
 
         //And FixedUpdate is used more for things involving physics
@@ -155,9 +156,13 @@ namespace Assets.Scripts.PlayerCharacter
                     //This is the statement that actually moves the character
                     //Mathf.Clamp(currentHP + 1, 0, maxHP)
                     rigidBody.AddForce(direction, ForceMode2D.Impulse);
+                    rigidBody.velocity = Vector3.ClampMagnitude(rigidBody.velocity, maxVelocity);
 
-                    Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
-                    rigidBody.AddForce(still);
+                    Debug.Log("Velocity normal: "+rigidBody.velocity.ToString());
+
+
+                    //Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
+                    //rigidBody.AddForce(still);
 
                     //Establish that the character is now descending (which will stop jump animation)
                     if (isAscending)
@@ -172,11 +177,16 @@ namespace Assets.Scripts.PlayerCharacter
                 {
                     animator.SetFloat("Speed", horizontalMovement);
                     Vector3 direction = new Vector3(horizontalMovement, 0, 0);
+
                     rigidBody.AddForce(direction, ForceMode2D.Impulse);
 
+                    rigidBody.velocity = Vector3.ClampMagnitude(rigidBody.velocity, maxVelocity);
+
+                    Debug.Log("Velocity descending: " + rigidBody.velocity.ToString());
+
                     //rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
-                    Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
-                    rigidBody.AddForce(still);
+                    //Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
+                    //rigidBody.AddForce(still);
                 }
                 #endregion
 
@@ -199,7 +209,7 @@ namespace Assets.Scripts.PlayerCharacter
 
         private void Attack()
         {
-            tabIsPressed = isAttacking;
+            rightIsPressed = isAttacking;
             if(isAttacking)
             {
                 //if (swordIsEquipped)
