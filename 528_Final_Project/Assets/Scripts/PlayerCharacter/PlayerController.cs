@@ -42,7 +42,7 @@ namespace Assets.Scripts.PlayerCharacter
         internal Animator animator;
 
         //Other components
-        private Collider2D collider2d;
+        private BoxCollider2D collider2d;
         private Rigidbody2D rigidBody;
 
         //Character attributes
@@ -62,7 +62,7 @@ namespace Assets.Scripts.PlayerCharacter
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
-            collider2d = GetComponent<Collider2D>();
+            collider2d = GetComponent<BoxCollider2D>();
             rigidBody = GetComponent<Rigidbody2D>();
 
             //Makes it so character's sprite doesn't roll around
@@ -150,8 +150,10 @@ namespace Assets.Scripts.PlayerCharacter
                     {
                         animator.Play("MhumJump");
                     }
+                    animator.SetFloat("Speed", horizontalMovement);
 
                     //This is the statement that actually moves the character
+                    //Mathf.Clamp(currentHP + 1, 0, maxHP)
                     rigidBody.AddForce(direction, ForceMode2D.Impulse);
 
                     Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
@@ -168,6 +170,7 @@ namespace Assets.Scripts.PlayerCharacter
                 //If character is not on ground and descending
                 if (!isGrounded && isDescending)
                 {
+                    animator.SetFloat("Speed", horizontalMovement);
                     Vector3 direction = new Vector3(horizontalMovement, 0, 0);
                     rigidBody.AddForce(direction, ForceMode2D.Impulse);
 
@@ -190,7 +193,7 @@ namespace Assets.Scripts.PlayerCharacter
                 #endregion
 
                 //Change animation to "walk" when moving and "idle" when not
-                animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
+                //animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
             }
         }
 
@@ -201,8 +204,12 @@ namespace Assets.Scripts.PlayerCharacter
             {
                 //if (swordIsEquipped)
                 //{
-                    //animator.SetBool("isAttacking", isAttacking);
-                    animator.Play("MhumAttack_Sword");
+                //animator.SetBool("isAttacking", isAttacking);
+
+                //Resize collider (only works with box collider for some reason)
+                collider2d.size = new Vector2(collider2d.size.x+1f, collider2d.size.y);
+                
+                animator.Play("MhumAttack_Sword");
                 //}
                 //else
                 //{
@@ -350,6 +357,11 @@ namespace Assets.Scripts.PlayerCharacter
         public void SetSwordIsEquipped(bool boolValue)
         {
             swordIsEquipped = boolValue;
+        }
+
+        public void SetIsAttacking(bool boolValue)
+        {
+            isAttacking = boolValue;
         }
         #endregion
     }

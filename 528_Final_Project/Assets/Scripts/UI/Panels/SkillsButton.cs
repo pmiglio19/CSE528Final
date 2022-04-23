@@ -19,8 +19,6 @@ namespace Assets.Scripts.UI
 
         private GameObject playerGameObject;
         private PlayerController playerController;
-        private GameObject enemyGameObject;
-        private BaseEnemy enemyController;
         private GameObject skillObject;
 
         public SkillsPanel skillsPanel;
