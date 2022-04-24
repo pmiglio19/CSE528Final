@@ -25,10 +25,15 @@ namespace Assets.Scripts.PlayerCharacter
         bool isAttacking = false;
         bool isLightningImmune = false;
 
+        bool iFramesActive = false;
+        float iFramesTimer = 0;
+        float iFramesMax = 50;
+
         //Movement constants & variables
         const float movementSpeedMultiplier = .00001f;
         const float jumpHeightMultiplier = 7f;
         const float maxVelocity = 20f;
+        float colliderWidth;
 
         float horizontalMovement = 0;
         float verticalMovement = 0;
@@ -68,10 +73,11 @@ namespace Assets.Scripts.PlayerCharacter
 
             //Makes it so character's sprite doesn't roll around
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            colliderWidth = collider2d.size.x;
 
-            health = new Health(10);
+            health = new Health(20);
             inventory = new Inventory();
-            mana = new Mana(10);
+            mana = new Mana(12);
             experience = new Experience();
             damage = new DamageDealt(1);     //Initially
         }
@@ -103,6 +109,8 @@ namespace Assets.Scripts.PlayerCharacter
             Attack();
 
             InvisibleCheck();
+
+            InvincibleFramesCheck();
 
             Move();
         }
@@ -154,15 +162,8 @@ namespace Assets.Scripts.PlayerCharacter
                     animator.SetFloat("Speed", horizontalMovement);
 
                     //This is the statement that actually moves the character
-                    //Mathf.Clamp(currentHP + 1, 0, maxHP)
                     rigidBody.AddForce(direction, ForceMode2D.Impulse);
                     rigidBody.velocity = Vector3.ClampMagnitude(rigidBody.velocity, maxVelocity);
-
-                    Debug.Log("Velocity normal: "+rigidBody.velocity.ToString());
-
-
-                    //Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
-                    //rigidBody.AddForce(still);
 
                     //Establish that the character is now descending (which will stop jump animation)
                     if (isAscending)
@@ -181,12 +182,6 @@ namespace Assets.Scripts.PlayerCharacter
                     rigidBody.AddForce(direction, ForceMode2D.Impulse);
 
                     rigidBody.velocity = Vector3.ClampMagnitude(rigidBody.velocity, maxVelocity);
-
-                    Debug.Log("Velocity descending: " + rigidBody.velocity.ToString());
-
-                    //rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
-                    //Vector3 still = new Vector3(0.0000000001f, 00000000001f, 00000000001f);
-                    //rigidBody.AddForce(still);
                 }
                 #endregion
 
@@ -201,9 +196,6 @@ namespace Assets.Scripts.PlayerCharacter
                     Flip();
                 }
                 #endregion
-
-                //Change animation to "walk" when moving and "idle" when not
-                //animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
             }
         }
 
@@ -217,8 +209,9 @@ namespace Assets.Scripts.PlayerCharacter
                 //animator.SetBool("isAttacking", isAttacking);
 
                 //Resize collider (only works with box collider for some reason)
-                collider2d.size = new Vector2(collider2d.size.x+1f, collider2d.size.y);
-                
+
+                collider2d.size = new Vector2(collider2d.size.x+.1f, collider2d.size.y);
+
                 animator.Play("MhumAttack_Sword");
                 //}
                 //else
@@ -249,6 +242,24 @@ namespace Assets.Scripts.PlayerCharacter
 
                     listOfEnemies.Clear();
 
+                }
+            }
+        }
+
+        private void InvincibleFramesCheck()
+        {
+            if (iFramesActive)
+            {
+                if (iFramesTimer < iFramesMax)
+                {
+                    iFramesTimer++;
+                    Debug.Log("iFramesTimer is now: "+iFramesTimer.ToString());
+                }
+                else
+                {
+                    Debug.Log("iFrames is now false");
+                    iFramesActive = false;
+                    iFramesTimer = 0;
                 }
             }
         }
@@ -295,21 +306,19 @@ namespace Assets.Scripts.PlayerCharacter
                 //Debug.Log("isGrounded is now " + isGrounded.ToString());
             }
 
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (!iFramesActive && collision.gameObject.CompareTag("Enemy"))
             {
-                Debug.Log("isAttacking: " + isAttacking.ToString());
-
-                Debug.Log("is sword animation: " + animator.GetCurrentAnimatorStateInfo(0).IsName("MhumAttack_Sword").ToString());
-
                 //Enemy doesn't do damage if attacking
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("MhumAttack_Sword") || animator.GetCurrentAnimatorStateInfo(0).IsName("MhumAttack_Punch"))
                 {
                     EnemyHealth enemyHealth = collision.collider.gameObject.GetComponent<BaseEnemy>().GetEnemyHealth();
 
                     enemyHealth.DecrementByAmount(damage.GetMultiplier());
+
+                    iFramesActive = true;
                 }
 
-                if (!isInvisible)
+                if (!iFramesActive && !isInvisible)
                 {
                     //Enemy does do damage if Mhum does not attack
                     DamageDealt enemyDamage = collision.collider.gameObject.GetComponent<BaseEnemy>().GetEnemyDamageDealt();
@@ -358,6 +367,7 @@ namespace Assets.Scripts.PlayerCharacter
         public List<GameObject> GetListOfEnemies() { return listOfEnemies; }
 
         public bool GetFacingRight() { return facingRight; }
+        public float GetColliderWidth() { return colliderWidth; }
 
         public void SetInvisibility(bool boolValue)
         {

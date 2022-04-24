@@ -11,7 +11,7 @@ namespace Assets.Scripts.UI
 {
     public class HealthUI : MonoBehaviour
     {
-        private static int currentHealth = 10;
+        private static int currentHealth = 20;
         public Text textHealth;
 
         void Start()
@@ -36,7 +36,7 @@ namespace Assets.Scripts.UI
 
         public void ResetHealth()
         {
-            currentHealth = 10;
+            currentHealth = 20;
         }
     }
 }

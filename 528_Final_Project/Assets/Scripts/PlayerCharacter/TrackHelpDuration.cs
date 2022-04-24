@@ -19,7 +19,7 @@ namespace Assets.Scripts.PlayerCharacter
 
             BoxCollider2D collider = playerController.GetComponent<BoxCollider2D>();
 
-            collider.size = new Vector2(collider.size.x-1f, collider.size.y);
+            collider.size = new Vector2(playerController.GetColliderWidth(), collider.size.y);
 
             animator.SetBool("isAttacking", false);
             playerController.SetIsAttacking(false);

@@ -11,7 +11,7 @@ namespace Assets.Scripts.UI
 {
     public class ManaUI : MonoBehaviour
     {
-        private static int currentMana = 10;
+        private static int currentMana = 12;
 
         public Text textMana;
 
@@ -37,7 +37,7 @@ namespace Assets.Scripts.UI
 
         public void ResetMana()
         {
-            currentMana = 10;
+            currentMana = 12;
         }
     }
 }

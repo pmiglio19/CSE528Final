@@ -48,25 +48,25 @@ namespace Assets.Scripts.UI
 
         private void UseSkill()
         {
-            if (mana.GetManaLevel() >= 5 && text.text == "Zappy")
+            if (mana.GetManaLevel() >= 3 && text.text == "Zappy")
             {
                 Vector3 newLightningPosition;
 
                 if(playerController.GetFacingRight())
                 {
-                    newLightningPosition = new Vector3(playerController.transform.position.x + 3, playerController.transform.position.y, 0);
+                    newLightningPosition = new Vector3(playerController.transform.position.x + 2.5f, playerController.transform.position.y, 0);
                 }
 
                 else
                 {
-                    newLightningPosition = new Vector3(playerController.transform.position.x - 3, playerController.transform.position.y, 0);
+                    newLightningPosition = new Vector3(playerController.transform.position.x - 2.5f, playerController.transform.position.y, 0);
                 }
 
                 skillObject.transform.position = newLightningPosition;
 
                 skillObject.GetComponent<Animator>().Play("Lightning", -1, 0f);
                 
-                mana.DecrementMana(5);
+                mana.DecrementMana(3);
             }
 
             return;
