@@ -27,7 +27,7 @@ namespace Assets.Scripts.PlayerCharacter
 
         bool iFramesActive = false;
         float iFramesTimer = 0;
-        float iFramesMax = 50;
+        float iFramesMax = 20;
 
         //Movement constants & variables
         const float movementSpeedMultiplier = .00001f;
@@ -75,7 +75,7 @@ namespace Assets.Scripts.PlayerCharacter
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
             colliderWidth = collider2d.size.x;
 
-            health = new Health(20);
+            health = new Health(15);
             inventory = new Inventory();
             mana = new Mana(12);
             experience = new Experience();
@@ -210,7 +210,7 @@ namespace Assets.Scripts.PlayerCharacter
 
                 //Resize collider (only works with box collider for some reason)
 
-                collider2d.size = new Vector2(collider2d.size.x+.1f, collider2d.size.y);
+                collider2d.size = new Vector2(collider2d.size.x+.2f, collider2d.size.y);
 
                 animator.Play("MhumAttack_Sword");
                 //}
@@ -253,11 +253,9 @@ namespace Assets.Scripts.PlayerCharacter
                 if (iFramesTimer < iFramesMax)
                 {
                     iFramesTimer++;
-                    Debug.Log("iFramesTimer is now: "+iFramesTimer.ToString());
                 }
                 else
                 {
-                    Debug.Log("iFrames is now false");
                     iFramesActive = false;
                     iFramesTimer = 0;
                 }
