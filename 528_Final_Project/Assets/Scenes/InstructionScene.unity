@@ -202,7 +202,7 @@ MonoBehaviour:
     Jump: Space Bar
 
     Attack:
-    Mouse right click'
+    Mouse left click'
 --- !u!222 &868623
 CanvasRenderer:
   m_ObjectHideFlags: 0

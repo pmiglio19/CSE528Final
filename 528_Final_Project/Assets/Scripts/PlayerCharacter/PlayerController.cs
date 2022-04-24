@@ -92,7 +92,7 @@ namespace Assets.Scripts.PlayerCharacter
             }
 
             spaceIsPressed = Input.GetKey(KeyCode.Space);
-            rightIsPressed = Input.GetMouseButton(1);
+            rightIsPressed = Input.GetMouseButton(0);
             isAttacking = rightIsPressed;
         }
 
