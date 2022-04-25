@@ -21,7 +21,7 @@ namespace Assets.Scripts.EnemyCharacters
 
         public Slime() : base()
         {
-            health = new EnemyHealth(3);
+            health = new EnemyHealth(5);
             experienceGained = 3;
             damage = new DamageDealt(3);
         }

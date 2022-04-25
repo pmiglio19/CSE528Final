@@ -204,20 +204,18 @@ namespace Assets.Scripts.PlayerCharacter
             rightIsPressed = isAttacking;
             if(isAttacking)
             {
-                //if (swordIsEquipped)
-                //{
-                //animator.SetBool("isAttacking", isAttacking);
+                if (swordIsEquipped)
+                {
+                    //Resize collider (only works with box collider for some reason)
 
-                //Resize collider (only works with box collider for some reason)
-
-                collider2d.size = new Vector2(collider2d.size.x+.2f, collider2d.size.y);
+                    collider2d.size = new Vector2(collider2d.size.x+.2f, collider2d.size.y);
 
                 animator.Play("MhumAttack_Sword");
-                //}
-                //else
-                //{
-                //    animator.Play("MhumAttack_Punch");
-                //}
+                }
+                else
+                {
+                    animator.Play("MhumAttack_Punch");
+                }
             }
         }
 
@@ -375,6 +373,7 @@ namespace Assets.Scripts.PlayerCharacter
         public void SetSwordIsEquipped(bool boolValue)
         {
             swordIsEquipped = boolValue;
+            animator.SetBool("swordIsEquipped", swordIsEquipped);
         }
 
         public void SetIsAttacking(bool boolValue)
