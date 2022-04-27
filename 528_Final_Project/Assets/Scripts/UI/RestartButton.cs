@@ -48,6 +48,7 @@ namespace Assets.Scripts.UI
             strengthText.ResetStrength();
             experienceText.ResetExperience();
             SceneManager.LoadScene("OverworldScene");
+            Time.timeScale = 1;
         }
     }
 }

@@ -14,13 +14,12 @@ namespace Assets.Scripts.EntityMechanics
         private int experienceLevel;
         private int nextExperienceLevelGoal;
         private ExperienceUI experienceUI;
-        
-
+                                                   
         public Experience()
         {
             experienceAmount = 0;
             experienceLevel = 1;
-            nextExperienceLevelGoal = 5;
+            nextExperienceLevelGoal = 7;
             experienceUI = new ExperienceUI();
         }
 
@@ -36,7 +35,7 @@ namespace Assets.Scripts.EntityMechanics
             if(xpAmount >= nextExperienceLevelGoal)
             {
                 experienceLevel += 1;
-                nextExperienceLevelGoal += 5;
+                nextExperienceLevelGoal += 7;
 
                 damage.ChangeMultiplier(damage.GetMultiplier() + 1);
 

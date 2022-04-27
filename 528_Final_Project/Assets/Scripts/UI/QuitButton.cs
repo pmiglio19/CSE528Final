@@ -41,6 +41,7 @@ namespace Assets.Scripts.UI
 
         private void TaskOnClick()
         {
+            Time.timeScale = 1;
             playerController.GetPlayerHealth().ResetHealth();
             playerController.GetPlayerMana().ResetMana();
             healthText.ResetHealth();
@@ -48,6 +49,8 @@ namespace Assets.Scripts.UI
             strengthText.ResetStrength();
             experienceText.ResetExperience();
             SceneManager.LoadScene("TitleScene");
+            Time.timeScale = 1;
+
         }
     }
 }

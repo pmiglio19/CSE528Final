@@ -25,6 +25,8 @@ namespace Assets.Scripts.PlayerCharacter
         bool isAttacking = false;
         bool isLightningImmune = false;
 
+        bool hasWon = false;
+
         bool iFramesActive = false;
         float iFramesTimer = 0;
         float iFramesMax = 20;
@@ -362,6 +364,8 @@ namespace Assets.Scripts.PlayerCharacter
 
         public List<GameObject> GetListOfEnemies() { return listOfEnemies; }
 
+        public bool GetHasWon() { return hasWon; }
+
         public bool GetFacingRight() { return facingRight; }
         public float GetColliderWidth() { return colliderWidth; }
 
@@ -379,6 +383,11 @@ namespace Assets.Scripts.PlayerCharacter
         public void SetIsAttacking(bool boolValue)
         {
             isAttacking = boolValue;
+        }
+
+        public void SetHasWon(bool boolValue)
+        {
+            hasWon = boolValue;
         }
         #endregion
     }

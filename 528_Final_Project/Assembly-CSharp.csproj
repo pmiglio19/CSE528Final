@@ -85,8 +85,9 @@
     <Compile Include="Assets\Scripts\UI\ManaUI.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Health.cs" />
-    <Compile Include="Assets\Scripts\Zones\VictoryZone.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\SkillsButton.cs" />
+    <Compile Include="Assets\Scripts\EnemyCharacters\RatKing.cs" />
+    <Compile Include="Assets\Scripts\UI\WinnerText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
