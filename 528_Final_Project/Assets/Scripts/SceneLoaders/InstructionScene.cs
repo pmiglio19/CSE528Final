@@ -15,8 +15,9 @@ namespace Assets.Scripts.SceneLoaders
         {
             if (Input.anyKey)
             {
-                GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();
+                //GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();
                 SceneManager.LoadScene("OverworldScene");
+                Time.timeScale = 1;
             }
         }
     }

@@ -33,6 +33,13 @@ namespace Assets.Scripts.EntityMechanics
             manaUI.DecrementMana(amount);
         }
 
+        public void ResetMana()
+        {
+            manaLevel = maxMana;
+        }
+
         public static int GetMaxMana() { return maxMana; }
+
+        public int GetManaLevel() { return manaLevel; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Audio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,9 @@ namespace Assets.Scripts.SceneLoaders
         {
             if (Input.anyKey)
             {
+                //GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().PlayMusic();
                 SceneManager.LoadScene("InstructionScene");
+                Time.timeScale = 1;
             }
         }
     }

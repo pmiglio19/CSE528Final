@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.EntityMechanics;
+using Assets.Scripts.PlayerCharacter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,45 +14,62 @@ namespace Assets.Scripts.EnemyCharacters
         private float min = 2f;
         private float max = 3f;
         public float maxDistanceCovered = 0f;
-        public bool facingRight = true;
+        private bool facingRight;
+        private bool isFlipped;
 
-        public Bat(int _maxDistanceCovered, bool _facingRight) : base()
+        private GameObject playerGameObject;
+        private PlayerController playerController;
+
+        public Bat(int _maxDistanceCovered) : base()
         {
-            health = new Health(3);
             maxDistanceCovered = _maxDistanceCovered;
-            facingRight = _facingRight;
         }
 
         private void Awake()
         {
+            health = new EnemyHealth(4);
+            experienceGained = 4;
             min = transform.position.x;
             max = transform.position.x + maxDistanceCovered;
+            damage = new DamageDealt(2);
+            facingRight = true;
+            isFlipped = true;
         }
 
         private void Update()
         {
-            if (!isInBattle)
+            transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
+
+            if (transform.position.x < max && transform.position.x >= max - .4f && isFlipped)
             {
-                transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
+                Flip();
+                isFlipped = !isFlipped;
+            }
 
-                if (transform.position.x <= max - .07)
-                {
-                    Flip();
-                }
+            else if (transform.position.x > min && transform.position.x <= min + .4f && !isFlipped)
+            {
+                Flip();
+                isFlipped = !isFlipped;
+            }
+        }
 
-                if (transform.position.x >= min + .07)
-                {
-                    Flip();
-                }
+        private void FixedUpdate()
+        {
+            if (health.CheckForDeath())
+            {
+                playerGameObject = GameObject.FindWithTag("Player");
+                playerController = playerGameObject.GetComponent<PlayerController>();
+
+                playerController.GetPlayerExperience().IncrementExperience(experienceGained, playerController.GetPlayerDamageDealt());
+
+                Destroy(gameObject);
             }
         }
 
         private void Flip()
         {
-            // Switch the way the player is labelled as facing.
             facingRight = !facingRight;
 
-            // Multiply the player's x local scale by -1.
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;

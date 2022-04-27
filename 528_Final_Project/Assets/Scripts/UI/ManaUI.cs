@@ -11,7 +11,7 @@ namespace Assets.Scripts.UI
 {
     public class ManaUI : MonoBehaviour
     {
-        private static int currentMana = 10;
+        private static int currentMana = 12;
 
         public Text textMana;
 
@@ -33,6 +33,11 @@ namespace Assets.Scripts.UI
         public void DecrementMana(int amount)
         {
             currentMana = Mathf.Clamp(currentMana - amount, 0, Mana.GetMaxMana());
+        }
+
+        public void ResetMana()
+        {
+            currentMana = 12;
         }
     }
 }

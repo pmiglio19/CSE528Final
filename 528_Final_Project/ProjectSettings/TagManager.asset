@@ -10,6 +10,11 @@ TagManager:
   - Weapon
   - UI
   - Music
+  - Skill
+  - HealthText
+  - ManaText
+  - Canvas
+  - Wall
   layers:
   - Default
   - TransparentFX

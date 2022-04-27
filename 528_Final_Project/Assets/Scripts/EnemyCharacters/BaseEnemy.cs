@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.EntityMechanics;
+using Assets.Scripts.PlayerCharacter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,28 +9,24 @@ using UnityEngine;
 
 namespace Assets.Scripts.EnemyCharacters
 {
-    class BaseEnemy : MonoBehaviour
+    public class BaseEnemy : MonoBehaviour
     {
         //Stats
-        protected Health health;
+        protected EnemyHealth health;
         protected DamageDealt damage;
+        protected int experienceGained;
 
         //Animations
         SpriteRenderer spriteRenderer;
         internal Animator animator;
 
         //Other components
-        public Collider2D collider2d;
-        public Rigidbody2D rigidBody;
+        protected Collider2D collider2d;
+        protected Rigidbody2D rigidBody;
 
         protected bool isInBattle = false;
-
-        public BaseEnemy()
-        {
-
-        }
-
-        private void Awake()
+        
+        private void Start()
         {
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,9 +37,22 @@ namespace Assets.Scripts.EnemyCharacters
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        public void SetIsInBattle(bool newBool)
+        public EnemyHealth GetEnemyHealth()
         {
-            isInBattle = newBool;
+            return health;
+        }
+
+        public DamageDealt GetEnemyDamageDealt()
+        {
+            return damage;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Skill"))
+            {
+                health.DecrementByAmount(10);
+            }
         }
     }
 }

@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &6860171630762784105
 Animator:
   serializedVersion: 3
@@ -154,5 +154,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b81700f7e32e4d4f8e49bed6e3a02f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider2d: {fileID: 6860171630762784110}
-  rigidBody: {fileID: 6860171630762784109}

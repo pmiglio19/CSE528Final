@@ -1,9 +1,9 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using static Core.Simulation;
 using Assets.Scripts.EntityMechanics;
 using Items;
 using Assets.Scripts.EnemyCharacters;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.PlayerCharacter
 {
@@ -11,9 +11,10 @@ namespace Assets.Scripts.PlayerCharacter
     {
         #region Class Variables
 
-        //Other states
+        //Control states
         bool controlEnabled = true;
         bool spaceIsPressed = false;
+        bool rightIsPressed = false;
 
         //Character states
         bool isGrounded = false;
@@ -21,10 +22,20 @@ namespace Assets.Scripts.PlayerCharacter
         bool isDescending = true;
         bool isInvisible = false;
         bool swordIsEquipped = false;
+        bool isAttacking = false;
+        bool isLightningImmune = false;
+
+        bool hasWon = false;
+
+        bool iFramesActive = false;
+        float iFramesTimer = 0;
+        float iFramesMax = 20;
 
         //Movement constants & variables
-        const float movementSpeedMultiplier = 5f;
-        const float jumpHeightMultiplier = 20f;
+        const float movementSpeedMultiplier = .00001f;
+        const float jumpHeightMultiplier = 7f;
+        const float maxVelocity = 20f;
+        float colliderWidth;
 
         float horizontalMovement = 0;
         float verticalMovement = 0;
@@ -32,13 +43,14 @@ namespace Assets.Scripts.PlayerCharacter
 
         int invisoTimer = 0;
         int invisoTimerMax = 500;
+        private List<GameObject> listOfEnemies = new List<GameObject>();
 
         //Animations
         private SpriteRenderer spriteRenderer;
         internal Animator animator;
 
         //Other components
-        private Collider2D collider2d;
+        private BoxCollider2D collider2d;
         private Rigidbody2D rigidBody;
 
         //Character attributes
@@ -58,15 +70,16 @@ namespace Assets.Scripts.PlayerCharacter
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
-            collider2d = GetComponent<Collider2D>();
+            collider2d = GetComponent<BoxCollider2D>();
             rigidBody = GetComponent<Rigidbody2D>();
 
             //Makes it so character's sprite doesn't roll around
             rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            colliderWidth = collider2d.size.x;
 
-            health = new Health(10);
+            health = new Health(15);
             inventory = new Inventory();
-            mana = new Mana(10);
+            mana = new Mana(12);
             experience = new Experience();
             damage = new DamageDealt(1);     //Initially
         }
@@ -75,41 +88,36 @@ namespace Assets.Scripts.PlayerCharacter
         private void Update()
         {
             //Check character health
-            if(health.CheckForDeath())
+            if (health.CheckForDeath())
             {
                 RunDeathProtocols();
-                //RestartGame();
-
-                //Ask to play again?
             }
 
             spaceIsPressed = Input.GetKey(KeyCode.Space);
+            rightIsPressed = Input.GetMouseButton(0);
+            isAttacking = rightIsPressed;
         }
 
         //And FixedUpdate is used more for things involving physics
         private void FixedUpdate()
         {
-            Move();
-
-            //Invisible Check
-            if(isInvisible)
+            if(!isLightningImmune)
             {
-                if (invisoTimer < invisoTimerMax)
-                {
-                    invisoTimer++;
-                }
-                else
-                {
-                    isInvisible = false;
-                    invisoTimer = 0;
-                    spriteRenderer.color += new Color(0, 0, 0, .5f);
-                }
+                GameObject lightning = GameObject.FindWithTag("Skill");
+                Physics2D.IgnoreCollision(lightning.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+                isLightningImmune = true;
             }
 
-            //If swordIsEquipped and sword animator bool value is not set to true, do it
-            //This will change Mhum's animation to carry a sword
+            Attack();
+
+            InvisibleCheck();
+
+            InvincibleFramesCheck();
+
+            Move();
         }
 
+        #region Fixed Update Helpers
         private void Move()
         {
             //If character drops too far below viewable map, reset health and respawn
@@ -153,12 +161,14 @@ namespace Assets.Scripts.PlayerCharacter
                     {
                         animator.Play("MhumJump");
                     }
+                    animator.SetFloat("Speed", horizontalMovement);
 
                     //This is the statement that actually moves the character
-                    rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
+                    rigidBody.AddForce(direction, ForceMode2D.Impulse);
+                    rigidBody.velocity = Vector3.ClampMagnitude(rigidBody.velocity, maxVelocity);
 
                     //Establish that the character is now descending (which will stop jump animation)
-                    if(isAscending)
+                    if (isAscending)
                     {
                         isAscending = false;
                         isDescending = true;
@@ -168,9 +178,12 @@ namespace Assets.Scripts.PlayerCharacter
                 //If character is not on ground and descending
                 if (!isGrounded && isDescending)
                 {
-                    Vector3 direction = new Vector3(horizontalMovement, -1f, 0);
+                    animator.SetFloat("Speed", horizontalMovement);
+                    Vector3 direction = new Vector3(horizontalMovement, 0, 0);
 
-                    rigidBody.MovePosition(transform.position + direction * movementSpeedMultiplier * Time.fixedDeltaTime);
+                    rigidBody.AddForce(direction, ForceMode2D.Impulse);
+
+                    rigidBody.velocity = Vector3.ClampMagnitude(rigidBody.velocity, maxVelocity);
                 }
                 #endregion
 
@@ -185,11 +198,70 @@ namespace Assets.Scripts.PlayerCharacter
                     Flip();
                 }
                 #endregion
-
-                //Change animation to "walk" when moving and "idle" when not
-                animator.SetFloat("Speed", Mathf.Abs(horizontalMovement) * movementSpeedMultiplier);
             }
         }
+
+        private void Attack()
+        {
+            rightIsPressed = isAttacking;
+            if(isAttacking)
+            {
+                if (swordIsEquipped)
+                {
+                    //Resize collider (only works with box collider for some reason)
+
+                    collider2d.size = new Vector2(collider2d.size.x+.2f, collider2d.size.y);
+
+                animator.Play("MhumAttack_Sword");
+                }
+                else
+                {
+                    animator.Play("MhumAttack_Punch");
+                }
+            }
+        }
+
+        private void InvisibleCheck()
+        {
+            if (isInvisible)
+            {
+                if (invisoTimer < invisoTimerMax)
+                {
+                    invisoTimer++;
+                }
+                else
+                {
+                    isInvisible = false;
+                    invisoTimer = 0;
+                    spriteRenderer.color += new Color(0, 0, 0, .5f);
+
+                    foreach (GameObject enemy in listOfEnemies)
+                    {
+                        Physics2D.IgnoreCollision(enemy.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+                    }
+
+                    listOfEnemies.Clear();
+
+                }
+            }
+        }
+
+        private void InvincibleFramesCheck()
+        {
+            if (iFramesActive)
+            {
+                if (iFramesTimer < iFramesMax)
+                {
+                    iFramesTimer++;
+                }
+                else
+                {
+                    iFramesActive = false;
+                    iFramesTimer = 0;
+                }
+            }
+        }
+        #endregion 
 
         #region Movement Utility
         //Used to flip character left or right
@@ -203,51 +275,6 @@ namespace Assets.Scripts.PlayerCharacter
             theScale.x *= -1;
             transform.localScale = theScale;
         }
-
-        private void FaceRight(GameObject gameObject)
-        {
-            if(gameObject.CompareTag("Player"))
-            {
-                if (!facingRight)
-                {
-                    facingRight = !facingRight;
-
-                    Vector3 theScale = transform.localScale;
-                    theScale.x *= -1;
-                    gameObject.transform.localScale = theScale;
-                }
-            }
-
-            //else
-            //{
-            //    Vector3 theScale = transform.localScale;
-            //    theScale.x *= -1;
-            //    gameObject.transform.localScale = theScale;
-            //}
-        }
-
-        private void FaceLeft(GameObject gameObject)
-        {
-            if (gameObject.CompareTag("Player"))
-            {
-                if (facingRight)
-                {
-                    facingRight = !facingRight;
-
-                    Vector3 theScale = transform.localScale;
-                    theScale.x *= -1;
-                    gameObject.transform.localScale = theScale;
-                }
-            }
-
-            //else
-            //{
-            //    Vector3 theScale = transform.localScale;
-            //    theScale.x *= -1;
-            //    gameObject.transform.localScale = theScale;
-            //}
-        }
-
         #endregion
 
         #region Death and Game Restart
@@ -277,33 +304,26 @@ namespace Assets.Scripts.PlayerCharacter
                 //Debug.Log("isGrounded is now " + isGrounded.ToString());
             }
 
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (!iFramesActive && collision.gameObject.CompareTag("Enemy"))
             {
-                if (isInvisible)
+                //Enemy doesn't do damage if attacking
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("MhumAttack_Sword") || animator.GetCurrentAnimatorStateInfo(0).IsName("MhumAttack_Punch"))
                 {
-                    Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+                    EnemyHealth enemyHealth = collision.collider.gameObject.GetComponent<BaseEnemy>().GetEnemyHealth();
+
+                    enemyHealth.DecrementByAmount(damage.GetMultiplier());
+
+                    iFramesActive = true;
                 }
 
-                else
+                if (!iFramesActive && !isInvisible)
                 {
-                    //Start battle scene when enemy is touched
-                    SceneManager.LoadScene("BattleScene");
+                    //Enemy does do damage if Mhum does not attack
+                    DamageDealt enemyDamage = collision.collider.gameObject.GetComponent<BaseEnemy>().GetEnemyDamageDealt();
 
-                    DontDestroyOnLoad(collider2d);
-                    DontDestroyOnLoad(collision.collider);
-
-                    //rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
-                    //rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
-                    //collision.collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-
-                    transform.position = new Vector3(-2f, 0f, 0f);
-                    collision.transform.position = new Vector3(2f, 0f, 0f);
-
-                    collision.gameObject.GetComponent<BaseEnemy>().SetIsInBattle(true);
-                    //FaceRight(transform.root.gameObject);
-                    //FaceLeft(collision.collider.gameObject);
+                    health.DecrementByAmount(enemyDamage.GetMultiplier());
                 }
+
             }
 
             if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
@@ -314,9 +334,6 @@ namespace Assets.Scripts.PlayerCharacter
                 inventory.AddToInventory(item);
 
                 Destroy(collision.gameObject);
-
-                //Set damageMultiplier if player has a weapon in inventory
-                //damage.ChangeMultiplier(inventory.CheckInventoryForWeapons());
             }
         }
 
@@ -335,11 +352,22 @@ namespace Assets.Scripts.PlayerCharacter
         #region Gets & Sets
         public Health GetPlayerHealth() { return health; }
 
+        public Mana GetPlayerMana() { return mana; }
+
         public Inventory GetPlayerInventory() { return inventory; }
 
         public DamageDealt GetPlayerDamageDealt() { return damage; }
 
+        public Experience GetPlayerExperience() { return experience; }
+
         public SpriteRenderer GetPlayerSpriteRenderer() { return spriteRenderer; }
+
+        public List<GameObject> GetListOfEnemies() { return listOfEnemies; }
+
+        public bool GetHasWon() { return hasWon; }
+
+        public bool GetFacingRight() { return facingRight; }
+        public float GetColliderWidth() { return colliderWidth; }
 
         public void SetInvisibility(bool boolValue)
         {
@@ -349,6 +377,17 @@ namespace Assets.Scripts.PlayerCharacter
         public void SetSwordIsEquipped(bool boolValue)
         {
             swordIsEquipped = boolValue;
+            animator.SetBool("swordIsEquipped", swordIsEquipped);
+        }
+
+        public void SetIsAttacking(bool boolValue)
+        {
+            isAttacking = boolValue;
+        }
+
+        public void SetHasWon(bool boolValue)
+        {
+            hasWon = boolValue;
         }
         #endregion
     }

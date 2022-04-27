@@ -11,7 +11,7 @@ namespace Assets.Scripts.UI
 {
     public class HealthUI : MonoBehaviour
     {
-        private static int currentHealth = 10;
+        private static int currentHealth = 15;
         public Text textHealth;
 
         void Start()
@@ -26,12 +26,17 @@ namespace Assets.Scripts.UI
 
         public void IncrementHealth(int amount)
         {
-            currentHealth = Mathf.Clamp(currentHealth + amount, 0, 20);
+            currentHealth = Mathf.Clamp(currentHealth + amount, 0, Health.GetMaxHealth());
         }
 
         public void DecrementHealth(int amount)
         {
             currentHealth = Mathf.Clamp(currentHealth - amount, 0, Health.GetMaxHealth());
+        }
+
+        public void ResetHealth()
+        {
+            currentHealth = 15;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,26 +13,34 @@ namespace Assets.Scripts.EntityMechanics
         private int experienceAmount;
         private int experienceLevel;
         private int nextExperienceLevelGoal;
-
+        private ExperienceUI experienceUI;
+                                                   
         public Experience()
         {
             experienceAmount = 0;
             experienceLevel = 1;
-            nextExperienceLevelGoal = 100;
+            nextExperienceLevelGoal = 7;
+            experienceUI = new ExperienceUI();
         }
 
-        public void IncrementExperience(int amount)
+        public void IncrementExperience(int amount, DamageDealt damage)
         {
             experienceAmount += amount;
-            CheckIfLevelUp(experienceAmount);
+            CheckIfLevelUp(experienceAmount, damage);
+            
         }
 
-        private void CheckIfLevelUp(int xpAmount)
+        private void CheckIfLevelUp(int xpAmount, DamageDealt damage)
         {
             if(xpAmount >= nextExperienceLevelGoal)
             {
                 experienceLevel += 1;
-                nextExperienceLevelGoal += 1000;
+                nextExperienceLevelGoal += 7;
+
+                damage.ChangeMultiplier(damage.GetMultiplier() + 1);
+
+                experienceUI.IncrementExperience(1);
+                
             }
         }
     }

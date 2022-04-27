@@ -1,7 +1,6 @@
 using Assets.Scripts.UI;
 using System;
 using UnityEngine;
-using static Core.Simulation;
 
 namespace Assets.Scripts.EntityMechanics
 {
@@ -26,7 +25,7 @@ namespace Assets.Scripts.EntityMechanics
 
         public void IncrementByAmount(int amount)
         {
-            currentHP = Mathf.Clamp(currentHP + amount, 0, 20);
+            currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
             healthUI.IncrementHealth(amount);
         }
 
@@ -41,7 +40,7 @@ namespace Assets.Scripts.EntityMechanics
         {
             currentHP = Mathf.Clamp(currentHP - amount, 0, maxHP);
 
-            healthUI.DecrementHealth(1);
+            healthUI.DecrementHealth(amount);
         }
 
         public void Die()

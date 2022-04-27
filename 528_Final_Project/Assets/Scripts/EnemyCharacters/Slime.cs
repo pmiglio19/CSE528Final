@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.EntityMechanics;
+using Assets.Scripts.PlayerCharacter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,21 @@ using UnityEngine;
 
 namespace Assets.Scripts.EnemyCharacters
 {
-    class Slime : BaseEnemy
+    public class Slime : BaseEnemy
     {
         float maxMoveDistance = .5f;
         //Set this to your objects initial position when game starts.
-        Vector3 origin;
+        //Vector3 origin;
         float speed = 5;
+
+        private GameObject playerGameObject;
+        private PlayerController playerController;
 
         public Slime() : base()
         {
-            health = new Health(5);
+            health = new EnemyHealth(5);
+            experienceGained = 3;
+            damage = new DamageDealt(3);
         }
 
         private void Update()
@@ -25,8 +31,21 @@ namespace Assets.Scripts.EnemyCharacters
             if(!isInBattle)
             {
                 Vector3 destination = transform.position;
-                destination.y = (transform.position.y > origin.y + maxMoveDistance) ? origin.y : origin.y + maxMoveDistance;
+                destination.y = (transform.position.y > transform.position.y + maxMoveDistance) ? transform.position.y : transform.position.y + maxMoveDistance;
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (health.CheckForDeath())
+            {
+                playerGameObject = GameObject.FindWithTag("Player");
+                playerController = playerGameObject.GetComponent<PlayerController>();
+
+                playerController.GetPlayerExperience().IncrementExperience(experienceGained, playerController.GetPlayerDamageDealt());
+
+                Destroy(gameObject);
             }
         }
     }
