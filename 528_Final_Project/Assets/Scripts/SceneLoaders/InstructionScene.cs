@@ -13,6 +13,13 @@ namespace Assets.Scripts.SceneLoaders
     {
         private void Update()
         {
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+                //UnityEditor.EditorApplication.isPlaying = false;
+            }
+
             if (Input.anyKey)
             {
                 //GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();

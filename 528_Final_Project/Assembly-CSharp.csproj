@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\EntityMechanics\Inventory.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\SkillsPanel.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\Slime.cs" />
+    <Compile Include="Assets\Scripts\UI\WinnerText.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleSystem.cs" />
     <Compile Include="Assets\Scripts\UI\RestartButton.cs" />
@@ -80,14 +81,14 @@
     <Compile Include="Assets\Scripts\Items\Sword.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\DamageDealt.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Mana.cs" />
+    <Compile Include="Assets\Scripts\EnemyCharacters\RatKing.cs" />
     <Compile Include="Assets\Scripts\SceneLoaders\InstructionScene.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\BattleButton.cs" />
     <Compile Include="Assets\Scripts\UI\ManaUI.cs" />
     <Compile Include="Assets\Scripts\EnemyCharacters\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\EntityMechanics\Health.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\SkillsButton.cs" />
-    <Compile Include="Assets\Scripts\EnemyCharacters\RatKing.cs" />
-    <Compile Include="Assets\Scripts\UI\WinnerText.cs" />
+    <Compile Include="Assets\Scripts\SceneLoaders\OverworldScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
